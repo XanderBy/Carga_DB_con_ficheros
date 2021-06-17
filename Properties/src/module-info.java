@@ -1,0 +1,3 @@
+module Properties {
+	exports properties;
+}
