@@ -27,16 +27,23 @@ public class Ventana extends JFrame implements ActionListener {
 		this.setNombre(nombre);
 		this.setTamano(tamano);
 		this.setListaBotones(listaBotones);
+		
 
+		this.setLayout(null);
+		
+		if(this.listaBotones != null) {
+			System.out.println(this.listaBotones.get(0).getBounds());
+			PropiedadesVentana.PropiedadesBotones(this);
+		}
+
+		
+		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		setTitle(this.getNombre());
 		setSize(tamano);
 		setVisible(true);
 
 		
-		if(listaBotones != null) {
-			PropiedadesVentana.PropiedadesBotones(this);
-		}
-
+		
 	}
 
 	@Override
