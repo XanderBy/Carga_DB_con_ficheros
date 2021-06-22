@@ -1,6 +1,7 @@
 package vista;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class PropiedadesVentana {
 
@@ -12,6 +13,13 @@ public class PropiedadesVentana {
 		for (JButton boton : vista.getListaBotones()) {
 			vista.add(boton);
 			boton.addActionListener(vista);
+		}
+		
+	}
+	public static void PropiedadesTitulos(Ventana vista) {
+		for (JLabel titulo : vista.getListaTitulos()) {
+			vista.add(titulo);
+			
 		}
 		
 	}

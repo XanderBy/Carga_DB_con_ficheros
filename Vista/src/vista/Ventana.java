@@ -22,18 +22,21 @@ public class Ventana extends JFrame implements ActionListener {
 	private String nombre;
 	private Dimension tamano;
 
-	public Ventana(String nombre, Dimension tamano, ArrayList<JButton> listaBotones) throws HeadlessException {
+	public Ventana(String nombre, Dimension tamano, ArrayList<JButton> listaBotones,ArrayList<JLabel> listaTitulos) throws HeadlessException {
 		super();
 		this.setNombre(nombre);
 		this.setTamano(tamano);
 		this.setListaBotones(listaBotones);
+		this.setListaTitulos(listaTitulos);
 		
 
 		this.setLayout(null);
 		
 		if(this.listaBotones != null) {
-			System.out.println(this.listaBotones.get(0).getBounds());
 			PropiedadesVentana.PropiedadesBotones(this);
+		}
+		if(this.listaTitulos != null) {
+			PropiedadesVentana.PropiedadesTitulos(this);
 		}
 
 		
