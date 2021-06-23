@@ -52,14 +52,14 @@ public class Configuracion {
 		JTextField textField=null;
 		
 		
-		String nombre = new String();
+		String nombre,id = new String();
 		int numeroBotones, posicionX, posicionY, ancho, alto;
 
 		numeroBotones = Integer.parseInt((String) properties.get(numero));
 		
 		for (int i = 0; i < numeroBotones; i++) {
 			nombre = (String) properties.get(("NOMBRE" + objeto + Integer.toString(i)));
-
+			id=(String) properties.get(("ID"+objeto+ Integer.toString(i)));
 			
 			switch (objeto) {
 			case "BOTON": {
@@ -89,6 +89,7 @@ public class Configuracion {
 			switch (objeto) {
 			case "BOTON": {
 				boton.setBounds(posicionX, posicionY, ancho, alto);
+				boton.setName(id);
 			}
 			case "LABELS":{
 				label.setBounds(posicionX, posicionY, ancho, alto);

@@ -51,7 +51,13 @@ public class Ventana extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		this.listaBotones.forEach((b)->{
+			if(e.getSource()==b & b.getName().contains("1")) {
+				System.out.println( b.getName());
+			}
+		});
+		
 
 	}
 
