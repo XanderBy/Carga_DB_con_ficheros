@@ -1,14 +1,19 @@
 package vista;
 
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -21,43 +26,61 @@ public class Ventana extends JFrame implements ActionListener {
 	private ArrayList<JLabel> listaTitulos;
 	private String nombre;
 	private Dimension tamano;
+	private JTabbedPane panelTabs;
 
-	public Ventana(String nombre, Dimension tamano, ArrayList<JButton> listaBotones,ArrayList<JLabel> listaTitulos) throws HeadlessException {
+	public Ventana(String nombre, Dimension tamano, ArrayList<JButton> listaBotones, ArrayList<JLabel> listaTitulos)
+			throws HeadlessException {
 		super();
 		this.setNombre(nombre);
 		this.setTamano(tamano);
 		this.setListaBotones(listaBotones);
 		this.setListaTitulos(listaTitulos);
 		
-
 		this.setLayout(null);
-		
-		if(this.listaBotones != null) {
-			PropiedadesVentana.PropiedadesBotones(this);
-		}
-		if(this.listaTitulos != null) {
-			PropiedadesVentana.PropiedadesTitulos(this);
-		}
 
+		this.panelTabs=new JTabbedPane(JTabbedPane.TOP);
+		
 		
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+		
+		
+		JPanel panel=new JPanel();
+		if (this.listaBotones != null) {
+			//PropiedadesVentana.PropiedadesBotones(this,panel);
+
+		}
+		
+		if (this.listaTitulos != null) {
+			//PropiedadesVentana.PropiedadesTitulos(this,panel);
+		}
+		NewTab nuevo=new NewTab(this.panelTabs);
+		
+		
+		
+		add(this.panelTabs);
+		
 		setTitle(this.getNombre());
 		setSize(tamano);
 		setVisible(true);
-
-		
+		setLayout(new GridLayout(1, 1));
 		
 	}
-
+	public void añadirBoton(JTabbedPane paneltab) {
+		
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		this.listaBotones.forEach((b)->{
-			if(e.getSource()==b & b.getName().contains("1")) {
-				System.out.println( b.getName());
+
+		this.listaBotones.forEach((b) -> {
+			if (e.getSource() == b & b.getName().contains("1")) {
+				System.out.println(b.getName());
+			}
+			if (e.getSource() == b & b.getName().contains("NuevaVentana")) {
+				System.out.println(b.getName());
+				AccionesBoton.NuevaTab(this);
 			}
 		});
-		
 
 	}
 
@@ -107,6 +130,16 @@ public class Ventana extends JFrame implements ActionListener {
 
 	public void setListaTitulos(ArrayList<JLabel> listaTitulos) {
 		this.listaTitulos = listaTitulos;
+	}
+
+
+	public JTabbedPane getPanelTabs() {
+		return panelTabs;
+	}
+
+
+	public void setPanelTabs(JTabbedPane panelTabs) {
+		this.panelTabs = panelTabs;
 	}
 
 }

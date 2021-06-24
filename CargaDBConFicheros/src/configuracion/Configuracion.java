@@ -19,11 +19,11 @@ import vista.Ventana;
 public class Configuracion {
 
 	Properties properties = new Properties();
-	ArrayList<JButton> listaBotones=new ArrayList<>();
-	ArrayList<JTable> listaTablas=new ArrayList<>();
-	ArrayList<JComboBox<String>> listaComboBox=new ArrayList<>();
-	ArrayList<JLabel> listaLabels=new ArrayList<>();
-	ArrayList<JTextField> listaTextFields=new ArrayList<>();
+	ArrayList<JButton> listaBotones = new ArrayList<>();
+	ArrayList<JTable> listaTablas = new ArrayList<>();
+	ArrayList<JComboBox<String>> listaComboBox = new ArrayList<>();
+	ArrayList<JLabel> listaLabels = new ArrayList<>();
+	ArrayList<JTextField> listaTextFields = new ArrayList<>();
 
 	public void CargarConfiguracion() {
 		try {
@@ -36,104 +36,110 @@ public class Configuracion {
 			e.printStackTrace();
 		}
 
-		CargarObjetosConfigurados(properties, "NUMEROBOTONESVENTANAPRINCIPAL","BOTON", false);
+		CargarObjetosConfigurados(properties, "NUMEROBOTONESVENTANAPRINCIPAL", "BOTON", false);
 		CargarObjetosConfigurados(properties, "NUMEROLABELSVENTANAPRINCIPAL","LABELS", false);
-		//CargarBotonesConfigurados(properties);
+		// CargarBotonesConfigurados(properties);
 
-		Ventana ventana = new Ventana("Prueba", new Dimension(500, 500), listaBotones,listaLabels);
+		Ventana ventana = new Ventana("Prueba", new Dimension(500, 500), listaBotones, listaLabels);
 
 	}
 
 	public void CargarObjetosConfigurados(Properties properties, String numero, String objeto, boolean tieneDatos) {
-		JButton boton=null;
-		JTable tabla=null;
-		JComboBox<String> comboBox=null;
-		JLabel label=null;
-		JTextField textField=null;
-		
-		
-		String nombre,id = new String();
+		JButton boton = null;
+		JTable tabla = null;
+		JComboBox<String> comboBox = null;
+		JLabel label = null;
+		JTextField textField = null;
+
+		String nombre, id = new String();
 		int numeroBotones, posicionX, posicionY, ancho, alto;
 
 		numeroBotones = Integer.parseInt((String) properties.get(numero));
-		
+
 		for (int i = 0; i < numeroBotones; i++) {
 			nombre = (String) properties.get(("NOMBRE" + objeto + Integer.toString(i)));
-			id=(String) properties.get(("ID"+objeto+ Integer.toString(i)));
-			
+			id = (String) properties.get(("ID" + objeto + Integer.toString(i)));
 			switch (objeto) {
 			case "BOTON": {
 				boton = new JButton(nombre);
+				break;
 			}
-			case "LABELS":{
+			case "LABELS": {
 				label = new JLabel(nombre);
+				break;
 			}
-			case "TEXTFIELD":{
+			case "TEXTFIELD": {
 				textField = new JTextField();
+				break;
 			}
-			case "COMBOBOX":{
+			case "COMBOBOX": {
 				comboBox = new JComboBox<>();
+				break;
 			}
-			case "TABLA":{
+			case "TABLA": {
 				tabla = new JTable();
+				break;
 			}
-			default:
-				System.out.println("Default");
 			}
 
 			posicionX = Integer.parseInt((String) properties.get("POSICIONX" + objeto + Integer.toString(i)));
 			posicionY = Integer.parseInt((String) properties.get("POSICIONY" + objeto + Integer.toString(i)));
 			ancho = Integer.parseInt((String) properties.get("TAMANOANCHO" + objeto + Integer.toString(i)));
 			alto = Integer.parseInt((String) properties.get("TAMANOALTO" + objeto + Integer.toString(i)));
-			
+
 			switch (objeto) {
 			case "BOTON": {
 				boton.setBounds(posicionX, posicionY, ancho, alto);
 				boton.setName(id);
+				break;
 			}
-			case "LABELS":{
+			case "LABELS": {
 				label.setBounds(posicionX, posicionY, ancho, alto);
+				break;
 			}
-			case "TEXTFIELD":{
+			case "TEXTFIELD": {
 				textField.setBounds(posicionX, posicionY, ancho, alto);
+				break;
 			}
-			case "COMBOBOX":{
+			case "COMBOBOX": {
 				comboBox.setBounds(posicionX, posicionY, ancho, alto);
+				break;
 			}
-			case "TABLA":{
+			case "TABLA": {
 				tabla.setBounds(posicionX, posicionY, ancho, alto);
+				break;
 			}
-			default:
-				System.out.println("Default");
 			}
-			
-			
-			SwitchAddListas(objeto, boton,tabla,comboBox,label,textField);
-			
+
+			SwitchAddListas(objeto, boton, tabla, comboBox, label, textField);
+
 		}
 	}
-	public void SwitchAddListas(String objeto,JButton boton,JTable tabla,JComboBox<String> comboBox,JLabel label,JTextField textField) {
+
+	public void SwitchAddListas(String objeto, JButton boton, JTable tabla, JComboBox<String> comboBox, JLabel label,
+			JTextField textField) {
 		switch (objeto) {
 		case "BOTON": {
 			listaBotones.add(boton);
+			break;
 		}
-		case "LABELS":{
+		case "LABELS": {
 			listaLabels.add(label);
-			System.out.println("lABEL");
+			break;
 		}
-		case "TEXTFIELD":{
+		case "TEXTFIELD": {
 			listaTextFields.add(textField);
+			break;
 		}
-		case "COMBOBOX":{
+		case "COMBOBOX": {
 			listaComboBox.add(comboBox);
+			break;
 		}
-		case "TABLA":{
+		case "TABLA": {
 			listaTablas.add(tabla);
+			break;
 		}
-		default:
-			System.out.println("Default");
 		}
 	}
-	
 
 }
