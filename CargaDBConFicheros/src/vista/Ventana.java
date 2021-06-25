@@ -3,13 +3,10 @@ package vista;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,14 +24,16 @@ public class Ventana extends JFrame implements ActionListener {
 	private String nombre;
 	private Dimension tamano;
 	private JTabbedPane panelTabs;
+	private int numeroMaxTabs;
 
-	public Ventana(String nombre, Dimension tamano, ArrayList<JButton> listaBotones, ArrayList<JLabel> listaTitulos)
+	public Ventana(String nombre, Dimension tamano, ArrayList<JButton> listaBotones, ArrayList<JLabel> listaTitulos, int numeroMaxTabs)
 			throws HeadlessException {
 		super();
 		this.setNombre(nombre);
 		this.setTamano(tamano);
 		this.setListaBotones(listaBotones);
 		this.setListaTitulos(listaTitulos);
+		this.setNumeroMaxTabs(numeroMaxTabs);
 		
 		this.setLayout(null);
 
@@ -44,7 +43,7 @@ public class Ventana extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		
 		
-		JPanel panel=new JPanel();
+		//JPanel panel=new JPanel();
 		if (this.listaBotones != null) {
 			//PropiedadesVentana.PropiedadesBotones(this,panel);
 
@@ -53,7 +52,7 @@ public class Ventana extends JFrame implements ActionListener {
 		if (this.listaTitulos != null) {
 			//PropiedadesVentana.PropiedadesTitulos(this,panel);
 		}
-		NewTab nuevo=new NewTab(this.panelTabs);
+		NewTab nuevo=new NewTab(this.getPanelTabs(), this.getNumeroMaxTabs());
 		
 		
 		
@@ -140,6 +139,12 @@ public class Ventana extends JFrame implements ActionListener {
 
 	public void setPanelTabs(JTabbedPane panelTabs) {
 		this.panelTabs = panelTabs;
+	}
+	public int getNumeroMaxTabs() {
+		return numeroMaxTabs;
+	}
+	public void setNumeroMaxTabs(int numeroMaxTabs) {
+		this.numeroMaxTabs = numeroMaxTabs;
 	}
 
 }

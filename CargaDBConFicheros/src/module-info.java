@@ -1,4 +1,5 @@
 module CargaDBConFicheros {
-	requires Vista;
+	
 	requires java.desktop;
+	exports configuracion;
 }

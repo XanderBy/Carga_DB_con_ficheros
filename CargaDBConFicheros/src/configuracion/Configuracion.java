@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import vista.Ventana;
 
+
 public class Configuracion {
 
 	Properties properties = new Properties();
@@ -24,6 +25,7 @@ public class Configuracion {
 	ArrayList<JComboBox<String>> listaComboBox = new ArrayList<>();
 	ArrayList<JLabel> listaLabels = new ArrayList<>();
 	ArrayList<JTextField> listaTextFields = new ArrayList<>();
+	public static Ventana ventana;
 
 	public void CargarConfiguracion() {
 		try {
@@ -40,7 +42,7 @@ public class Configuracion {
 		CargarObjetosConfigurados(properties, "NUMEROLABELSVENTANAPRINCIPAL","LABELS", false);
 		// CargarBotonesConfigurados(properties);
 
-		Ventana ventana = new Ventana("Prueba", new Dimension(500, 500), listaBotones, listaLabels);
+		ventana = new Ventana("Prueba", new Dimension(500, 500), listaBotones, listaLabels,Integer.parseInt((String) properties.get("NUMEROMAXTABS")));
 
 	}
 
