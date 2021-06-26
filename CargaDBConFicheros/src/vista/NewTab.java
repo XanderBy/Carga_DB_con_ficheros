@@ -2,9 +2,15 @@ package vista;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 import configuracion.Configuracion;
 
 @SuppressWarnings("serial")
@@ -13,12 +19,13 @@ public class NewTab extends JPanel implements MouseListener {
 	private JButton nuevaTab;
 	private JTabbedPane panel;
 	private int numeroMaxTabs;
+	
 
 	public NewTab(JTabbedPane panel,int numeroMaxTabs) {
 
 		this.panel = panel;
 		this.numeroMaxTabs= numeroMaxTabs;
-
+		
 		this.panel.insertTab("Nuevo", null, null, "Nueva Pestaña", 0);
 		this.panel.getModel().clearSelection();
 		this.panel.addMouseListener(this);
@@ -29,17 +36,8 @@ public class NewTab extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		JTabbedPane panel1 = (JTabbedPane) e.getSource();
 		if (panel1.getSelectedIndex() == 0 & this.getNumeroMaxTabs()>= panel1.getTabCount()) {
-			JPanel tab = new JPanel();
-			if (Configuracion.ventana.getListaBotones() != null) {
-				PropiedadesVentana.PropiedadesBotones(Configuracion.ventana,tab);
-
-			}
 			
-			if (Configuracion.ventana.getListaTitulos() != null) {
-				PropiedadesVentana.PropiedadesTitulos(Configuracion.ventana,tab);
-			}
-			
-			
+			Tab tab=new Tab(this.panel);
 			this.getPanel().addTab("Tab", tab);
 			this.getPanel().repaint();
 		}
@@ -93,6 +91,7 @@ public class NewTab extends JPanel implements MouseListener {
 	public void setNumeroMaxTabs(int numeroMaxTabs) {
 		this.numeroMaxTabs = numeroMaxTabs;
 	}
+
 
 
 }

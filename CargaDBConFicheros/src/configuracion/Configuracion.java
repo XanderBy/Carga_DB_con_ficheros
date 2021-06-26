@@ -19,15 +19,17 @@ import vista.Ventana;
 
 public class Configuracion {
 
-	Properties properties = new Properties();
-	ArrayList<JButton> listaBotones = new ArrayList<>();
-	ArrayList<JTable> listaTablas = new ArrayList<>();
-	ArrayList<JComboBox<String>> listaComboBox = new ArrayList<>();
-	ArrayList<JLabel> listaLabels = new ArrayList<>();
-	ArrayList<JTextField> listaTextFields = new ArrayList<>();
+	 static Properties properties = new Properties();
+	/*
+	 * ArrayList<JButton> listaBotones = new ArrayList<>(); ArrayList<JTable>
+	 * listaTablas = new ArrayList<>(); ArrayList<JComboBox<String>> listaComboBox =
+	 * new ArrayList<>(); ArrayList<JLabel> listaLabels = new ArrayList<>();
+	 * ArrayList<JTextField> listaTextFields = new ArrayList<>();
+	 */
 	public static Ventana ventana;
-
-	public void CargarConfiguracion() {
+	
+	public void CreacionVentana() {
+		
 		try {
 			properties.load(new FileInputStream(new File("resources/config.properties")));
 		} catch (FileNotFoundException e) {
@@ -37,16 +39,23 @@ public class Configuracion {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		ventana = new Ventana("Prueba", new Dimension(500, 500),Integer.parseInt((String) properties.get("NUMEROMAXTABS")));
+	}
+	
+	public static void CargarConfiguracion(ArrayList<JButton> listaBotones, ArrayList<JLabel> listaLabels) {
+		
+		
 
-		CargarObjetosConfigurados(properties, "NUMEROBOTONESVENTANAPRINCIPAL", "BOTON", false);
-		CargarObjetosConfigurados(properties, "NUMEROLABELSVENTANAPRINCIPAL","LABELS", false);
+		CargarObjetosConfigurados(properties, "NUMEROBOTONESVENTANAPRINCIPAL", "BOTON", false,listaBotones,listaLabels);
+		CargarObjetosConfigurados(properties, "NUMEROLABELSVENTANAPRINCIPAL","LABELS", false,listaBotones,listaLabels);
 		// CargarBotonesConfigurados(properties);
 
-		ventana = new Ventana("Prueba", new Dimension(500, 500), listaBotones, listaLabels,Integer.parseInt((String) properties.get("NUMEROMAXTABS")));
+		
 
 	}
 
-	public void CargarObjetosConfigurados(Properties properties, String numero, String objeto, boolean tieneDatos) {
+	public static void CargarObjetosConfigurados(Properties properties, String numero, String objeto, boolean tieneDatos, ArrayList<JButton> listaBotones,ArrayList<JLabel> listaLabels) {
 		JButton boton = null;
 		JTable tabla = null;
 		JComboBox<String> comboBox = null;
@@ -113,13 +122,13 @@ public class Configuracion {
 			}
 			}
 
-			SwitchAddListas(objeto, boton, tabla, comboBox, label, textField);
+			SwitchAddListas(objeto, boton, tabla, comboBox, label, textField, listaBotones,listaLabels);
 
 		}
 	}
 
-	public void SwitchAddListas(String objeto, JButton boton, JTable tabla, JComboBox<String> comboBox, JLabel label,
-			JTextField textField) {
+	public static void SwitchAddListas(String objeto, JButton boton, JTable tabla, JComboBox<String> comboBox, JLabel label,
+			JTextField textField, ArrayList<JButton> listaBotones, ArrayList<JLabel> listaLabels) {
 		switch (objeto) {
 		case "BOTON": {
 			listaBotones.add(boton);
@@ -130,15 +139,15 @@ public class Configuracion {
 			break;
 		}
 		case "TEXTFIELD": {
-			listaTextFields.add(textField);
+			//listaTextFields.add(textField);
 			break;
 		}
 		case "COMBOBOX": {
-			listaComboBox.add(comboBox);
+			//listaComboBox.add(comboBox);
 			break;
 		}
 		case "TABLA": {
-			listaTablas.add(tabla);
+			//listaTablas.add(tabla);
 			break;
 		}
 		}

@@ -10,17 +10,17 @@ public class PropiedadesVentana {
 
 	}
 
-	public static void PropiedadesBotones(Ventana vista, JPanel panel) {
-		for (JButton boton : vista.getListaBotones()) {
-			panel.add(boton);
-			boton.addActionListener(vista);
+	public static void PropiedadesBotones(Tab tab) {
+		for (JButton boton : tab.getListaBotones()) {
+			tab.add(boton);
+			boton.addActionListener(tab);
 		}
 
 	}
 
-	public static void PropiedadesTitulos(Ventana vista, JPanel panel) {
-		for (JLabel titulo : vista.getListaTitulos()) {
-			panel.add(titulo);
+	public static void PropiedadesTitulos(Tab tab) {
+		for (JLabel titulo : tab.getListaTitulos()) {
+			tab.add(titulo);
 		}
 
 	}
