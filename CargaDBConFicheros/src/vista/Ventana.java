@@ -33,7 +33,7 @@ public class Ventana extends JFrame implements ActionListener {
 		this.setLayout(null);
 
 		this.panelTabs=new JTabbedPane(JTabbedPane.TOP);
-		
+
 		
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		

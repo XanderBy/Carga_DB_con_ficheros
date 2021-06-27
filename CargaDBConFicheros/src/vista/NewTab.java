@@ -1,5 +1,6 @@
 package vista;
 
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -19,14 +20,14 @@ public class NewTab extends JPanel implements MouseListener {
 	private JButton nuevaTab;
 	private JTabbedPane panel;
 	private int numeroMaxTabs;
-	
 
-	public NewTab(JTabbedPane panel,int numeroMaxTabs) {
+	public NewTab(JTabbedPane panel, int numeroMaxTabs) {
 
 		this.panel = panel;
-		this.numeroMaxTabs= numeroMaxTabs;
-		
+		this.numeroMaxTabs = numeroMaxTabs;
+
 		this.panel.insertTab("Nuevo", null, null, "Nueva Pestaña", 0);
+		
 		this.panel.getModel().clearSelection();
 		this.panel.addMouseListener(this);
 
@@ -34,11 +35,68 @@ public class NewTab extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		JTabbedPane panel1 = (JTabbedPane) e.getSource();
-		if (panel1.getSelectedIndex() == 0 & this.getNumeroMaxTabs()>= panel1.getTabCount()) {
+		try {
+			JTabbedPane panel1 = (JTabbedPane) e.getSource();
+			if (panel1.getSelectedIndex() == 0 & this.getNumeroMaxTabs() >= panel1.getTabCount()) {
+
+				Tab tab = new Tab(this.panel);
+				this.getPanel().addTab("Tab", tab);
+				JButton boton = null;
+				System.out.println("holaaaaa"+this.getPanel().getTabCount());
+				if((this.getPanel().getComponentCount() - 1000)==0) {
+					System.out.println(this.getPanel().getComponentCount());
+					boton=new JButton();
+					System.out.println("sssa"+this.getPanel().getComponentCount());
+
+					this.getPanel().getComponents()[(this.getPanel().getComponentCount()-1)].setName(String.valueOf((this.getPanel().getComponentCount()-1)));
+					boton.setName(String.valueOf((this.getPanel().getComponentCount()-1)));
+				}else {
+					System.out.println("Es una tonteria"+this.getPanel().getComponentCount());
+					boton=new JButton();
+					
+					this.getPanel().getComponents()[(this.getPanel().getComponentCount()-1)].setName(String.valueOf((this.getPanel().getComponentCount()-1)));
+					
+					boton.setName(String.valueOf((this.getPanel().getComponentCount()-1)));
+				}
+				
+				boton.setText("X");
+				boton.addMouseListener(this);
+				//System.out.println(panel1.getTabCount());
+				System.out.println("sss"+this.getPanel().getComponentCount());
+				panel1.setTabComponentAt(this.getPanel().getComponentCount(), boton);
+				
+			}
+		} catch (Exception e2) {
+			System.out.println(e2);
+			JButton botonCerrar = (JButton) e.getSource();
+			System.out.println(botonCerrar);
+			if(botonCerrar != null) {
+				//System.out.println(botonCerrar.getPanel());
+				System.out.println("tab"+this.panel.getComponents()[0]);
+				System.out.println("tab"+this.panel.getComponents()[1]);
+				System.out.println("tab"+this.panel.getComponents()[2]);
+				System.out.println("tab"+this.panel.getComponents()[3]);
+				System.out.println("tab"+this.panel.getComponents()[4]);
+				System.out.println("boton"+botonCerrar.getName());
+				int numeroComponentes=this.panel.getComponents().length;
+				for (int i=0; i<numeroComponentes; i++) {
+					if(this.panel.getComponents()[i].getName()!=null) {
+						System.out.println("Aun no entro"+this.panel.getComponents()[i].getName());
+						if(Integer.parseInt(this.panel.getComponents()[i].getName())==Integer.parseInt(botonCerrar.getName())) {
+							System.out.println("Entó"+ this.panel.getComponents()[i]);
+							this.panel.remove(this.panel.getComponents()[i]);
+							break;
+						}
+					}
+					
+					
+					
+				}
+				
+			}
 			
-			Tab tab=new Tab(this.panel);
-			this.getPanel().addTab("Tab", tab);
+
+		}finally {
 			this.getPanel().repaint();
 		}
 
@@ -46,7 +104,6 @@ public class NewTab extends JPanel implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -91,7 +148,5 @@ public class NewTab extends JPanel implements MouseListener {
 	public void setNumeroMaxTabs(int numeroMaxTabs) {
 		this.numeroMaxTabs = numeroMaxTabs;
 	}
-
-
 
 }

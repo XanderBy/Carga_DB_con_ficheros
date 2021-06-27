@@ -1,21 +1,9 @@
 package vista;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
-import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.plaf.basic.BasicButtonUI;
 
 import configuracion.Configuracion;
 
@@ -43,6 +30,7 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaTablas=new ArrayList<>();
 		this.listaCajaTexto=new ArrayList<>();
 		this.listaTitulos=new ArrayList<>();
+		
 		Configuracion.CargarConfiguracion(this.getListaBotones(),this.getListaTitulos());
 		
 		if (this.getListaBotones() != null) {
