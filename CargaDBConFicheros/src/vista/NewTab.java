@@ -38,15 +38,16 @@ public class NewTab extends JPanel implements MouseListener {
 		try {
 			JTabbedPane panel1 = (JTabbedPane) e.getSource();
 			if (panel1.getSelectedIndex() == 0 & this.getNumeroMaxTabs() >= panel1.getTabCount()) {
-
+				
 				Tab tab = new Tab(this.panel);
 				this.getPanel().addTab("Tab", tab);
 				JButton boton = null;
+				
 				boton = new JButton();
 				this.getPanel().getComponents()[(this.getPanel().getComponentCount() - 1)]
 						.setName(String.valueOf((this.getPanel().getComponentCount() - 1)));
 				boton.setName(String.valueOf((this.getPanel().getComponentCount() - 1)));
-
+				
 				boton.setText("X");
 				boton.addMouseListener(this);
 
@@ -58,7 +59,7 @@ public class NewTab extends JPanel implements MouseListener {
 
 			}
 		} catch (Exception e2) {
-
+			
 			JButton botonCerrar = (JButton) e.getSource();
 
 			if (botonCerrar != null) {

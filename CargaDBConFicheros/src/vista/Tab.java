@@ -1,11 +1,12 @@
 package vista;
 
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -20,18 +21,20 @@ public class Tab extends JPanel implements ActionListener {
 	private ArrayList<JTable> listaTablas;
 	private ArrayList<JTextField> listaCajaTexto;
 	private ArrayList<JLabel> listaTitulos;
+	private ArrayList<JComboBox<String>> listaTComboBox;
 	private JTabbedPane panel;
 	
 	
 	public Tab(JTabbedPane panel) {
+		 this.setLayout(null);
 		
-		setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
 		this.listaBotones=new ArrayList<>();
 		this.listaTablas=new ArrayList<>();
 		this.listaCajaTexto=new ArrayList<>();
 		this.listaTitulos=new ArrayList<>();
+		this.listaTComboBox=new ArrayList<>();
 		
-		Configuracion.CargarConfiguracion(this.getListaBotones(),this.getListaTitulos());
+		Configuracion.CargarConfiguracion(this.getListaBotones(),this.getListaTitulos(), this.getListaCajaTexto(),this.getListaTComboBox());
 		
 		if (this.getListaBotones() != null) {
 			PropiedadesVentana.PropiedadesBotones(this);
@@ -40,6 +43,14 @@ public class Tab extends JPanel implements ActionListener {
 		
 		if (this.getListaTitulos() != null) {
 			PropiedadesVentana.PropiedadesTitulos(this);
+		}
+		
+		if (this.getListaCajaTexto() != null) {
+			PropiedadesVentana.PropiedadesCajaText(this);
+		}
+		
+		if (this.getListaCajaTexto() != null) {
+			PropiedadesVentana.PropiedadesComboBox(this);
 		}
 	}
 	
@@ -87,5 +98,15 @@ public class Tab extends JPanel implements ActionListener {
 
 	public void setListaTitulos(ArrayList<JLabel> listaTitulos) {
 		this.listaTitulos = listaTitulos;
+	}
+
+
+	public ArrayList<JComboBox<String>> getListaTComboBox() {
+		return listaTComboBox;
+	}
+
+
+	public void setListaTComboBox(ArrayList<JComboBox<String>> listaTComboBox) {
+		this.listaTComboBox = listaTComboBox;
 	}
 }

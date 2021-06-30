@@ -1,8 +1,10 @@
 package vista;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class PropiedadesVentana {
 
@@ -25,10 +27,18 @@ public class PropiedadesVentana {
 
 	}
 
-	public static void PropiedadesText(Ventana vista) {
-
+	public static void PropiedadesCajaText(Tab tab) {
+		for (JTextField textField : tab.getListaCajaTexto()) {
+			tab.add(textField);
+		}
 	}
 
+	public static void PropiedadesComboBox(Tab tab) {
+		for (JComboBox<String> comboBox : tab.getListaTComboBox()) {
+			tab.add(comboBox);
+		}
+	}
+	
 	public static void PropiedadesTabla(Ventana vista) {
 
 	}
