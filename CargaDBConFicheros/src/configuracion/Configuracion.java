@@ -84,8 +84,7 @@ public class Configuracion {
 			}
 			case "COMBOBOX": {
 				comboBox = new JComboBox<String>();
-				comboBox.addItem("Hola");
-				comboBox.addItem("Hola2");
+				CargarComboBox(comboBox,objeto,i);
 				break;
 			}
 			case "TABLA": {
@@ -153,6 +152,14 @@ public class Configuracion {
 			// listaTablas.add(tabla);
 			break;
 		}
+		}
+	}
+	public static void CargarComboBox(JComboBox<String> comboBox,String objeto, int numero) {
+		String nombreLista=(String) properties.get("DATOCARGADO"+objeto+numero);
+		String[] listado=((String) properties.get(nombreLista)).split(",");
+		
+		for (String eleccion : listado) {
+			comboBox.addItem(eleccion);
 		}
 	}
 
