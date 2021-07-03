@@ -50,6 +50,10 @@ public class Tab extends JPanel implements ActionListener {
 		if (this.getListaCajaTexto() != null) {
 			PropiedadesVentana.PropiedadesComboBox(this);
 		}
+		
+		if (this.getListaTablas() != null) {
+			PropiedadesVentana.PropiedadesTablas(this);
+		}
 	}
 
 	@Override

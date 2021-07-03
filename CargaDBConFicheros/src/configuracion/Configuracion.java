@@ -1,6 +1,7 @@
 package configuracion;
 
 import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -166,4 +167,14 @@ public class Configuracion {
 		}
 	}
 
+	// Sobre 100 que llega por parametro lo trataremos para ponerlo en la ventana de
+	// una manera que dependa del ancho y alto de la ventana
+	public static void OtorgarPosicion(Ventana vista) {
+		
+		int anchoVentana=vista.getWidth();
+		int altoVentana=vista.getHeight();
+		System.out.println(anchoVentana);
+		
+		
+	}
 }

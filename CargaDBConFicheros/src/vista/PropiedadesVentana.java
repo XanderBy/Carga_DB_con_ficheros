@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 public class PropiedadesVentana {
@@ -39,8 +40,10 @@ public class PropiedadesVentana {
 		}
 	}
 	
-	public static void PropiedadesTabla(Ventana vista) {
-
+	public static void PropiedadesTablas(Tab tab) {
+		for (JTable tabla : tab.getListaTablas()) {
+			tab.add(tabla);
+		}
 	}
 
 }
