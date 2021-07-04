@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
+import componentes.ComboBoxPersonalizado;
+import componentes.TextFieldPersonalizado;
 import vista.Ventana;
 
 public class Configuracion {
@@ -37,7 +37,7 @@ public class Configuracion {
 	}
 
 	public static void CargarConfiguracion(ArrayList<JButton> listaBotones, ArrayList<JLabel> listaLabels,
-			ArrayList<JTextField> listaCajaTexto, ArrayList<JComboBox<String>> listaTComboBox,
+			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
 			ArrayList<JTable> listaTablas) {
 
 		CargarObjetosConfigurados(properties, "NUMEROBOTONESVENTANAPRINCIPAL", "BOTON", false, listaBotones,
@@ -54,13 +54,13 @@ public class Configuracion {
 
 	public static void CargarObjetosConfigurados(Properties properties, String numero, String objeto,
 			boolean tieneDatos, ArrayList<JButton> listaBotones, ArrayList<JLabel> listaLabels,
-			ArrayList<JTextField> listaCajaTexto, ArrayList<JComboBox<String>> listaTComboBox,
+			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
 			ArrayList<JTable> listaTablas) {
 		JButton boton = null;
 		JTable tabla = null;
-		JComboBox<String> comboBox = null;
+		ComboBoxPersonalizado comboBox = null;
 		JLabel label = null;
-		JTextField textField = null;
+		TextFieldPersonalizado textField = null;
 
 		String nombre, id = new String();
 		int numeroBotones, posicionX, posicionY, ancho, alto;
@@ -80,11 +80,11 @@ public class Configuracion {
 				break;
 			}
 			case "TEXTFIELD": {
-				textField = new JTextField();
+				textField = new TextFieldPersonalizado();
 				break;
 			}
 			case "COMBOBOX": {
-				comboBox = new JComboBox<String>();
+				comboBox = new ComboBoxPersonalizado();
 				CargarComboBox(comboBox, objeto, i);
 				break;
 			}
@@ -129,9 +129,9 @@ public class Configuracion {
 		}
 	}
 
-	public static void SwitchAddListas(String objeto, JButton boton, JTable tabla, JComboBox<String> comboBox,
-			JLabel label, JTextField textField, ArrayList<JButton> listaBotones, ArrayList<JLabel> listaLabels,
-			ArrayList<JTextField> listaCajaTexto, ArrayList<JComboBox<String>> listaTComboBox,
+	public static void SwitchAddListas(String objeto, JButton boton, JTable tabla, ComboBoxPersonalizado comboBox,
+			JLabel label, TextFieldPersonalizado textField, ArrayList<JButton> listaBotones, ArrayList<JLabel> listaLabels,
+			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
 			ArrayList<JTable> listaTablas) {
 		switch (objeto) {
 		case "BOTON": {
@@ -158,7 +158,7 @@ public class Configuracion {
 		}
 	}
 
-	public static void CargarComboBox(JComboBox<String> comboBox, String objeto, int numero) {
+	public static void CargarComboBox(ComboBoxPersonalizado comboBox, String objeto, int numero) {
 		String nombreLista = (String) properties.get("DATOCARGADO" + objeto + numero);
 		String[] listado = ((String) properties.get(nombreLista)).split(",");
 

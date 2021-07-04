@@ -4,22 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
+import componentes.ComboBoxPersonalizado;
+import componentes.TextFieldPersonalizado;
 import configuracion.Configuracion;
 
 public class Tab extends JPanel implements ActionListener {
 
 	private ArrayList<JButton> listaBotones;
 	private ArrayList<JTable> listaTablas;
-	private ArrayList<JTextField> listaCajaTexto;
+	private ArrayList<TextFieldPersonalizado> listaCajaTexto;
 	private ArrayList<JLabel> listaTitulos;
-	private ArrayList<JComboBox<String>> listaTComboBox;
+	private ArrayList<ComboBoxPersonalizado> listaTComboBox;
 	private JTabbedPane panel;
 
 	public Tab(JTabbedPane panel) {
@@ -84,11 +84,11 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaTablas = listaTablas;
 	}
 
-	public ArrayList<JTextField> getListaCajaTexto() {
+	public ArrayList<TextFieldPersonalizado> getListaCajaTexto() {
 		return listaCajaTexto;
 	}
 
-	public void setListaCajaTexto(ArrayList<JTextField> listaCajaTexto) {
+	public void setListaCajaTexto(ArrayList<TextFieldPersonalizado> listaCajaTexto) {
 		this.listaCajaTexto = listaCajaTexto;
 	}
 
@@ -100,11 +100,11 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaTitulos = listaTitulos;
 	}
 
-	public ArrayList<JComboBox<String>> getListaTComboBox() {
+	public ArrayList<ComboBoxPersonalizado> getListaTComboBox() {
 		return listaTComboBox;
 	}
 
-	public void setListaTComboBox(ArrayList<JComboBox<String>> listaTComboBox) {
+	public void setListaTComboBox(ArrayList<ComboBoxPersonalizado> listaTComboBox) {
 		this.listaTComboBox = listaTComboBox;
 	}
 }
