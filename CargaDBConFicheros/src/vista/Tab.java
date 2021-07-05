@@ -3,26 +3,27 @@ package vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 
+import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
+import componentes.LabelPersonalizado;
+import componentes.TabbedPanePersonalizado;
+import componentes.TablaPersonalizado;
 import componentes.TextFieldPersonalizado;
 import configuracion.Configuracion;
 
 public class Tab extends JPanel implements ActionListener {
 
-	private ArrayList<JButton> listaBotones;
-	private ArrayList<JTable> listaTablas;
+	private ArrayList<BotonPersonalizado> listaBotones;
+	private ArrayList<TablaPersonalizado> listaTablas;
 	private ArrayList<TextFieldPersonalizado> listaCajaTexto;
-	private ArrayList<JLabel> listaTitulos;
+	private ArrayList<LabelPersonalizado> listaTitulos;
 	private ArrayList<ComboBoxPersonalizado> listaTComboBox;
-	private JTabbedPane panel;
+	private TabbedPanePersonalizado panel;
 
-	public Tab(JTabbedPane panel) {
+	public Tab(TabbedPanePersonalizado panel) {
 		this.setLayout(null);
 
 		this.listaBotones = new ArrayList<>();
@@ -68,19 +69,19 @@ public class Tab extends JPanel implements ActionListener {
 
 	}
 
-	public ArrayList<JButton> getListaBotones() {
+	public ArrayList<BotonPersonalizado> getListaBotones() {
 		return listaBotones;
 	}
 
-	public void setListaBotones(ArrayList<JButton> listaBotones) {
+	public void setListaBotones(ArrayList<BotonPersonalizado> listaBotones) {
 		this.listaBotones = listaBotones;
 	}
 
-	public ArrayList<JTable> getListaTablas() {
+	public ArrayList<TablaPersonalizado> getListaTablas() {
 		return listaTablas;
 	}
 
-	public void setListaTablas(ArrayList<JTable> listaTablas) {
+	public void setListaTablas(ArrayList<TablaPersonalizado> listaTablas) {
 		this.listaTablas = listaTablas;
 	}
 
@@ -92,11 +93,11 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaCajaTexto = listaCajaTexto;
 	}
 
-	public ArrayList<JLabel> getListaTitulos() {
+	public ArrayList<LabelPersonalizado> getListaTitulos() {
 		return listaTitulos;
 	}
 
-	public void setListaTitulos(ArrayList<JLabel> listaTitulos) {
+	public void setListaTitulos(ArrayList<LabelPersonalizado> listaTitulos) {
 		this.listaTitulos = listaTitulos;
 	}
 

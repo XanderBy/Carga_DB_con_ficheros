@@ -16,14 +16,16 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import componentes.TabbedPanePersonalizado;
 import configuracion.Configuracion;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame implements ActionListener {
 
+	
 	private String nombre;
 	private Dimension tamano;
-	private JTabbedPane panelTabs;
+	private TabbedPanePersonalizado panelTabs;
 	private int numeroMaxTabs;
 
 	public Ventana(String nombre, Dimension tamano, int numeroMaxTabs) throws HeadlessException {
@@ -33,9 +35,11 @@ public class Ventana extends JFrame implements ActionListener {
 		this.setNumeroMaxTabs(numeroMaxTabs);
 
 		this.setLayout(null);
-
-		this.panelTabs = new JTabbedPane(JTabbedPane.TOP);
-
+		
+		
+		this.panelTabs = new TabbedPanePersonalizado();
+		this.panelTabs.setTabPlacement(JTabbedPane.TOP);
+		
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 
 		NewTab nuevo = new NewTab(this.getPanelTabs(), this.getNumeroMaxTabs());
@@ -85,11 +89,11 @@ public class Ventana extends JFrame implements ActionListener {
 		this.tamano = tamano;
 	}
 
-	public JTabbedPane getPanelTabs() {
+	public TabbedPanePersonalizado getPanelTabs() {
 		return panelTabs;
 	}
 
-	public void setPanelTabs(JTabbedPane panelTabs) {
+	public void setPanelTabs(TabbedPanePersonalizado panelTabs) {
 		this.panelTabs = panelTabs;
 	}
 
@@ -100,5 +104,7 @@ public class Ventana extends JFrame implements ActionListener {
 	public void setNumeroMaxTabs(int numeroMaxTabs) {
 		this.numeroMaxTabs = numeroMaxTabs;
 	}
+
+	
 
 }

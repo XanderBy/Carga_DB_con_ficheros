@@ -12,16 +12,17 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import componentes.TabbedPanePersonalizado;
 import configuracion.Configuracion;
 
 @SuppressWarnings("serial")
 public class NewTab extends JPanel implements MouseListener {
 
 	private JButton nuevaTab;
-	private JTabbedPane panel;
+	private TabbedPanePersonalizado panel;
 	private int numeroMaxTabs;
 
-	public NewTab(JTabbedPane panel, int numeroMaxTabs) {
+	public NewTab(TabbedPanePersonalizado panel, int numeroMaxTabs) {
 
 		this.panel = panel;
 		this.numeroMaxTabs = numeroMaxTabs;
@@ -38,16 +39,17 @@ public class NewTab extends JPanel implements MouseListener {
 		try {
 			JTabbedPane panel1 = (JTabbedPane) e.getSource();
 			if (panel1.getSelectedIndex() == 0 & this.getNumeroMaxTabs() >= panel1.getTabCount()) {
-				
+
 				Tab tab = new Tab(this.panel);
+				this.getPanel().getListaTabs().add(tab);
 				this.getPanel().addTab("Tab", tab);
 				JButton boton = null;
-				
+
 				boton = new JButton();
 				this.getPanel().getComponents()[(this.getPanel().getComponentCount() - 1)]
 						.setName(String.valueOf((this.getPanel().getComponentCount() - 1)));
 				boton.setName(String.valueOf((this.getPanel().getComponentCount() - 1)));
-				
+
 				boton.setText("X");
 				boton.addMouseListener(this);
 
@@ -59,7 +61,7 @@ public class NewTab extends JPanel implements MouseListener {
 
 			}
 		} catch (Exception e2) {
-			
+
 			JButton botonCerrar = (JButton) e.getSource();
 
 			if (botonCerrar != null) {
@@ -68,7 +70,11 @@ public class NewTab extends JPanel implements MouseListener {
 					if (this.panel.getComponents()[i].getName() != null) {
 						if (Integer.parseInt(this.panel.getComponents()[i].getName()) == Integer
 								.parseInt(botonCerrar.getName())) {
+
+							this.getPanel().getListaTabs().remove(this.panel.getComponents()[i]);
+
 							this.panel.remove(this.panel.getComponents()[i]);
+
 							break;
 						}
 					}
@@ -114,11 +120,11 @@ public class NewTab extends JPanel implements MouseListener {
 		this.nuevaTab = nuevaTab;
 	}
 
-	public JTabbedPane getPanel() {
+	public TabbedPanePersonalizado getPanel() {
 		return panel;
 	}
 
-	public void setPanel(JTabbedPane panel) {
+	public void setPanel(TabbedPanePersonalizado panel) {
 		this.panel = panel;
 	}
 

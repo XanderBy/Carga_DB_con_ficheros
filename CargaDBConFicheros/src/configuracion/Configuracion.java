@@ -9,12 +9,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTable;
 
+import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
+import componentes.LabelPersonalizado;
+import componentes.TablaPersonalizado;
 import componentes.TextFieldPersonalizado;
+import vista.Tab;
 import vista.Ventana;
 
 public class Configuracion {
@@ -36,9 +38,9 @@ public class Configuracion {
 				Integer.parseInt((String) properties.get("NUMEROMAXTABS")));
 	}
 
-	public static void CargarConfiguracion(ArrayList<JButton> listaBotones, ArrayList<JLabel> listaLabels,
+	public static void CargarConfiguracion(ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
 			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
-			ArrayList<JTable> listaTablas) {
+			ArrayList<TablaPersonalizado> listaTablas) {
 
 		CargarObjetosConfigurados(properties, "NUMEROBOTONESVENTANAPRINCIPAL", "BOTON", false, listaBotones,
 				listaLabels, listaCajaTexto, listaTComboBox, listaTablas);
@@ -53,13 +55,13 @@ public class Configuracion {
 	}
 
 	public static void CargarObjetosConfigurados(Properties properties, String numero, String objeto,
-			boolean tieneDatos, ArrayList<JButton> listaBotones, ArrayList<JLabel> listaLabels,
+			boolean tieneDatos, ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
 			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
-			ArrayList<JTable> listaTablas) {
-		JButton boton = null;
-		JTable tabla = null;
+			ArrayList<TablaPersonalizado> listaTablas) {
+		BotonPersonalizado boton = null;
+		TablaPersonalizado tabla = null;
 		ComboBoxPersonalizado comboBox = null;
-		JLabel label = null;
+		LabelPersonalizado label = null;
 		TextFieldPersonalizado textField = null;
 
 		String nombre, id = new String();
@@ -72,11 +74,13 @@ public class Configuracion {
 			id = (String) properties.get(("ID" + objeto + Integer.toString(i)));
 			switch (objeto) {
 			case "BOTON": {
-				boton = new JButton(nombre);
+				boton = new BotonPersonalizado();
+				boton.setText(nombre);
 				break;
 			}
 			case "LABELS": {
-				label = new JLabel(nombre);
+				label = new LabelPersonalizado();
+				label.setText(nombre);
 				break;
 			}
 			case "TEXTFIELD": {
@@ -89,7 +93,7 @@ public class Configuracion {
 				break;
 			}
 			case "TABLA": {
-				tabla = new JTable();
+				tabla = new TablaPersonalizado();
 				break;
 			}
 			}
@@ -102,23 +106,33 @@ public class Configuracion {
 			switch (objeto) {
 			case "BOTON": {
 				boton.setBounds(posicionX, posicionY, ancho, alto);
+				boton.setPosicionX(posicionX);
+				boton.setPosicionY(posicionY);
 				boton.setName(id);
 				break;
 			}
 			case "LABELS": {
 				label.setBounds(posicionX, posicionY, ancho, alto);
+				label.setPosicionX(posicionX);
+				label.setPosicionY(posicionY);
 				break;
 			}
 			case "TEXTFIELD": {
 				textField.setBounds(posicionX, posicionY, ancho, alto);
+				textField.setPosicionX(posicionX);
+				textField.setPosicionY(posicionY);
 				break;
 			}
 			case "COMBOBOX": {
 				comboBox.setBounds(posicionX, posicionY, ancho, alto);
+				comboBox.setPosicionX(posicionX);
+				comboBox.setPosicionY(posicionY);
 				break;
 			}
 			case "TABLA": {
 				tabla.setBounds(posicionX, posicionY, ancho, alto);
+				tabla.setPosicionX(posicionX);
+				tabla.setPosicionY(posicionY);
 				break;
 			}
 			}
@@ -129,10 +143,10 @@ public class Configuracion {
 		}
 	}
 
-	public static void SwitchAddListas(String objeto, JButton boton, JTable tabla, ComboBoxPersonalizado comboBox,
-			JLabel label, TextFieldPersonalizado textField, ArrayList<JButton> listaBotones, ArrayList<JLabel> listaLabels,
+	public static void SwitchAddListas(String objeto, BotonPersonalizado boton, TablaPersonalizado tabla, ComboBoxPersonalizado comboBox,
+			LabelPersonalizado label, TextFieldPersonalizado textField, ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
 			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
-			ArrayList<JTable> listaTablas) {
+			ArrayList<TablaPersonalizado> listaTablas) {
 		switch (objeto) {
 		case "BOTON": {
 			listaBotones.add(boton);
@@ -173,8 +187,22 @@ public class Configuracion {
 		
 		int anchoVentana=vista.getWidth();
 		int altoVentana=vista.getHeight();
-		System.out.println(anchoVentana);
 		
+		double valorX=0;
+		System.out.println("Ancho: "+anchoVentana);
+		for (Tab tab : vista.getPanelTabs().getListaTabs()) {
+			for (BotonPersonalizado boton : tab.getListaBotones()) {
+				valorX=anchoVentana*(boton.getPosicionX()/100);
+				System.out.println("Nueva Posicion"+ boton.getPosicionX());
+				System.out.println("Nuevo valor"+ (boton.getPosicionX()/100));
+				boton.setBounds((int)  valorX,(int) (altoVentana*(boton.getPosicionY()/100)),100,100);
+				System.out.println("PosicionX "+(anchoVentana*(boton.getPosicionX()/100)));
+			}
+			
+			System.out.println(tab.getListaBotones().get(0).getPosicionX());
+			System.out.println(tab.getListaBotones().get(0).getBounds());
+			tab.repaint();
+		}
 		
 	}
 }
