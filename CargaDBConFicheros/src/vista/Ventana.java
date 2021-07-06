@@ -61,7 +61,7 @@ public class Ventana extends JFrame implements ActionListener {
 	}
 	
 	public void Posicion() {
-		Configuracion.OtorgarPosicion(this);
+		Configuracion.OtorgarPosicion();
 	}
 	
 	public void añadirBoton(JTabbedPane paneltab) {

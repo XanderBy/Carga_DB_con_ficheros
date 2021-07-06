@@ -44,7 +44,7 @@ public class NewTab extends JPanel implements MouseListener {
 				this.getPanel().getListaTabs().add(tab);
 				this.getPanel().addTab("Tab", tab);
 				JButton boton = null;
-
+				Configuracion.OtorgarPosicion();
 				boton = new JButton();
 				this.getPanel().getComponents()[(this.getPanel().getComponentCount() - 1)]
 						.setName(String.valueOf((this.getPanel().getComponentCount() - 1)));

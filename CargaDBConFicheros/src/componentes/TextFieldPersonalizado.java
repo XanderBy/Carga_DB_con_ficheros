@@ -4,30 +4,30 @@ import javax.swing.JTextField;
 
 public class TextFieldPersonalizado extends JTextField {
 
-	private int posicionX;
-	private int posicionY;
+	private double posicionX;
+	private double posicionY;
 	
 	
 	public TextFieldPersonalizado() {
 		super();
 	}
 
-	public TextFieldPersonalizado(int posicionX, int posicionY) {
+	public TextFieldPersonalizado(double posicionX, double posicionY) {
 		super();
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
 	}
 	
-	public int getPosicionX() {
+	public double getPosicionX() {
 		return posicionX;
 	}
-	public void setPosicionX(int posicionX) {
+	public void setPosicionX(double posicionX) {
 		this.posicionX = posicionX;
 	}
-	public int getPosicionY() {
+	public double getPosicionY() {
 		return posicionY;
 	}
-	public void setPosicionY(int posicionY) {
+	public void setPosicionY(double posicionY) {
 		this.posicionY = posicionY;
 	}
 	

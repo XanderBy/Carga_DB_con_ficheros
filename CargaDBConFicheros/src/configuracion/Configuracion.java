@@ -183,24 +183,28 @@ public class Configuracion {
 
 	// Sobre 100 que llega por parametro lo trataremos para ponerlo en la ventana de
 	// una manera que dependa del ancho y alto de la ventana
-	public static void OtorgarPosicion(Ventana vista) {
+	public static void OtorgarPosicion() {
 		
-		int anchoVentana=vista.getWidth();
-		int altoVentana=vista.getHeight();
+		int anchoVentana=ventana.getWidth();
+		int altoVentana=ventana.getHeight();
 		
-		double valorX=0;
-		System.out.println("Ancho: "+anchoVentana);
-		for (Tab tab : vista.getPanelTabs().getListaTabs()) {
+		double valorX,valorY=0;
+		for (Tab tab : ventana.getPanelTabs().getListaTabs()) {
 			for (BotonPersonalizado boton : tab.getListaBotones()) {
 				valorX=anchoVentana*(boton.getPosicionX()/100);
-				System.out.println("Nueva Posicion"+ boton.getPosicionX());
-				System.out.println("Nuevo valor"+ (boton.getPosicionX()/100));
-				boton.setBounds((int)  valorX,(int) (altoVentana*(boton.getPosicionY()/100)),100,100);
-				System.out.println("PosicionX "+(anchoVentana*(boton.getPosicionX()/100)));
+				valorY=altoVentana*(boton.getPosicionY()/100);
+				boton.setBounds((int)  valorX,(int) valorY,100,100);
 			}
 			
-			System.out.println(tab.getListaBotones().get(0).getPosicionX());
-			System.out.println(tab.getListaBotones().get(0).getBounds());
+			for (ComboBoxPersonalizado comboBox : tab.getListaTComboBox()) {
+				
+				valorX=anchoVentana*(comboBox.getPosicionX()/100);
+				valorY=altoVentana*(comboBox.getPosicionY()/100);
+				System.out.println(valorX);
+				comboBox.setBounds((int)  valorX,(int) valorY,100,100);
+			}
+			
+			
 			tab.repaint();
 		}
 		
