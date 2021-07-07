@@ -38,9 +38,9 @@ public class Configuracion {
 				Integer.parseInt((String) properties.get("NUMEROMAXTABS")));
 	}
 
-	public static void CargarConfiguracion(ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
-			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
-			ArrayList<TablaPersonalizado> listaTablas) {
+	public static void CargarConfiguracion(ArrayList<BotonPersonalizado> listaBotones,
+			ArrayList<LabelPersonalizado> listaLabels, ArrayList<TextFieldPersonalizado> listaCajaTexto,
+			ArrayList<ComboBoxPersonalizado> listaTComboBox, ArrayList<TablaPersonalizado> listaTablas) {
 
 		CargarObjetosConfigurados(properties, "NUMEROBOTONESVENTANAPRINCIPAL", "BOTON", false, listaBotones,
 				listaLabels, listaCajaTexto, listaTComboBox, listaTablas);
@@ -143,8 +143,9 @@ public class Configuracion {
 		}
 	}
 
-	public static void SwitchAddListas(String objeto, BotonPersonalizado boton, TablaPersonalizado tabla, ComboBoxPersonalizado comboBox,
-			LabelPersonalizado label, TextFieldPersonalizado textField, ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
+	public static void SwitchAddListas(String objeto, BotonPersonalizado boton, TablaPersonalizado tabla,
+			ComboBoxPersonalizado comboBox, LabelPersonalizado label, TextFieldPersonalizado textField,
+			ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
 			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
 			ArrayList<TablaPersonalizado> listaTablas) {
 		switch (objeto) {
@@ -184,29 +185,48 @@ public class Configuracion {
 	// Sobre 100 que llega por parametro lo trataremos para ponerlo en la ventana de
 	// una manera que dependa del ancho y alto de la ventana
 	public static void OtorgarPosicion() {
-		
-		int anchoVentana=ventana.getWidth();
-		int altoVentana=ventana.getHeight();
-		
-		double valorX,valorY=0;
+
+		int anchoVentana = ventana.getWidth();
+		int altoVentana = ventana.getHeight();
+
+		double valorX, valorY = 0;
 		for (Tab tab : ventana.getPanelTabs().getListaTabs()) {
 			for (BotonPersonalizado boton : tab.getListaBotones()) {
-				valorX=anchoVentana*(boton.getPosicionX()/100);
-				valorY=altoVentana*(boton.getPosicionY()/100);
-				boton.setBounds((int)  valorX,(int) valorY,100,100);
+				valorX = anchoVentana * (boton.getPosicionX() / 100);
+				valorY = altoVentana * (boton.getPosicionY() / 100);
+				boton.setBounds((int) valorX, (int) valorY, boton.getWidth(), boton.getHeight());
 			}
-			
+
 			for (ComboBoxPersonalizado comboBox : tab.getListaTComboBox()) {
-				
-				valorX=anchoVentana*(comboBox.getPosicionX()/100);
-				valorY=altoVentana*(comboBox.getPosicionY()/100);
-				System.out.println(valorX);
-				comboBox.setBounds((int)  valorX,(int) valorY,100,100);
+
+				valorX = anchoVentana * (comboBox.getPosicionX() / 100);
+				valorY = altoVentana * (comboBox.getPosicionY() / 100);
+				comboBox.setBounds((int) valorX, (int) valorY, comboBox.getWidth(), comboBox.getHeight());
+			}
+
+			for (TextFieldPersonalizado textField : tab.getListaCajaTexto()) {
+
+				valorX = anchoVentana * (textField.getPosicionX() / 100);
+				valorY = altoVentana * (textField.getPosicionY() / 100);
+				textField.setBounds((int) valorX, (int) valorY, textField.getWidth(), textField.getHeight());
+			}
+
+			for (TablaPersonalizado tabla : tab.getListaTablas()) {
+
+				valorX = anchoVentana * (tabla.getPosicionX() / 100);
+				valorY = altoVentana * (tabla.getPosicionY() / 100);
+				tabla.setBounds((int) valorX, (int) valorY, tabla.getWidth(), tabla.getHeight());
 			}
 			
+			for (LabelPersonalizado label : tab.getListaTitulos()) {
+
+				valorX = anchoVentana * (label.getPosicionX() / 100);
+				valorY = altoVentana * (label.getPosicionY() / 100);
+				label.setBounds((int) valorX, (int) valorY, label.getWidth(), label.getHeight());
+			}
 			
 			tab.repaint();
 		}
-		
+
 	}
 }

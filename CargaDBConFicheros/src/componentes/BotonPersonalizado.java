@@ -6,6 +6,7 @@ public class BotonPersonalizado extends JButton {
 
 	private double posicionX;
 	private double posicionY;
+
 	
 	
 	
@@ -35,6 +36,7 @@ public class BotonPersonalizado extends JButton {
 	public void setPosicionY(double posicionY) {
 		this.posicionY = posicionY;
 	}
+
 	
 	
 	
