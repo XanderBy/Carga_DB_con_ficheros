@@ -133,6 +133,8 @@ public class Configuracion {
 				tabla.setBounds(posicionX, posicionY, ancho, alto);
 				tabla.setPosicionX(posicionX);
 				tabla.setPosicionY(posicionY);
+				tabla.setAncho(ancho);
+				tabla.setAlto(alto);
 				break;
 			}
 			}
@@ -188,8 +190,9 @@ public class Configuracion {
 
 		int anchoVentana = ventana.getWidth();
 		int altoVentana = ventana.getHeight();
-
-		double valorX, valorY = 0;
+		
+		double anchoComponente = 0, altoComponente=0;
+		double valorX=0, valorY = 0;
 		for (Tab tab : ventana.getPanelTabs().getListaTabs()) {
 			for (BotonPersonalizado boton : tab.getListaBotones()) {
 				valorX = anchoVentana * (boton.getPosicionX() / 100);
@@ -215,7 +218,9 @@ public class Configuracion {
 
 				valorX = anchoVentana * (tabla.getPosicionX() / 100);
 				valorY = altoVentana * (tabla.getPosicionY() / 100);
-				tabla.setBounds((int) valorX, (int) valorY, tabla.getWidth(), tabla.getHeight());
+				anchoComponente=anchoVentana * (tabla.getAncho() / 100);
+				altoComponente=altoVentana * (tabla.getAlto() / 100);
+				tabla.setBounds((int) valorX, (int) valorY, (int) anchoComponente, (int) altoComponente);
 			}
 			
 			for (LabelPersonalizado label : tab.getListaTitulos()) {
