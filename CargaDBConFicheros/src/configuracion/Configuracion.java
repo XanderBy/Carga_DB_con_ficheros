@@ -180,6 +180,10 @@ public class Configuracion {
 		String[] listado = ((String) properties.get(nombreLista)).split(",");
 
 		for (String eleccion : listado) {
+			if(comboBox.getItemCount()==0) {
+				comboBox.addItem("");
+			}
+			
 			comboBox.addItem(eleccion);
 		}
 	}
@@ -194,9 +198,12 @@ public class Configuracion {
 		double anchoComponente = 0, altoComponente=0;
 		double valorX=0, valorY = 0;
 		for (Tab tab : ventana.getPanelTabs().getListaTabs()) {
+			
 			for (BotonPersonalizado boton : tab.getListaBotones()) {
 				valorX = anchoVentana * (boton.getPosicionX() / 100);
 				valorY = altoVentana * (boton.getPosicionY() / 100);
+				anchoComponente=anchoVentana * (boton.getAncho() / 100);
+				altoComponente=altoVentana * (boton.getAlto() / 100);
 				boton.setBounds((int) valorX, (int) valorY, boton.getWidth(), boton.getHeight());
 			}
 
