@@ -3,6 +3,8 @@ package vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -66,6 +68,9 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaBotones.forEach((b) -> {
 			if (e.getSource() == b & b.getName().contains("1")) {
 				System.out.println(b.getName());
+				String messages[] = { "str1", "str2", "str3", "str4", "str5" };
+
+				PopUp.showInputDialog(null, messages);
 			}
 
 		});
