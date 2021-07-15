@@ -8,6 +8,7 @@ public class BotonPersonalizado extends JButton {
 	private double posicionY;
 	private double ancho;
 	private double alto;
+	private String dependeComponente;
 
 	public BotonPersonalizado() {
 		super();
@@ -51,6 +52,14 @@ public class BotonPersonalizado extends JButton {
 
 	public void setAncho(double ancho) {
 		this.ancho = ancho;
+	}
+
+	public Object getDependeComponente() {
+		return dependeComponente;
+	}
+
+	public void setDependeComponente(String dependeComponente) {
+		this.dependeComponente = dependeComponente;
 	}
 
 }

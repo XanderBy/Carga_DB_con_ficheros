@@ -64,7 +64,7 @@ public class Configuracion {
 		LabelPersonalizado label = null;
 		TextFieldPersonalizado textField = null;
 
-		String nombre, id = new String();
+		String nombre, id, depende = new String();
 		int numeroBotones, posicionX, posicionY, ancho, alto;
 
 		numeroBotones = Integer.parseInt((String) properties.get(numero));
@@ -72,10 +72,12 @@ public class Configuracion {
 		for (int i = 0; i < numeroBotones; i++) {
 			nombre = (String) properties.get(("NOMBRE" + objeto + Integer.toString(i)));
 			id = (String) properties.get(("ID" + objeto + Integer.toString(i)));
+			depende=(String) properties.get(("DEPENDEHABILITADO" + objeto + Integer.toString(i)));
 			switch (objeto) {
 			case "BOTON": {
 				boton = new BotonPersonalizado();
 				boton.setText(nombre);
+				boton.setDependeComponente(depende);
 				break;
 			}
 			case "LABELS": {
@@ -89,6 +91,7 @@ public class Configuracion {
 			}
 			case "COMBOBOX": {
 				comboBox = new ComboBoxPersonalizado();
+				comboBox.setId(id);
 				CargarComboBox(comboBox, objeto, i);
 				break;
 			}

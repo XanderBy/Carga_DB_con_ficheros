@@ -21,10 +21,18 @@ public class PropiedadesVentana {
 
 	}
 
+	public static void DependienteBotones() {
+
+	}
+
 	public static void PropiedadesTitulos(Tab tab) {
 		for (JLabel titulo : tab.getListaTitulos()) {
 			tab.add(titulo);
 		}
+
+	}
+
+	public static void DependienteTitulos() {
 
 	}
 
@@ -34,16 +42,27 @@ public class PropiedadesVentana {
 		}
 	}
 
+	public static void DependienteCajaText() {
+
+	}
+
 	public static void PropiedadesComboBox(Tab tab) {
 		for (JComboBox<String> comboBox : tab.getListaTComboBox()) {
 			tab.add(comboBox);
 		}
 	}
-	
+
+	public static void DependienteComboBox() {
+
+	}
+
 	public static void PropiedadesTablas(Tab tab) {
 		for (JTable tabla : tab.getListaTablas()) {
 			tab.add(tabla);
 		}
 	}
 
+	public static void DependienteTablas() {
+
+	}
 }

@@ -4,6 +4,7 @@ import javax.swing.JComboBox;
 
 public class ComboBoxPersonalizado extends JComboBox<String> {
 
+	private String id;
 	private double posicionX;
 	private double posicionY;
 
@@ -31,6 +32,14 @@ public class ComboBoxPersonalizado extends JComboBox<String> {
 
 	public void setPosicionY(double posicionY) {
 		this.posicionY = posicionY;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

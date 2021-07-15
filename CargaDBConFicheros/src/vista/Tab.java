@@ -39,7 +39,7 @@ public class Tab extends JPanel implements ActionListener {
 
 		if (this.getListaBotones() != null) {
 			PropiedadesVentana.PropiedadesBotones(this);
-
+			
 		}
 
 		if (this.getListaTitulos() != null) {
