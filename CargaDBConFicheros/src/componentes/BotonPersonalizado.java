@@ -54,7 +54,7 @@ public class BotonPersonalizado extends JButton {
 		this.ancho = ancho;
 	}
 
-	public Object getDependeComponente() {
+	public String getDependeComponente() {
 		return dependeComponente;
 	}
 

@@ -244,4 +244,15 @@ public class Configuracion {
 		}
 
 	}
+	public static void ActivarComponentes(String IdComponente,boolean activar, ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
+			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
+			ArrayList<TablaPersonalizado> listaTablas) {
+		
+		for (BotonPersonalizado boton : listaBotones) {
+			if(boton.getDependeComponente() != null && boton.getDependeComponente().equalsIgnoreCase(IdComponente)) {
+				boton.setEnabled(activar);
+			}
+		}
+		
+	}
 }

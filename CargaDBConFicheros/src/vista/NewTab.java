@@ -12,6 +12,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import componentes.BotonPersonalizado;
 import componentes.TabbedPanePersonalizado;
 import configuracion.Configuracion;
 
@@ -37,19 +38,20 @@ public class NewTab extends JPanel implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		try {
-			JTabbedPane panel1 = (JTabbedPane) e.getSource();
+			TabbedPanePersonalizado panel1 = (TabbedPanePersonalizado) e.getSource();
 			if (panel1.getSelectedIndex() == 0 & this.getNumeroMaxTabs() >= panel1.getTabCount()) {
-
+				
 				Tab tab = new Tab(this.panel);
 				this.getPanel().getListaTabs().add(tab);
 				this.getPanel().addTab("Tab", tab);
-				JButton boton = null;
+				BotonPersonalizado boton = null;
 				Configuracion.OtorgarPosicion();
-				boton = new JButton();
+				boton = new BotonPersonalizado();
+				
 				this.getPanel().getComponents()[(this.getPanel().getComponentCount() - 1)]
 						.setName(String.valueOf((this.getPanel().getComponentCount() - 1)));
 				boton.setName(String.valueOf((this.getPanel().getComponentCount() - 1)));
-
+				
 				boton.setText("X");
 				boton.addMouseListener(this);
 
@@ -62,7 +64,7 @@ public class NewTab extends JPanel implements MouseListener {
 			}
 		} catch (Exception e2) {
 
-			JButton botonCerrar = (JButton) e.getSource();
+			BotonPersonalizado botonCerrar = (BotonPersonalizado) e.getSource();
 
 			if (botonCerrar != null) {
 				int numeroComponentes = this.panel.getComponents().length;

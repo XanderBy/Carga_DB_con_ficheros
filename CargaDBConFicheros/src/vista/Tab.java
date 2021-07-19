@@ -50,7 +50,7 @@ public class Tab extends JPanel implements ActionListener {
 			PropiedadesVentana.PropiedadesCajaText(this);
 		}
 
-		if (this.getListaCajaTexto() != null) {
+		if (this.getListaTComboBox() != null) {
 			PropiedadesVentana.PropiedadesComboBox(this);
 		}
 		
@@ -74,6 +74,19 @@ public class Tab extends JPanel implements ActionListener {
 			}
 
 		});
+		this.listaTComboBox.forEach((b)->{
+			System.out.println(b.getId());
+			if (e.getSource() == b & b.getId().contains("BASESDEDATOS")) {
+				String valor=(String)((ComboBoxPersonalizado) e.getSource()).getSelectedItem();
+				if(valor != null && valor.length()>0) {
+					Configuracion.ActivarComponentes(b.getId(),true,this.getListaBotones(),null,null,null,null);
+				}else {
+					Configuracion.ActivarComponentes(b.getId(),false,this.getListaBotones(),null,null,null,null);
+				}
+				
+			}
+		});
+		
 
 	}
 

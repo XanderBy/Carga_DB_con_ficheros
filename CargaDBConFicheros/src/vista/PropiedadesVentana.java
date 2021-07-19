@@ -7,6 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import componentes.BotonPersonalizado;
+import componentes.ComboBoxPersonalizado;
+
 public class PropiedadesVentana {
 
 	public static void PropiedadesVentana(Ventana vista) {
@@ -14,7 +17,10 @@ public class PropiedadesVentana {
 	}
 
 	public static void PropiedadesBotones(Tab tab) {
-		for (JButton boton : tab.getListaBotones()) {
+		for (BotonPersonalizado boton : tab.getListaBotones()) {
+			if(boton.getDependeComponente() != null && boton.getDependeComponente().length()>0) {
+				boton.setEnabled(false);
+			}
 			tab.add(boton);
 			boton.addActionListener(tab);
 		}
@@ -47,8 +53,9 @@ public class PropiedadesVentana {
 	}
 
 	public static void PropiedadesComboBox(Tab tab) {
-		for (JComboBox<String> comboBox : tab.getListaTComboBox()) {
+		for (ComboBoxPersonalizado comboBox : tab.getListaTComboBox()) {
 			tab.add(comboBox);
+			comboBox.addActionListener(tab);
 		}
 	}
 
