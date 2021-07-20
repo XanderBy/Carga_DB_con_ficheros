@@ -14,6 +14,7 @@ import componentes.LabelPersonalizado;
 import componentes.TabbedPanePersonalizado;
 import componentes.TablaPersonalizado;
 import componentes.TextFieldPersonalizado;
+import conexion.Conexion;
 import configuracion.Configuracion;
 
 public class Tab extends JPanel implements ActionListener {
@@ -64,11 +65,13 @@ public class Tab extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		
+		Conexion.ConectarConDb("MYSQL");
+		
 		this.listaBotones.forEach((b) -> {
 			if (e.getSource() == b & b.getName().contains("1")) {
 				System.out.println(b.getName());
-				String messages[] = { "str1", "str2", "str3", "str4", "str5" };
+				String messages[] = { "Endpoint", "Puerto", "Usuario", "Contraseña" };
 
 				PopUp.showInputDialog(null, messages);
 			}

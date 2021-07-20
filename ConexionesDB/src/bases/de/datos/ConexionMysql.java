@@ -22,10 +22,11 @@ public class ConexionMysql {
 		boolean res = false;
 		try {
 			Class.forName(driver);
-			this.setConexion(DriverManager.getConnection(this.getUrl(), this.getUsuario(), this.getContrasena()));
+			this.setConexion(DriverManager.getConnection(this.getUrl()+":"+this.getPuerto()+"/"+this.getBaseDeDatos(), this.getUsuario(), this.getContrasena()));
 			res = true;
-
+			System.out.println("Ha conectado");
 		} catch (Exception e) {
+			System.out.println(e);
 			System.out.println("Error al conectar");
 		}
 

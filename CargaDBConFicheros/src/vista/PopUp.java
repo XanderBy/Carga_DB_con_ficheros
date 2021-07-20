@@ -24,7 +24,7 @@ public class PopUp extends JOptionPane {
 			panel.add(textFields[i]);
 		}
 
-		JOptionPane.showConfirmDialog(parentComponent, panel, "Input", JOptionPane.OK_CANCEL_OPTION);
+		JOptionPane.showConfirmDialog(parentComponent, panel, "Datos Conexión", JOptionPane.OK_CANCEL_OPTION);
 
 		for (int i = 0; i < messages.length; i++)
 			input[i] = textFields[i].getText();

@@ -12,7 +12,15 @@ public class Conexion {
 		case "MYSQL": {
 
 			mysql = new ConexionMysql();
-
+			mysql.setDriver("com.mysql.cj.jdbc.Driver");
+			mysql.setContrasena("admin");
+			mysql.setUsuario("root");
+			mysql.setBaseDeDatos("prueba");
+			mysql.setUrl("jdbc:mysql://localhost/");
+			mysql.setPuerto("3306");
+			
+			mysql.Conectar();
+			mysql.Desconectar();
 			break;
 		}
 		default:
