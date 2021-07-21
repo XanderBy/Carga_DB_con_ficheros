@@ -4,19 +4,19 @@ import bases.de.datos.ConexionMysql;
 
 public class Conexion {
 
-	private static ConexionMysql mysql;
+	private ConexionMysql mysql;
 
-	public static void ConectarConDb(String db) {
+	public void ConectarConDb(String db) {
 
 		switch (db) {
 		case "MYSQL": {
-
+			System.out.println("Entra?");
 			mysql = new ConexionMysql();
 			mysql.setDriver("com.mysql.cj.jdbc.Driver");
-			mysql.setContrasena("admin");
+			mysql.setContrasena("");
 			mysql.setUsuario("root");
-			mysql.setBaseDeDatos("prueba");
-			mysql.setUrl("jdbc:mysql://localhost/");
+			mysql.setBaseDeDatos("test");
+			mysql.setUrl("jdbc:mysql://127.0.0.1/");
 			mysql.setPuerto("3306");
 			
 			mysql.Conectar();
@@ -28,8 +28,14 @@ public class Conexion {
 		}
 
 	}
+	public boolean EstaConectado() {
+		boolean res=false;
+		
+		
+		return res;
+	}
 
-	public static boolean RealizarCarga(String db) {
+	public boolean RealizarCarga(String db) {
 
 		boolean res = false;
 

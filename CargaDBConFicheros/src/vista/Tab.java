@@ -25,10 +25,12 @@ public class Tab extends JPanel implements ActionListener {
 	private ArrayList<LabelPersonalizado> listaTitulos;
 	private ArrayList<ComboBoxPersonalizado> listaTComboBox;
 	private TabbedPanePersonalizado panel;
+	private Conexion conexion;
 
 	public Tab(TabbedPanePersonalizado panel) {
 		this.setLayout(null);
-
+		
+		this.conexion=new Conexion();
 		this.listaBotones = new ArrayList<>();
 		this.listaTablas = new ArrayList<>();
 		this.listaCajaTexto = new ArrayList<>();
@@ -66,7 +68,7 @@ public class Tab extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		Conexion.ConectarConDb("MYSQL");
+		
 		
 		this.listaBotones.forEach((b) -> {
 			if (e.getSource() == b & b.getName().contains("1")) {
@@ -74,6 +76,8 @@ public class Tab extends JPanel implements ActionListener {
 				String messages[] = { "Endpoint", "Puerto", "Usuario", "Contraseña" };
 
 				PopUp.showInputDialog(null, messages);
+				
+				this.conexion.ConectarConDb("MYSQL");
 			}
 
 		});
@@ -131,5 +135,13 @@ public class Tab extends JPanel implements ActionListener {
 
 	public void setListaTComboBox(ArrayList<ComboBoxPersonalizado> listaTComboBox) {
 		this.listaTComboBox = listaTComboBox;
+	}
+
+	public Conexion getConexion() {
+		return conexion;
+	}
+
+	public void setConexion(Conexion conexion) {
+		this.conexion = conexion;
 	}
 }

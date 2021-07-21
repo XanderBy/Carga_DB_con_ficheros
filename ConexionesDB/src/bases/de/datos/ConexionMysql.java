@@ -22,6 +22,7 @@ public class ConexionMysql {
 		boolean res = false;
 		try {
 			Class.forName(driver);
+			System.out.println();
 			this.setConexion(DriverManager.getConnection(this.getUrl()+":"+this.getPuerto()+"/"+this.getBaseDeDatos(), this.getUsuario(), this.getContrasena()));
 			res = true;
 			System.out.println("Ha conectado");
