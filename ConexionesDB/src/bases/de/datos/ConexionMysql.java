@@ -20,10 +20,12 @@ public class ConexionMysql {
 
 	public boolean Conectar() {
 		boolean res = false;
+		String urlTotal= new String();
 		try {
 			Class.forName(driver);
-			System.out.println();
-			this.setConexion(DriverManager.getConnection(this.getUrl()+":"+this.getPuerto()+"/"+this.getBaseDeDatos(), this.getUsuario(), this.getContrasena()));
+			urlTotal=this.getUrl()+this.getBaseDeDatos()+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+			System.out.println(urlTotal);
+			this.setConexion(DriverManager.getConnection(urlTotal, this.getUsuario(), this.getContrasena()));
 			res = true;
 			System.out.println("Ha conectado");
 		} catch (Exception e) {

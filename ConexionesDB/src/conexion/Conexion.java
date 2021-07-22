@@ -13,10 +13,10 @@ public class Conexion {
 			System.out.println("Entra?");
 			mysql = new ConexionMysql();
 			mysql.setDriver("com.mysql.cj.jdbc.Driver");
-			mysql.setContrasena("");
+			mysql.setContrasena("admin");
 			mysql.setUsuario("root");
-			mysql.setBaseDeDatos("test");
-			mysql.setUrl("jdbc:mysql://127.0.0.1/");
+			mysql.setBaseDeDatos("prueba");
+			mysql.setUrl("jdbc:mysql://localhost/");
 			mysql.setPuerto("3306");
 			
 			mysql.Conectar();
