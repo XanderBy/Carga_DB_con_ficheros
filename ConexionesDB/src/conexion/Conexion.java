@@ -6,27 +6,22 @@ public class Conexion {
 
 	private ConexionMysql mysql;
 
-	public void ConectarConDb(String db) {
-
+	public boolean ConectarConDb(String db, String usuario, String contrasena, String baseDeDatos, String url, String puerto) {
+		boolean res=false;
 		switch (db) {
 		case "MYSQL": {
-			System.out.println("Entra?");
-			mysql = new ConexionMysql();
-			mysql.setDriver("com.mysql.cj.jdbc.Driver");
-			mysql.setContrasena("admin");
-			mysql.setUsuario("root");
-			mysql.setBaseDeDatos("prueba");
-			mysql.setUrl("jdbc:mysql://localhost/");
-			mysql.setPuerto("3306");
 			
-			mysql.Conectar();
+			mysql = new ConexionMysql(db,puerto, url, usuario,contrasena);
+
+			
+			res=mysql.Conectar();
 			mysql.Desconectar();
 			break;
 		}
 		default:
 			System.out.println("No se ha elegido ninguna conexión");
 		}
-
+		return res;
 	}
 	public boolean EstaConectado() {
 		boolean res=false;

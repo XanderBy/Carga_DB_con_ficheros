@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 
 public class ConexionMysql {
 
+	private String cabecera;
 	private String driver;
 	private String baseDeDatos;
 	private String hostName;
@@ -16,14 +17,29 @@ public class ConexionMysql {
 
 	public ConexionMysql() {
 		super();
+		this.setDriver("com.mysql.cj.jdbc.Driver");
+		this.setCabecera("jdbc:mysql://");
 	}
+	
+
+	public ConexionMysql(String baseDeDatos, String puerto, String url, String usuario, String contrasena) {
+		super();
+		this.baseDeDatos = baseDeDatos;
+		this.puerto = puerto;
+		this.url = url;
+		this.usuario = usuario;
+		this.contrasena = contrasena;
+		this.setDriver("com.mysql.cj.jdbc.Driver");
+		this.setCabecera("jdbc:mysql://");
+	}
+
 
 	public boolean Conectar() {
 		boolean res = false;
 		String urlTotal= new String();
 		try {
 			Class.forName(driver);
-			urlTotal=this.getUrl()+this.getBaseDeDatos()+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+			urlTotal=this.getCabecera() + this.getUrl()+this.getBaseDeDatos()+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 			System.out.println(urlTotal);
 			this.setConexion(DriverManager.getConnection(urlTotal, this.getUsuario(), this.getContrasena()));
 			res = true;
@@ -108,6 +124,14 @@ public class ConexionMysql {
 
 	public void setConexion(Connection conexion) {
 		this.conexion = conexion;
+	}
+
+	public String getCabecera() {
+		return cabecera;
+	}
+
+	public void setCabecera(String cabecera) {
+		this.cabecera = cabecera;
 	}
 
 }

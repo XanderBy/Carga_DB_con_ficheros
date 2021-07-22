@@ -24,13 +24,14 @@ public class Tab extends JPanel implements ActionListener {
 	private ArrayList<TextFieldPersonalizado> listaCajaTexto;
 	private ArrayList<LabelPersonalizado> listaTitulos;
 	private ArrayList<ComboBoxPersonalizado> listaTComboBox;
+	private String baseDeDatosElegida;
 	private TabbedPanePersonalizado panel;
 	private Conexion conexion;
 
 	public Tab(TabbedPanePersonalizado panel) {
 		this.setLayout(null);
-		
-		this.conexion=new Conexion();
+
+		this.conexion = new Conexion();
 		this.listaBotones = new ArrayList<>();
 		this.listaTablas = new ArrayList<>();
 		this.listaCajaTexto = new ArrayList<>();
@@ -42,7 +43,7 @@ public class Tab extends JPanel implements ActionListener {
 
 		if (this.getListaBotones() != null) {
 			PropiedadesVentana.PropiedadesBotones(this);
-			
+
 		}
 
 		if (this.getListaTitulos() != null) {
@@ -56,44 +57,46 @@ public class Tab extends JPanel implements ActionListener {
 		if (this.getListaTComboBox() != null) {
 			PropiedadesVentana.PropiedadesComboBox(this);
 		}
-		
+
 		if (this.getListaTablas() != null) {
 			PropiedadesVentana.PropiedadesTablas(this);
 		}
-		
-		
-		
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		
-		
-		this.listaBotones.forEach((b) -> {
-			if (e.getSource() == b & b.getName().contains("1")) {
-				System.out.println(b.getName());
-				String messages[] = { "Endpoint", "Puerto", "Usuario", "Contraseña" };
 
-				PopUp.showInputDialog(null, messages);
-				
-				this.conexion.ConectarConDb("MYSQL");
+		this.listaBotones.forEach((b) -> {
+			if (e.getSource() == b & b.getName().contains("CONECTAR")) {
+				String messages[] = { "Endpoint", "Base de Datos", "Puerto", "Usuario", "Contraseña" };
+				String textoDefault[]= {};
+				String[] datosConexion = PopUp.showInputDialog(null, messages);
+
+				if (datosConexion.length > 0) {
+					if(this.conexion.ConectarConDb(this.getBaseDeDatosElegida(), datosConexion[3], datosConexion[4],
+							datosConexion[1], datosConexion[0], datosConexion[2])) {
+						System.out.println(b.getId());
+						Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null, null, null);
+					}
+				}
+
 			}
 
 		});
-		this.listaTComboBox.forEach((b)->{
+		this.listaTComboBox.forEach((b) -> {
 			System.out.println(b.getId());
 			if (e.getSource() == b & b.getId().contains("BASESDEDATOS")) {
-				String valor=(String)((ComboBoxPersonalizado) e.getSource()).getSelectedItem();
-				if(valor != null && valor.length()>0) {
-					Configuracion.ActivarComponentes(b.getId(),true,this.getListaBotones(),null,null,null,null);
-				}else {
-					Configuracion.ActivarComponentes(b.getId(),false,this.getListaBotones(),null,null,null,null);
+				String valor = (String) ((ComboBoxPersonalizado) e.getSource()).getSelectedItem();
+				if (valor != null && valor.length() > 0) {
+					Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null, null, null);
+					this.setBaseDeDatosElegida(valor);
+				} else {
+					Configuracion.ActivarComponentes(b.getId(), false, this.getListaBotones(), null, null, null, null);
 				}
-				
+
 			}
 		});
-		
 
 	}
 
@@ -143,5 +146,13 @@ public class Tab extends JPanel implements ActionListener {
 
 	public void setConexion(Conexion conexion) {
 		this.conexion = conexion;
+	}
+
+	public String getBaseDeDatosElegida() {
+		return baseDeDatosElegida;
+	}
+
+	public void setBaseDeDatosElegida(String baseDeDatosElegida) {
+		this.baseDeDatosElegida = baseDeDatosElegida;
 	}
 }

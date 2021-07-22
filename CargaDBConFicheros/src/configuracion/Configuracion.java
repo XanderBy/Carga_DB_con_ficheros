@@ -77,6 +77,7 @@ public class Configuracion {
 			case "BOTON": {
 				boton = new BotonPersonalizado();
 				boton.setText(nombre);
+				boton.setId(id);
 				boton.setDependeComponente(depende);
 				break;
 			}
