@@ -70,14 +70,23 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaBotones.forEach((b) -> {
 			if (e.getSource() == b & b.getName().contains("CONECTAR")) {
 				String messages[] = { "Endpoint", "Base de Datos", "Puerto", "Usuario", "Contraseña" };
-				String textoDefault[]= {"localhost/","prueba","3306","root","admin"};
-				String[] datosConexion = PopUp.showInputDialog(null, messages,textoDefault);
-
-				if (datosConexion.length > 0) {
-					if(this.conexion.ConectarConDb(this.getBaseDeDatosElegida(), datosConexion[3], datosConexion[4],
-							datosConexion[1], datosConexion[0], datosConexion[2])) {
-						System.out.println(b.getId());
-						Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null, null, null);
+				String textoDefault[] = { "localhost/", "prueba", "3306", "root", "admin" };
+				String[] datosConexion = new PopUp().showInputDialog(null, messages, textoDefault);
+				System.out.println(datosConexion.length);
+				if (datosConexion.length == 0) {
+					JOptionPane.showMessageDialog(null, "No has introducido los campos necesarios", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					if (datosConexion.length > 0) {
+						if (this.conexion.ConectarConDb(this.getBaseDeDatosElegida(), datosConexion[3],
+								datosConexion[4], datosConexion[1], datosConexion[0], datosConexion[2])) {
+							System.out.println(b.getId());
+							Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null, null,
+									null);
+						} else {
+							JOptionPane.showMessageDialog(null, "No se ha podido establecer conexion", "Error",
+									JOptionPane.ERROR_MESSAGE);
+						}
 					}
 				}
 

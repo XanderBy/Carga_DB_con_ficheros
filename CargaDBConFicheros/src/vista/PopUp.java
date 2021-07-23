@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 public class PopUp extends JOptionPane {
 
-	public static String[] showInputDialog(Component parentComponent, String messages[], String textoDefault[]) {
+	public String[] showInputDialog(Component parentComponent, String messages[], String textoDefault[]) {
 		JTextField textFields[] = new JTextField[messages.length];
 		boolean vacio = true;
 		String valorAux = new String();
@@ -37,10 +37,8 @@ public class PopUp extends JOptionPane {
 			}
 
 		}
-
-		if (vacio == true) {
+		if (vacio)
 			input = new String[0];
-		}
 
 		return input;
 	}
