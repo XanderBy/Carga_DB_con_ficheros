@@ -178,10 +178,22 @@ public class Configuracion {
 		}
 		}
 	}
+	
+	public static String[] CargarLista(String nombre, boolean comboBox) {
+		String[] listado=null;
+		
+		if(comboBox) {
+			String nombreLista = (String) properties.get(nombre);
+			listado=((String) properties.get(nombreLista)).split(",");
+		}else {
+			listado=((String) properties.get(nombre)).split(",");
+		}
+		
+		return listado;
+	}
 
 	public static void CargarComboBox(ComboBoxPersonalizado comboBox, String objeto, int numero) {
-		String nombreLista = (String) properties.get("DATOCARGADO" + objeto + numero);
-		String[] listado = ((String) properties.get(nombreLista)).split(",");
+		String[] listado = CargarLista(("DATOCARGADO" + objeto + numero), true);
 
 		for (String eleccion : listado) {
 			if(comboBox.getItemCount()==0) {

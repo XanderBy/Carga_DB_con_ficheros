@@ -16,6 +16,7 @@ import componentes.TablaPersonalizado;
 import componentes.TextFieldPersonalizado;
 import conexion.Conexion;
 import configuracion.Configuracion;
+import importacion.Importacion;
 
 public class Tab extends JPanel implements ActionListener {
 
@@ -90,6 +91,9 @@ public class Tab extends JPanel implements ActionListener {
 					}
 				}
 
+			}
+			if(e.getSource() == b & b.getName().contains("IMPORTARFICHERO")) {
+				Importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS",false));
 			}
 
 		});

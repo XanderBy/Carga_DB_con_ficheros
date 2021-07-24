@@ -1,5 +1,6 @@
 package vista;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,9 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import componentes.BotonPersonalizado;
 import componentes.TabbedPanePersonalizado;
+import componentes.TextFieldPersonalizado;
 import configuracion.Configuracion;
 
 @SuppressWarnings("serial")
@@ -45,8 +48,16 @@ public class NewTab extends JPanel implements MouseListener {
 				this.getPanel().getListaTabs().add(tab);
 				this.getPanel().addTab("Tab", tab);
 				BotonPersonalizado boton = null;
+				TextFieldPersonalizado nombreCabecera=null;
 				Configuracion.OtorgarPosicion();
 				boton = new BotonPersonalizado();
+				nombreCabecera=new TextFieldPersonalizado(){ 
+				    @Override public void setBorder(Border border) { 
+				        // No! 
+				       } 
+				   }; 
+				nombreCabecera.setOpaque(false);
+				
 				
 				this.getPanel().getComponents()[(this.getPanel().getComponentCount() - 1)]
 						.setName(String.valueOf((this.getPanel().getComponentCount() - 1)));
@@ -54,11 +65,15 @@ public class NewTab extends JPanel implements MouseListener {
 				
 				boton.setText("X");
 				boton.addMouseListener(this);
-
+				JPanel componenteCabecera=new JPanel();
+				componenteCabecera.add(nombreCabecera);
+				componenteCabecera.add(boton);
 				if (this.getPanel().getComponentCount() == 1) {
-					panel1.setTabComponentAt(this.getPanel().getComponentCount(), boton);
+					nombreCabecera.setText("Nombre"+this.getPanel().getComponentCount());
+					panel1.setTabComponentAt(this.getPanel().getComponentCount(), componenteCabecera);
 				} else {
-					panel1.setTabComponentAt(this.getPanel().getComponentCount() - 1, boton);
+					nombreCabecera.setText("Nombre"+(this.getPanel().getComponentCount() - 1));
+					panel1.setTabComponentAt(this.getPanel().getComponentCount() - 1, componenteCabecera);
 				}
 
 			}
@@ -93,7 +108,7 @@ public class NewTab extends JPanel implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
+		
 	}
 
 	@Override
