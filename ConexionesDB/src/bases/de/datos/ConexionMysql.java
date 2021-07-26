@@ -51,12 +51,24 @@ public class ConexionMysql {
 
 		return res;
 	}
+	
+	
 
 	public boolean Desconectar() {
-
-		return false;
+		try {
+			
+			this.getConexion().close();
+			
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
-
+	public void ObtenerDatosBasicosTabla(String tabla) {
+		
+		//describe [db_name.]table_name;
+		
+	}
 	public boolean Insert() {
 
 		return false;
