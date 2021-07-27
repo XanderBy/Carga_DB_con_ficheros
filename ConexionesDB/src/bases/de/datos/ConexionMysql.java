@@ -2,6 +2,9 @@ package bases.de.datos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ConexionMysql {
 
@@ -20,7 +23,6 @@ public class ConexionMysql {
 		this.setDriver("com.mysql.cj.jdbc.Driver");
 		this.setCabecera("jdbc:mysql://");
 	}
-	
 
 	public ConexionMysql(String baseDeDatos, String puerto, String url, String usuario, String contrasena) {
 		super();
@@ -33,13 +35,13 @@ public class ConexionMysql {
 		this.setCabecera("jdbc:mysql://");
 	}
 
-
 	public boolean Conectar() {
 		boolean res = false;
-		String urlTotal= new String();
+		String urlTotal = new String();
 		try {
 			Class.forName(driver);
-			urlTotal=this.getCabecera() + this.getUrl()+this.getBaseDeDatos()+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+			urlTotal = this.getCabecera() + this.getUrl() + this.getBaseDeDatos()
+					+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 			System.out.println(urlTotal);
 			this.setConexion(DriverManager.getConnection(urlTotal, this.getUsuario(), this.getContrasena()));
 			res = true;
@@ -51,24 +53,47 @@ public class ConexionMysql {
 
 		return res;
 	}
-	
-	
 
 	public boolean Desconectar() {
 		try {
-			
+
 			this.getConexion().close();
-			
+
 		} catch (Exception e) {
 			return false;
 		}
 		return true;
 	}
+
 	public void ObtenerDatosBasicosTabla(String tabla) {
-		
-		//describe [db_name.]table_name;
-		
+
+		// describe [db_name.]table_name;
+
+		String query = "describe " + this.getBaseDeDatos() + "." + tabla;
+		System.out.println(query);
+		Conectar();
+		Statement st;
+		try {
+			st = this.getConexion().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next())
+		      {
+				System.out.println(rs.getString("Field"));
+				System.out.println(rs.getString("Type"));
+				System.out.println(rs.getString("Null"));
+				System.out.println(rs.getString("Key"));
+				System.out.println(rs.getString("Default"));
+				System.out.println(rs.getString("Extra"));
+		      }
+			
+			Desconectar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
+
 	public boolean Insert() {
 
 		return false;

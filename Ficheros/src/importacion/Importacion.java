@@ -5,9 +5,11 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import conexion.Conexion;
+
 public class Importacion {
 
-	public static boolean ImportarFichero(String[] listadoExtensionesPermitidas) {
+	public static boolean ImportarFichero(String[] listadoExtensionesPermitidas, Conexion conexionDB) {
 
 		JFileChooser fileChooser = new JFileChooser();
 		FileNameExtensionFilter filtroExtension = new FileNameExtensionFilter(null, listadoExtensionesPermitidas);
@@ -28,17 +30,17 @@ public class Importacion {
 				e.getStackTrace();
 				return false;
 			}
-			ImportarPorTipo(extensionElegida,nombreTabla);
+			ImportarPorTipo(extensionElegida,nombreTabla,conexionDB);
 		}
 
 		return false;
 	}
 
-	public static void ImportarPorTipo(String tipo, String nombreTabla) {
+	public static void ImportarPorTipo(String tipo, String nombreTabla, Conexion conexionDB) {
 		System.out.println("El nombre de la tabla es: "+nombreTabla);
 		switch (tipo) {
 			case "xlsx": {
-				
+				conexionDB.mysql.ObtenerDatosBasicosTabla(nombreTabla);
 				break;
 			}
 		}

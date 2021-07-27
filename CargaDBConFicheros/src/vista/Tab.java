@@ -93,7 +93,7 @@ public class Tab extends JPanel implements ActionListener {
 
 			}
 			if(e.getSource() == b & b.getName().contains("IMPORTARFICHERO")) {
-				Importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS",false));
+				Importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS",false),this.getConexion());
 			}
 
 		});
