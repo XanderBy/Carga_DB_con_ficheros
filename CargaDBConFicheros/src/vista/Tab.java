@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
@@ -16,6 +15,7 @@ import componentes.TablaPersonalizado;
 import componentes.TextFieldPersonalizado;
 import conexion.Conexion;
 import configuracion.Configuracion;
+import estructura.datos.EstructuraDatosImportacionTabla;
 import importacion.Importacion;
 
 public class Tab extends JPanel implements ActionListener {
@@ -28,6 +28,7 @@ public class Tab extends JPanel implements ActionListener {
 	private String baseDeDatosElegida;
 	private TabbedPanePersonalizado panel;
 	private Conexion conexion;
+	private ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla;
 
 	public Tab(TabbedPanePersonalizado panel) {
 		this.setLayout(null);
@@ -38,7 +39,8 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaCajaTexto = new ArrayList<>();
 		this.listaTitulos = new ArrayList<>();
 		this.listaTComboBox = new ArrayList<>();
-
+		this.listaTipoDatosTabla=new ArrayList<>();
+		
 		Configuracion.CargarConfiguracion(this.getListaBotones(), this.getListaTitulos(), this.getListaCajaTexto(),
 				this.getListaTComboBox(), this.getListaTablas());
 
@@ -93,7 +95,7 @@ public class Tab extends JPanel implements ActionListener {
 
 			}
 			if(e.getSource() == b & b.getName().contains("IMPORTARFICHERO")) {
-				Importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS",false),this.getConexion());
+				Importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS",false),this.getConexion(), this.getListaTipoDatosTabla());
 			}
 
 		});
@@ -167,5 +169,13 @@ public class Tab extends JPanel implements ActionListener {
 
 	public void setBaseDeDatosElegida(String baseDeDatosElegida) {
 		this.baseDeDatosElegida = baseDeDatosElegida;
+	}
+
+	public ArrayList<EstructuraDatosImportacionTabla> getListaTipoDatosTabla() {
+		return listaTipoDatosTabla;
+	}
+
+	public void setListaTipoDatosTabla(ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
+		this.listaTipoDatosTabla = listaTipoDatosTabla;
 	}
 }

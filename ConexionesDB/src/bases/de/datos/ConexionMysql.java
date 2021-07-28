@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import estructura.datos.EstructuraDatosImportacionTabla;
 
 public class ConexionMysql {
 
@@ -65,7 +68,7 @@ public class ConexionMysql {
 		return true;
 	}
 
-	public void ObtenerDatosBasicosTabla(String tabla) {
+	public void ObtenerDatosBasicosTabla(String tabla, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
 
 		// describe [db_name.]table_name;
 
@@ -76,16 +79,20 @@ public class ConexionMysql {
 		try {
 			st = this.getConexion().createStatement();
 			ResultSet rs = st.executeQuery(query);
-			while (rs.next())
-		      {
-				System.out.println(rs.getString("Field"));
-				System.out.println(rs.getString("Type"));
-				System.out.println(rs.getString("Null"));
-				System.out.println(rs.getString("Key"));
-				System.out.println(rs.getString("Default"));
-				System.out.println(rs.getString("Extra"));
-		      }
-			
+			while (rs.next()) {
+				/*
+				 * System.out.println(rs.getString("Field"));
+				 * System.out.println(rs.getString("Type"));
+				 * System.out.println(rs.getString("Null"));
+				 * System.out.println(rs.getString("Key"));
+				 * System.out.println(rs.getString("Default"));
+				 * System.out.println(rs.getString("Extra"));
+				 */
+				EstructuraDatosImportacionTabla estructura = new EstructuraDatosImportacionTabla(rs.getString("Field"),
+						rs.getString("Type"));
+				listaTipoDatosTabla.add(estructura);
+			}
+
 			Desconectar();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
