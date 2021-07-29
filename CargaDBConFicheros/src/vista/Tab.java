@@ -39,8 +39,8 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaCajaTexto = new ArrayList<>();
 		this.listaTitulos = new ArrayList<>();
 		this.listaTComboBox = new ArrayList<>();
-		this.listaTipoDatosTabla=new ArrayList<>();
-		
+		this.listaTipoDatosTabla = new ArrayList<>();
+
 		Configuracion.CargarConfiguracion(this.getListaBotones(), this.getListaTitulos(), this.getListaCajaTexto(),
 				this.getListaTComboBox(), this.getListaTablas());
 
@@ -76,26 +76,33 @@ public class Tab extends JPanel implements ActionListener {
 				String textoDefault[] = { "localhost/", "prueba", "3306", "root", "admin" };
 				String[] datosConexion = new PopUp().showInputDialog(null, messages, textoDefault);
 				System.out.println(datosConexion.length);
+				System.out.println(datosConexion[0]);
 				if (datosConexion.length == 0) {
 					JOptionPane.showMessageDialog(null, "No has introducido los campos necesarios", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					if (datosConexion.length > 0) {
-						if (this.conexion.ConectarConDb(this.getBaseDeDatosElegida(), datosConexion[3],
-								datosConexion[4], datosConexion[1], datosConexion[0], datosConexion[2])) {
-							System.out.println(b.getId());
-							Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null, null,
-									null);
-						} else {
-							JOptionPane.showMessageDialog(null, "No se ha podido establecer conexion", "Error",
-									JOptionPane.ERROR_MESSAGE);
+					if (!datosConexion[0].equals("Ha pulsado cancelar")) {
+						if (datosConexion.length > 0) {
+							if (this.conexion.ConectarConDb(this.getBaseDeDatosElegida(), datosConexion[3],
+									datosConexion[4], datosConexion[1], datosConexion[0], datosConexion[2])) {
+								System.out.println(b.getId());
+								Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null,
+										null, null);
+							} else {
+								JOptionPane.showMessageDialog(null, "No se ha podido establecer conexion", "Error",
+										JOptionPane.ERROR_MESSAGE);
+							}
 						}
 					}
+
 				}
 
 			}
-			if(e.getSource() == b & b.getName().contains("IMPORTARFICHERO")) {
-				Importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS",false),this.getConexion(), this.getListaTipoDatosTabla());
+			if (e.getSource() == b & b.getName().contains("IMPORTARFICHERO")) {
+				Importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS", false), this.getConexion(),
+						this.getListaTipoDatosTabla());
+				Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null,
+						null, null);
 			}
 
 		});

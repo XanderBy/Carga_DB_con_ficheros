@@ -36,6 +36,9 @@ public class PopUp extends JOptionPane {
 				}
 			}
 
+		}else {
+			input[0]="Ha pulsado cancelar";
+			vacio=false;
 		}
 		if (vacio)
 			input = new String[0];
