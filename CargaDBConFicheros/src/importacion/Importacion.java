@@ -8,6 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import conexion.Conexion;
 import estructura.datos.EstructuraDatosImportacionTabla;
+import tipo.ficheros.Excel;
 
 public class Importacion {
 
@@ -17,6 +18,7 @@ public class Importacion {
 		FileNameExtensionFilter filtroExtension = new FileNameExtensionFilter(null, listadoExtensionesPermitidas);
 		fileChooser.setFileFilter(filtroExtension);
 		int resultado = fileChooser.showOpenDialog(fileChooser);
+		String ruta=new String();
 
 		if (resultado == JFileChooser.APPROVE_OPTION) {
 			String extensionElegida, nombreTabla, nombreFichero = new String();
@@ -28,21 +30,24 @@ public class Importacion {
 				extensionElegida = listaAuxiliarExtension[listaAuxiliarExtension.length - 1];
 				nombreTabla=fichero.getName().replace(("."+extensionElegida), "");
 				
+				ruta=fichero.getAbsolutePath();
+				
 			} catch (Exception e) {
 				e.getStackTrace();
 				return false;
 			}
-			ImportarPorTipo(extensionElegida,nombreTabla,conexionDB,listaTipoDatosTabla);
+			ImportarPorTipo(extensionElegida,nombreTabla,conexionDB,listaTipoDatosTabla,ruta);
 		}
 
 		return false;
 	}
 
-	public static void ImportarPorTipo(String tipo, String nombreTabla, Conexion conexionDB, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
+	public static void ImportarPorTipo(String tipo, String nombreTabla, Conexion conexionDB, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla,String ruta) {
 		System.out.println("El nombre de la tabla es: "+nombreTabla);
 		switch (tipo) {
 			case "xlsx": {
 				conexionDB.mysql.ObtenerDatosBasicosTabla(nombreTabla,listaTipoDatosTabla);
+				Excel.ObtenerDatosExcel(new File(ruta));
 				break;
 			}
 		}

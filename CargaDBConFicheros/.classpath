@@ -7,12 +7,17 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="src" path="/Ficheros">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="/ConexionesDB">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="/Ficheros">
+	<classpathentry combineaccessrules="false" kind="src" path="/Fichero">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

@@ -2,6 +2,6 @@ module CargaDBConFicheros {
 	
 	requires ConexionesDB;
 	requires java.desktop;
-	requires Ficheros;
+	requires Fichero;
 	exports configuracion;
 }
