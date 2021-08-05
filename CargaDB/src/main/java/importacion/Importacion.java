@@ -44,14 +44,31 @@ public class Importacion {
 
 	public static void ImportarPorTipo(String tipo, String nombreTabla, Conexion conexionDB, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla,String ruta) {
 		System.out.println("El nombre de la tabla es: "+nombreTabla);
+		String[][] datosExcel = null;
 		switch (tipo) {
 			case "xlsx": {
 				conexionDB.mysql.ObtenerDatosBasicosTabla(nombreTabla,listaTipoDatosTabla);
-				Excel.ObtenerDatosExcel(new File(ruta));
+				datosExcel=Excel.ObtenerDatosExcel(new File(ruta));
 				break;
 			}
 		}
 
+	}
+	public static void ValidarDatos(String[][] datosExcel,ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
+		int contadorColumna=0;
+		
+		for (EstructuraDatosImportacionTabla estructuraDatosImportacionTabla : listaTipoDatosTabla) {
+			
+			if(datosExcel[contadorColumna][0].equalsIgnoreCase(estructuraDatosImportacionTabla.getNombreCampo())) {
+				for (int y = 0; y < datosExcel[contadorColumna].length; y++) {
+					//Comprobar si se puede convertir el dato al tipo de la columna
+					estructuraDatosImportacionTabla.getListadoDatos().add(datosExcel[contadorColumna][y]);
+					
+				}
+			}
+			
+			contadorColumna++;
+		}
 	}
 
 }

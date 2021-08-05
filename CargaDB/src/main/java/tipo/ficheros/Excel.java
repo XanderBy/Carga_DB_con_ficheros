@@ -18,7 +18,7 @@ public class Excel {
 
 	public static String[][] ObtenerDatosExcel(File excelFile) {
 		InputStream excelStream = null;
-		String[][] datosExcel;
+		String[][] datosExcel = null;
 		try {
 			excelStream = new FileInputStream(excelFile);
 
@@ -31,62 +31,34 @@ public class Excel {
 			Cell celda;
 
 			int numeroFilas = hoja.getLastRowNum();
-			int numeroColumnas = (numeroFilas>0) ? hoja.getRow(0).getPhysicalNumberOfCells() : 0;
-			
-			datosExcel= new String[numeroColumnas][numeroFilas];
-			
+			int numeroColumnas = (numeroFilas > 0) ? hoja.getRow(0).getPhysicalNumberOfCells() : 0;
+			System.out.println(numeroColumnas);
+			datosExcel = new String[numeroColumnas][numeroFilas];
+
 			String cellValue;
-			
+
 			for (int x = 0; x < numeroColumnas; x++) {
 				for (int y = 0; y < numeroFilas; y++) {
-					cellValue = fila.getCell(y) == null ? ""
-							: (fila.getCell(y).getCellType() == CellType.STRING)
-									? fila.getCell(y).getStringCellValue()
-									: (fila.getCell(y).getCellType() == CellType.NUMERIC)
-											? "" + fila.getCell(y).getNumericCellValue()
+					fila = hoja.getRow(y);
+					cellValue = fila.getCell(x) == null ? ""
+							: (fila.getCell(x).getCellType() == CellType.STRING) ? fila.getCell(x).getStringCellValue()
+									: (fila.getCell(x).getCellType() == CellType.NUMERIC)
+											? "" + fila.getCell(x).getNumericCellValue()
 											: (fila.getCell(y).getCellType() == CellType.BOOLEAN)
-													? "" + fila.getCell(y).getBooleanCellValue()
-													: (fila.getCell(y).getCellType() == CellType.BLANK) ? "BLANK"
-															: (fila.getCell(y).getCellType() == CellType.FORMULA)
+													? "" + fila.getCell(x).getBooleanCellValue()
+													: (fila.getCell(x).getCellType() == CellType.BLANK) ? "BLANK"
+															: (fila.getCell(x).getCellType() == CellType.FORMULA)
 																	? "FORMULA"
-																	: (fila.getCell(y)
-																			.getCellType() == CellType.ERROR)
-																					? "ERROR"
-																					: "";
-					System.out.print("[Column " + c + ": " + cellValue + "] ");
-					
-				}
-				
-			}
-			
+																	: (fila.getCell(x).getCellType() == CellType.ERROR)
+																			? "ERROR"
+																			: "";
+					System.out.print("[Column " + y + ": " + cellValue + "] ");
+					datosExcel[x][y]=cellValue;
 
-			for (int r = 0; r < numeroFilas; r++) {
-				fila = hoja.getRow(r);
-				if (fila == null) {
-					break;
-				} else {
-					System.out.print("Row: " + r + " -> ");
-					for (int c = 0; c < (numeroColumnas = fila.getLastCellNum()); c++) {
-
-						cellValue = fila.getCell(c) == null ? ""
-								: (fila.getCell(c).getCellType() == CellType.STRING)
-										? fila.getCell(c).getStringCellValue()
-										: (fila.getCell(c).getCellType() == CellType.NUMERIC)
-												? "" + fila.getCell(c).getNumericCellValue()
-												: (fila.getCell(c).getCellType() == CellType.BOOLEAN)
-														? "" + fila.getCell(c).getBooleanCellValue()
-														: (fila.getCell(c).getCellType() == CellType.BLANK) ? "BLANK"
-																: (fila.getCell(c).getCellType() == CellType.FORMULA)
-																		? "FORMULA"
-																		: (fila.getCell(c)
-																				.getCellType() == CellType.ERROR)
-																						? "ERROR"
-																						: "";
-						System.out.print("[Column " + c + ": " + cellValue + "] ");
-					}
-					System.out.println();
 				}
+
 			}
+
 		} catch (FileNotFoundException fileNotFoundException) {
 			System.out.println("The file not exists (No se encontr� el fichero): " + fileNotFoundException);
 		} catch (IOException ex) {
@@ -100,6 +72,7 @@ public class Excel {
 								+ ex);
 			}
 		}
+		return datosExcel;
 	}
 
 }

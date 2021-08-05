@@ -72,7 +72,7 @@ public class Tab extends JPanel implements ActionListener {
 
 		this.listaBotones.forEach((b) -> {
 			if (e.getSource() == b & b.getName().contains("CONECTAR")) {
-				String messages[] = { "Endpoint", "Base de Datos", "Puerto", "Usuario", "Contraseña" };
+				String messages[] = { "Endpoint", "Base de Datos", "Puerto", "Usuario", "Contraseï¿½a" };
 				String textoDefault[] = { "localhost/", "prueba", "3306", "root", "admin" };
 				String[] datosConexion = new PopUp().showInputDialog(null, messages, textoDefault);
 				System.out.println(datosConexion.length);
