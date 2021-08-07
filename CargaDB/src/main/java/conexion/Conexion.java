@@ -1,6 +1,9 @@
 package conexion;
 
+import java.util.ArrayList;
+
 import bases.de.datos.ConexionMysql;
+import estructura.datos.EstructuraDatosImportacionTabla;
 
 public class Conexion {
 
@@ -19,7 +22,7 @@ public class Conexion {
 			break;
 		}
 		default:
-			System.out.println("No se ha elegido ninguna conexión");
+			System.out.println("No se ha elegido ninguna conexiï¿½n");
 		}
 		return res;
 	}
@@ -30,19 +33,19 @@ public class Conexion {
 		return res;
 	}
 
-	public boolean RealizarCarga(String db) {
+	public boolean RealizarCarga(String db, String tabla,ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
 
 		boolean res = false;
 
 		switch (db) {
 		case "MYSQL": {
 
-			res = mysql.Insert();
+			res = mysql.Insert(tabla,listaTipoDatosTabla);
 
 			break;
 		}
 		default:
-			System.out.println("No se ha elegido ninguna conexión");
+			System.out.println("No se ha elegido ninguna conexiï¿½n");
 		}
 
 		return res;

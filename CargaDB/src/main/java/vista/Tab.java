@@ -29,6 +29,7 @@ public class Tab extends JPanel implements ActionListener {
 	private TabbedPanePersonalizado panel;
 	private Conexion conexion;
 	private ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla;
+	private Importacion importacion;
 
 	public Tab(TabbedPanePersonalizado panel) {
 		this.setLayout(null);
@@ -40,6 +41,7 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaTitulos = new ArrayList<>();
 		this.listaTComboBox = new ArrayList<>();
 		this.listaTipoDatosTabla = new ArrayList<>();
+		this.importacion=new Importacion();
 
 		Configuracion.CargarConfiguracion(this.getListaBotones(), this.getListaTitulos(), this.getListaCajaTexto(),
 				this.getListaTComboBox(), this.getListaTablas());
@@ -99,10 +101,16 @@ public class Tab extends JPanel implements ActionListener {
 
 			}
 			if (e.getSource() == b & b.getName().contains("IMPORTARFICHERO")) {
-				Importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS", false), this.getConexion(),
-						this.getListaTipoDatosTabla());
+				this.setListaTipoDatosTabla(this.importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS", false), this.getConexion(),
+						this.getListaTipoDatosTabla()));
 				Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null,
 						null, null);
+				
+				System.out.println(this.getListaTipoDatosTabla().get(0).getListadoDatos().get(0));
+			}
+			if (e.getSource() == b & b.getName().contains("CARGADATOS")) {
+				this.getConexion().RealizarCarga(baseDeDatosElegida, this.importacion.getNombreTabla(),this.getListaTipoDatosTabla());
+
 			}
 
 		});

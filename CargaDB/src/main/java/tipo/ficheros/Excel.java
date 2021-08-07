@@ -35,11 +35,30 @@ public class Excel {
 			System.out.println(numeroColumnas);
 			datosExcel = new String[numeroColumnas][numeroFilas];
 
-			String cellValue;
+			String cellValue = new String();
 
 			for (int x = 0; x < numeroColumnas; x++) {
 				for (int y = 0; y < numeroFilas; y++) {
 					fila = hoja.getRow(y);
+					
+					switch (fila.getCell(x).getCellType()) {
+			        case BOOLEAN:
+			        	cellValue=""+fila.getCell(x).getBooleanCellValue();
+			            break;
+			        case NUMERIC:
+			        	cellValue=""+fila.getCell(x).getNumericCellValue();
+			            break;
+			        case STRING:
+			        	cellValue=fila.getCell(x).getStringCellValue();
+			            break;
+			        case BLANK:
+			            break;
+			        case ERROR:
+			            break;
+
+			    }
+					
+					/*
 					cellValue = fila.getCell(x) == null ? ""
 							: (fila.getCell(x).getCellType() == CellType.STRING) ? fila.getCell(x).getStringCellValue()
 									: (fila.getCell(x).getCellType() == CellType.NUMERIC)
@@ -52,6 +71,8 @@ public class Excel {
 																	: (fila.getCell(x).getCellType() == CellType.ERROR)
 																			? "ERROR"
 																			: "";
+																			*/
+					
 					System.out.print("[Column " + y + ": " + cellValue + "] ");
 					datosExcel[x][y]=cellValue;
 

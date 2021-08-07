@@ -68,7 +68,7 @@ public class ConexionMysql {
 		return true;
 	}
 
-	public void ObtenerDatosBasicosTabla(String tabla, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
+	public ArrayList<EstructuraDatosImportacionTabla> ObtenerDatosBasicosTabla(String tabla, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
 
 		// describe [db_name.]table_name;
 
@@ -98,12 +98,48 @@ public class ConexionMysql {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		return listaTipoDatosTabla;
 	}
 
-	public boolean Insert() {
-
-		return false;
+	public boolean Insert(String tabla,ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
+		String insert=new String();
+		String campos= new String();
+		String valores= new String();
+		ArrayList<EstructuraDatosImportacionTabla> temporal=listaTipoDatosTabla;
+		int contador=0;
+		boolean res=true;
+		Statement st;
+		try {
+			Conectar();
+			st = this.getConexion().createStatement();
+			
+			for (EstructuraDatosImportacionTabla estructuraDatosImportacionTabla : temporal) {
+				campos+=estructuraDatosImportacionTabla.getNombreCampo()+",";
+				for (String dato : estructuraDatosImportacionTabla.getListadoDatos()) {
+					valores+=dato+",";
+					estructuraDatosImportacionTabla.getListadoDatos().remove(dato);
+					break;
+				}
+				//st.executeUpdate
+			}
+			System.out.println(campos);
+			campos=campos.substring(0, campos.length()-1);
+			System.out.println(valores);
+			valores=valores.substring(0, valores.length()-1);
+			
+			//insert="INSERT INTO "+this.baseDeDatos+"."+ tabla+" ("+campos+") VALUES ("+valores+")";
+			insert="INSERT INTO "+tabla+" "+campos+" VALUES (1.0)";
+			System.out.println(insert);
+			st.executeUpdate(valores);
+			
+		} catch (SQLException e) {
+			res=false;
+			e.printStackTrace();
+		}finally {
+			Desconectar();
+		}
+		
+		return res;
 	}
 
 	public String getDriver() {
