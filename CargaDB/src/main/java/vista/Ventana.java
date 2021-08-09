@@ -1,6 +1,8 @@
 package vista;
 
 import java.awt.Dimension;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -15,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import java.awt.Point;
+import java.awt.Window;
 
 import componentes.TabbedPanePersonalizado;
 import configuracion.Configuracion;
@@ -28,7 +32,7 @@ public class Ventana extends JFrame implements ActionListener {
 	private TabbedPanePersonalizado panelTabs;
 	private int numeroMaxTabs;
 
-	public Ventana(String nombre, Dimension tamano, int numeroMaxTabs) throws HeadlessException {
+	public Ventana(String nombre, Dimension tamano, int numeroMaxTabs, Point posicion) throws HeadlessException {
 		super();
 		this.setNombre(nombre);
 		this.setTamano(tamano);
@@ -42,12 +46,15 @@ public class Ventana extends JFrame implements ActionListener {
 		
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 
+		
 		NewTab nuevo = new NewTab(this.getPanelTabs(), this.getNumeroMaxTabs());
-
+ 
 		add(this.panelTabs);
-
+		
+		GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1].setFullScreenWindow(this);
+		//setLocation(posicion);
 		setTitle(this.getNombre());
-		setSize(tamano);
+		//setSize(tamano);
 		setVisible(true);
 		setLayout(new GridLayout(1, 1));
 

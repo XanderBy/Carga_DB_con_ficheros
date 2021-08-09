@@ -1,6 +1,7 @@
 package configuracion;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,7 +36,7 @@ public class Configuracion {
 		}
 
 		ventana = new Ventana("Prueba", new Dimension(500, 500),
-				Integer.parseInt((String) properties.get("NUMEROMAXTABS")));
+				Integer.parseInt((String) properties.get("NUMEROMAXTABS")), new Point(0,0));
 	}
 
 	public static void CargarConfiguracion(ArrayList<BotonPersonalizado> listaBotones,
