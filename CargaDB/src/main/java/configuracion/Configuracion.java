@@ -99,6 +99,7 @@ public class Configuracion {
 			}
 			case "TABLA": {
 				tabla = new TablaPersonalizado();
+				tabla.setId(id);
 				break;
 			}
 			}

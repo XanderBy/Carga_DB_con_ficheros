@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
@@ -41,7 +42,7 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaTitulos = new ArrayList<>();
 		this.listaTComboBox = new ArrayList<>();
 		this.listaTipoDatosTabla = new ArrayList<>();
-		this.importacion=new Importacion();
+		this.importacion = new Importacion();
 
 		Configuracion.CargarConfiguracion(this.getListaBotones(), this.getListaTitulos(), this.getListaCajaTexto(),
 				this.getListaTComboBox(), this.getListaTablas());
@@ -101,15 +102,28 @@ public class Tab extends JPanel implements ActionListener {
 
 			}
 			if (e.getSource() == b & b.getName().contains("IMPORTARFICHERO")) {
-				this.setListaTipoDatosTabla(this.importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS", false), this.getConexion(),
-						this.getListaTipoDatosTabla()));
-				Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null,
-						null, null);
-				
+				this.getListaTipoDatosTabla().clear();
+				this.setListaTipoDatosTabla(
+						this.importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS", false),
+								this.getConexion(), this.getListaTipoDatosTabla()));
+				Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null, null, null);
+				this.listaTablas.forEach((t) -> {
+					System.out.println(t.getId());
+					
+					if (t.getId().contains("DATOSACARGAR")) {
+						System.out.println("Entró");
+						t.setModel(this.importacion.CargarDatosJTable(listaTipoDatosTabla));
+						
+						
+						
+					}
+				});
+
 				System.out.println(this.getListaTipoDatosTabla().get(0).getListadoDatos().get(0));
 			}
 			if (e.getSource() == b & b.getName().contains("CARGADATOS")) {
-				this.getConexion().RealizarCarga(baseDeDatosElegida, this.importacion.getNombreTabla(),this.getListaTipoDatosTabla());
+				this.getConexion().RealizarCarga(baseDeDatosElegida, this.importacion.getNombreTabla(),
+						this.getListaTipoDatosTabla());
 
 			}
 

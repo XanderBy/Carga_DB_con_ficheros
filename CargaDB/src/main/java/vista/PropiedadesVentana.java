@@ -4,11 +4,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
+import componentes.TablaPersonalizado;
 
 public class PropiedadesVentana {
 
@@ -64,8 +66,12 @@ public class PropiedadesVentana {
 	}
 
 	public static void PropiedadesTablas(Tab tab) {
-		for (JTable tabla : tab.getListaTablas()) {
+		for (TablaPersonalizado tabla : tab.getListaTablas()) {
 			tab.add(tabla);
+			JScrollPane scrollPane = new JScrollPane();
+			 tab.add(scrollPane);
+	        scrollPane.setBounds(tabla.getX(), tabla.getY(),(int) tabla.getAncho(),(int)  tabla.getAlto());
+	        scrollPane.setViewportView(tabla);
 		}
 	}
 

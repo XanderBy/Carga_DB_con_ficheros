@@ -1,6 +1,10 @@
 package componentes;
 
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class TablaPersonalizado extends JTable {
 
@@ -8,9 +12,12 @@ public class TablaPersonalizado extends JTable {
 	private double posicionY;
 	private double ancho;
 	private double alto;
+	private String id;
 
 	public TablaPersonalizado() {
 		super();
+		
+		//this.setModel(new AbstractTableModel());
 	}
 
 	
@@ -65,6 +72,20 @@ public class TablaPersonalizado extends JTable {
 
 	public void setPosicionY(double posicionY) {
 		this.posicionY = posicionY;
+	}
+
+
+
+
+	public String getId() {
+		return id;
+	}
+
+
+
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }
