@@ -2,7 +2,11 @@ package configuracion;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
@@ -246,6 +251,30 @@ public class Configuracion {
 				anchoComponente=anchoVentana * (tabla.getAncho() / 100);
 				altoComponente=altoVentana * (tabla.getAlto() / 100);
 				tabla.setBounds((int) valorX, (int) valorY, (int) anchoComponente, (int) altoComponente);
+				tabla.setFillsViewportHeight(true);
+				 
+				//tabla.setPreferredScrollableViewportSize(new Dimension(450,63));
+				/*
+				if(tabla.getScroll() != null) {
+					JScrollPane scroll=tabla.getScroll();
+					scroll.setBounds((int) valorX, (int) valorY, (int) anchoComponente, (int) altoComponente);
+					tabla.setScroll(scroll);
+				}*/
+				tabla.setAutoscrolls(true);
+				for (JScrollPane scroll : tab.getListaScroll()) {
+
+					tabla.setPreferredSize(null);
+					// jTable.setBounds(new Rectangle(17, 250, 500, 100));
+					// jTable.enable(false);
+					tabla.setEnabled(false);
+					// jTable.getAutoscrolls();
+					// jTable.getRowHeight(10);
+					scroll = new JScrollPane(tabla, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+							JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+					
+					
+					//scroll.setBounds(100, 100, (int) anchoComponente, (int) altoComponente);
+				}
 			}
 			
 			for (LabelPersonalizado label : tab.getListaTitulos()) {

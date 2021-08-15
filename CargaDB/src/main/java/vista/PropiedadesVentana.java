@@ -1,5 +1,11 @@
 package vista;
 
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,7 +26,7 @@ public class PropiedadesVentana {
 
 	public static void PropiedadesBotones(Tab tab) {
 		for (BotonPersonalizado boton : tab.getListaBotones()) {
-			if(boton.getDependeComponente() != null && boton.getDependeComponente().length()>0) {
+			if (boton.getDependeComponente() != null && boton.getDependeComponente().length() > 0) {
 				boton.setEnabled(false);
 			}
 			tab.add(boton);
@@ -67,11 +73,23 @@ public class PropiedadesVentana {
 
 	public static void PropiedadesTablas(Tab tab) {
 		for (TablaPersonalizado tabla : tab.getListaTablas()) {
+
+			tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			JScrollPane scrollPane = null;
+			tabla.setPreferredSize(null);
+			// jTable.setBounds(new Rectangle(17, 250, 500, 100));
+			// jTable.enable(false);
+			tabla.setEnabled(false);
+			// jTable.getAutoscrolls();
+			// jTable.getRowHeight(10);
+			scrollPane = new JScrollPane(tabla, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+					JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+			tabla.setFillsViewportHeight(true);
+
 			tab.add(tabla);
-			JScrollPane scrollPane = new JScrollPane();
-			 tab.add(scrollPane);
-	        scrollPane.setBounds(tabla.getX(), tabla.getY(),(int) tabla.getAncho(),(int)  tabla.getAlto());
-	        scrollPane.setViewportView(tabla);
+			// tab.add(scrollPane);
+			// tab.getListaScroll().add(scrollPane);
+
 		}
 	}
 

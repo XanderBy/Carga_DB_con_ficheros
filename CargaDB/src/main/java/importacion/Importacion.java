@@ -22,13 +22,33 @@ public class Importacion {
 	public DefaultTableModel CargarDatosJTable(ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
 
 		// DefaultTableModel modelo= new DefaultTableModel();
+		Object[] Cabecera = new Object[listaTipoDatosTabla.size()];
+		int contadorCabecera = 0;
+		int contadorDatos = 0;
+		int maxDatos = 0;
+
+		for (EstructuraDatosImportacionTabla estructuraDatosImportacionTabla : listaTipoDatosTabla) {
+			if (maxDatos < estructuraDatosImportacionTabla.getListadoDatos().size()) {
+				maxDatos = estructuraDatosImportacionTabla.getListadoDatos().size();
+			}
+		}
+
+		Object[][] datos = new Object[maxDatos][listaTipoDatosTabla.size()];
 
 		for (EstructuraDatosImportacionTabla estructuraDatosImportacionTabla : listaTipoDatosTabla) {
 			System.out.println(estructuraDatosImportacionTabla.getNombreCampo());
-			// modelo.addColumn((Object) estructuraDatosImportacionTabla.getNombreCampo());
 
+			Cabecera[contadorCabecera] = estructuraDatosImportacionTabla.getNombreCampo();
+			
+			
+			for (String dato : estructuraDatosImportacionTabla.getListadoDatos()) {
+				datos[contadorDatos][contadorCabecera]=dato;
+				contadorDatos++;
+			}
+			contadorDatos=0;
+			contadorCabecera++;
 		}
-		DefaultTableModel modelo = new DefaultTableModel(new Object[][] { { "Hola" } }, new Object[] { "v1" }) {
+		DefaultTableModel modelo = new DefaultTableModel(datos, Cabecera) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;

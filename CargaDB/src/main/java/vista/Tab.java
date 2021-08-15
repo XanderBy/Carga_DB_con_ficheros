@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import componentes.BotonPersonalizado;
@@ -26,6 +27,7 @@ public class Tab extends JPanel implements ActionListener {
 	private ArrayList<TextFieldPersonalizado> listaCajaTexto;
 	private ArrayList<LabelPersonalizado> listaTitulos;
 	private ArrayList<ComboBoxPersonalizado> listaTComboBox;
+	private ArrayList<JScrollPane> listaScroll;
 	private String baseDeDatosElegida;
 	private TabbedPanePersonalizado panel;
 	private Conexion conexion;
@@ -43,6 +45,7 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaTComboBox = new ArrayList<>();
 		this.listaTipoDatosTabla = new ArrayList<>();
 		this.importacion = new Importacion();
+		this.setListaScroll(new ArrayList<>());
 
 		Configuracion.CargarConfiguracion(this.getListaBotones(), this.getListaTitulos(), this.getListaCajaTexto(),
 				this.getListaTComboBox(), this.getListaTablas());
@@ -206,5 +209,13 @@ public class Tab extends JPanel implements ActionListener {
 
 	public void setListaTipoDatosTabla(ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
 		this.listaTipoDatosTabla = listaTipoDatosTabla;
+	}
+
+	public ArrayList<JScrollPane> getListaScroll() {
+		return listaScroll;
+	}
+
+	public void setListaScroll(ArrayList<JScrollPane> listaScroll) {
+		this.listaScroll = listaScroll;
 	}
 }

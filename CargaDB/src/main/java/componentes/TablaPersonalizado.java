@@ -13,6 +13,7 @@ public class TablaPersonalizado extends JTable {
 	private double ancho;
 	private double alto;
 	private String id;
+	private JScrollPane scroll;
 
 	public TablaPersonalizado() {
 		super();
@@ -86,6 +87,20 @@ public class TablaPersonalizado extends JTable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+
+
+
+	public JScrollPane getScroll() {
+		return scroll;
+	}
+
+
+
+
+	public void setScroll(JScrollPane scroll) {
+		this.scroll = scroll;
 	}
 
 }
