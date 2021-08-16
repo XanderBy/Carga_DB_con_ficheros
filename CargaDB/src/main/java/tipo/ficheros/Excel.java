@@ -36,11 +36,13 @@ public class Excel {
 			datosExcel = new String[numeroColumnas][numeroFilas];
 
 			String cellValue = new String();
-
+			
 			for (int x = 0; x < numeroColumnas; x++) {
 				for (int y = 0; y < numeroFilas; y++) {
 					fila = hoja.getRow(y);
-					
+					if(fila.getCell(x)==null) {
+						break;
+					}
 					switch (fila.getCell(x).getCellType()) {
 			        case BOOLEAN:
 			        	cellValue=""+fila.getCell(x).getBooleanCellValue();

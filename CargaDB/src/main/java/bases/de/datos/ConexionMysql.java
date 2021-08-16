@@ -2,6 +2,7 @@ package bases.de.datos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -68,7 +69,8 @@ public class ConexionMysql {
 		return true;
 	}
 
-	public ArrayList<EstructuraDatosImportacionTabla> ObtenerDatosBasicosTabla(String tabla, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
+	public ArrayList<EstructuraDatosImportacionTabla> ObtenerDatosBasicosTabla(String tabla,
+			ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
 
 		// describe [db_name.]table_name;
 
@@ -101,44 +103,46 @@ public class ConexionMysql {
 		return listaTipoDatosTabla;
 	}
 
-	public boolean Insert(String tabla,ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
-		String insert=new String();
-		String campos= new String();
-		String valores= new String();
-		ArrayList<EstructuraDatosImportacionTabla> temporal=listaTipoDatosTabla;
-		int contador=0;
-		boolean res=true;
-		Statement st;
+	public boolean Insert(String tabla, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
+		String insert = new String();
+		String campos = new String();
+		String valores = new String();
+		ArrayList<EstructuraDatosImportacionTabla> temporal = listaTipoDatosTabla;
+		int contador = 0;
+		boolean res = true;
+		PreparedStatement st;
 		try {
 			Conectar();
-			st = this.getConexion().createStatement();
-			
+
 			for (EstructuraDatosImportacionTabla estructuraDatosImportacionTabla : temporal) {
-				campos+=estructuraDatosImportacionTabla.getNombreCampo()+",";
+				campos += estructuraDatosImportacionTabla.getNombreCampo() + ",";
 				for (String dato : estructuraDatosImportacionTabla.getListadoDatos()) {
-					valores+=dato+",";
+					valores += dato + ",";
 					estructuraDatosImportacionTabla.getListadoDatos().remove(dato);
 					break;
 				}
-				//st.executeUpdate
+				// st.executeUpdate
 			}
 			System.out.println(campos);
-			campos=campos.substring(0, campos.length()-1);
+			campos = campos.substring(0, campos.length() - 1);
 			System.out.println(valores);
-			valores=valores.substring(0, valores.length()-1);
-			
-			//insert="INSERT INTO "+this.baseDeDatos+"."+ tabla+" ("+campos+") VALUES ("+valores+")";
-			insert="INSERT INTO "+tabla+" "+campos+" VALUES (1.0)";
-			System.out.println(insert);
-			st.executeUpdate(valores);
-			
+			valores = valores.substring(0, valores.length() - 1);
+
+			 insert="INSERT INTO "+this.baseDeDatos+"."+ tabla+" ("+campos+") VALUES (?,?)";
+			st = this.getConexion().prepareStatement(insert);
+			int valor=1;
+			st.setInt(1, valor);
+			st.setString(2, "Hola");
+
+			st.execute();
+
 		} catch (SQLException e) {
-			res=false;
+			res = false;
 			e.printStackTrace();
-		}finally {
+		} finally {
 			Desconectar();
 		}
-		
+
 		return res;
 	}
 
