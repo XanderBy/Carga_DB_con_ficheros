@@ -127,7 +127,7 @@ public class Tab extends JPanel implements ActionListener {
 			if (e.getSource() == b & b.getName().contains("CARGADATOS")) {
 				this.getConexion().RealizarCarga(baseDeDatosElegida, this.importacion.getNombreTabla(),
 						this.getListaTipoDatosTabla());
-
+				Configuracion.ActivarComponentes(b.getId(), false, this.getListaBotones(), null, null, null, null);
 			}
 
 		});

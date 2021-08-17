@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import estructura.datos.EstructuraDatosImportacionTabla;
 
@@ -92,6 +93,7 @@ public class ConexionMysql {
 				 */
 				EstructuraDatosImportacionTabla estructura = new EstructuraDatosImportacionTabla(rs.getString("Field"),
 						rs.getString("Type"));
+				System.out.println(estructura.getTipo());
 				listaTipoDatosTabla.add(estructura);
 			}
 
@@ -111,30 +113,44 @@ public class ConexionMysql {
 		int contador = 0;
 		boolean res = true;
 		PreparedStatement st;
+		int maxDatos = 0;
+
+		for (EstructuraDatosImportacionTabla estructuraDatosImportacionTabla : listaTipoDatosTabla) {
+			if (maxDatos < estructuraDatosImportacionTabla.getListadoDatos().size()) {
+				maxDatos = estructuraDatosImportacionTabla.getListadoDatos().size();
+			}
+		}
+
 		try {
 			Conectar();
 
-			for (EstructuraDatosImportacionTabla estructuraDatosImportacionTabla : temporal) {
-				campos += estructuraDatosImportacionTabla.getNombreCampo() + ",";
-				for (String dato : estructuraDatosImportacionTabla.getListadoDatos()) {
-					valores += dato + ",";
-					estructuraDatosImportacionTabla.getListadoDatos().remove(dato);
-					break;
+			for (int i = 0; i < maxDatos; i++) {
+
+				for (EstructuraDatosImportacionTabla estructuraDatosImportacionTabla : temporal) {
+					campos += estructuraDatosImportacionTabla.getNombreCampo() + ",";
+					for (String dato : estructuraDatosImportacionTabla.getListadoDatos()) {
+						if (estructuraDatosImportacionTabla.getTipo().contains("varchar")) {
+							valores += "'" + dato + "',";
+						} else {
+							valores += dato + ",";
+						}
+
+						estructuraDatosImportacionTabla.getListadoDatos().remove(dato);
+						break;
+					}
 				}
-				// st.executeUpdate
+
+				campos = campos.substring(0, campos.length() - 1);
+				valores = valores.substring(0, valores.length() - 1);
+
+				insert = "INSERT INTO " + this.baseDeDatos + "." + tabla + " (" + campos + ") VALUES (" + valores + ")";
+				System.out.println(insert);
+				st = this.getConexion().prepareStatement(insert);
+
+				st.execute();
+				valores="";
+				campos="";
 			}
-			System.out.println(campos);
-			campos = campos.substring(0, campos.length() - 1);
-			System.out.println(valores);
-			valores = valores.substring(0, valores.length() - 1);
-
-			 insert="INSERT INTO "+this.baseDeDatos+"."+ tabla+" ("+campos+") VALUES (?,?)";
-			st = this.getConexion().prepareStatement(insert);
-			int valor=1;
-			st.setInt(1, valor);
-			st.setString(2, "Hola");
-
-			st.execute();
 
 		} catch (SQLException e) {
 			res = false;
