@@ -92,7 +92,7 @@ public class Tab extends JPanel implements ActionListener {
 							if (this.conexion.ConectarConDb(this.getBaseDeDatosElegida(), datosConexion[3],
 									datosConexion[4], datosConexion[1], datosConexion[0], datosConexion[2])) {
 								System.out.println(b.getId());
-								Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null,
+								Configuracion.ActivarComponentes(b.getId(), true,false, this.getListaBotones(), null, null,
 										null, null);
 							} else {
 								JOptionPane.showMessageDialog(null, "No se ha podido establecer conexion", "Error",
@@ -109,25 +109,28 @@ public class Tab extends JPanel implements ActionListener {
 				this.setListaTipoDatosTabla(
 						this.importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS", false),
 								this.getConexion(), this.getListaTipoDatosTabla()));
-				Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null, null, null);
+				Configuracion.ActivarComponentes(b.getId(), true,false, this.getListaBotones(), null, null, null, null);
 				this.listaTablas.forEach((t) -> {
 					System.out.println(t.getId());
-					
+
 					if (t.getId().contains("DATOSACARGAR")) {
 						System.out.println("Entró");
 						t.setModel(this.importacion.CargarDatosJTable(listaTipoDatosTabla));
-						
-						
-						
+
 					}
 				});
 
 				System.out.println(this.getListaTipoDatosTabla().get(0).getListadoDatos().get(0));
 			}
 			if (e.getSource() == b & b.getName().contains("CARGADATOS")) {
-				this.getConexion().RealizarCarga(baseDeDatosElegida, this.importacion.getNombreTabla(),
-						this.getListaTipoDatosTabla());
-				Configuracion.ActivarComponentes(b.getId(), false, this.getListaBotones(), null, null, null, null);
+				if(this.getConexion().RealizarCarga(baseDeDatosElegida, this.importacion.getNombreTabla(),
+						this.getListaTipoDatosTabla())) {
+					
+				}else {
+					
+				}
+				Configuracion.ActivarComponentes(b.getId(), false,true, this.getListaBotones(), null, null, null, null);
+
 			}
 
 		});
@@ -136,15 +139,15 @@ public class Tab extends JPanel implements ActionListener {
 			if (e.getSource() == b & b.getId().contains("BASESDEDATOS")) {
 				String valor = (String) ((ComboBoxPersonalizado) e.getSource()).getSelectedItem();
 				if (valor != null && valor.length() > 0) {
-					Configuracion.ActivarComponentes(b.getId(), true, this.getListaBotones(), null, null, null, null);
+					Configuracion.ActivarComponentes(b.getId(), true,false, this.getListaBotones(), null, null, null, null);
 					this.setBaseDeDatosElegida(valor);
 				} else {
-					Configuracion.ActivarComponentes(b.getId(), false, this.getListaBotones(), null, null, null, null);
+					Configuracion.ActivarComponentes(b.getId(), false,false, this.getListaBotones(), null, null, null, null);
 				}
 
 			}
 		});
-
+		repaint();
 	}
 
 	public ArrayList<BotonPersonalizado> getListaBotones() {
