@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.GroupLayout.Alignment;
 
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
@@ -244,38 +246,19 @@ public class Configuracion {
 				textField.setBounds((int) valorX, (int) valorY, textField.getWidth(), textField.getHeight());
 			}
 
-			for (TablaPersonalizado tabla : tab.getListaTablas()) {
+			//for (TablaPersonalizado tabla : tab.getListaTablas()) {
 
-				valorX = anchoVentana * (tabla.getPosicionX() / 100);
-				valorY = altoVentana * (tabla.getPosicionY() / 100);
-				anchoComponente=anchoVentana * (tabla.getAncho() / 100);
-				altoComponente=altoVentana * (tabla.getAlto() / 100);
-				tabla.setBounds((int) valorX, (int) valorY, (int) anchoComponente, (int) altoComponente);
-				tabla.setFillsViewportHeight(true);
+				valorX = anchoVentana * (tab.getListaTablas().get(0).getPosicionX() / 100);
+				valorY = altoVentana * (tab.getListaTablas().get(0).getPosicionY() / 100);
+				anchoComponente=anchoVentana * (tab.getListaTablas().get(0).getAncho() / 100);
+				altoComponente=altoVentana * (tab.getListaTablas().get(0).getAlto() / 100);
+				tab.getListaTablas().get(0).setBounds((int) valorX, (int) valorY, (int) anchoComponente, (int) altoComponente);
+
+		
+					 
 				 
-				//tabla.setPreferredScrollableViewportSize(new Dimension(450,63));
-				/*
-				if(tabla.getScroll() != null) {
-					JScrollPane scroll=tabla.getScroll();
-					scroll.setBounds((int) valorX, (int) valorY, (int) anchoComponente, (int) altoComponente);
-					tabla.setScroll(scroll);
-				}*/
-				tabla.setAutoscrolls(true);
-				for (JScrollPane scroll : tab.getListaScroll()) {
-
-					tabla.setPreferredSize(null);
-					// jTable.setBounds(new Rectangle(17, 250, 500, 100));
-					// jTable.enable(false);
-					tabla.setEnabled(false);
-					// jTable.getAutoscrolls();
-					// jTable.getRowHeight(10);
-					scroll = new JScrollPane(tabla, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-							JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-					
-					
-					//scroll.setBounds(100, 100, (int) anchoComponente, (int) altoComponente);
-				}
-			}
+				
+			//}
 			
 			for (LabelPersonalizado label : tab.getListaTitulos()) {
 
