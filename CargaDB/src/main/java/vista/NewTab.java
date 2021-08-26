@@ -31,7 +31,7 @@ public class NewTab extends JPanel implements MouseListener {
 		this.panel = panel;
 		this.numeroMaxTabs = numeroMaxTabs;
 
-		this.panel.insertTab("Nuevo", null, null, "Nueva Pestaña", 0);
+		this.panel.insertTab("Nuevo", null, null, "Nueva Pestaï¿½a", 0);
 
 		this.panel.getModel().clearSelection();
 		this.panel.addMouseListener(this);
@@ -78,7 +78,7 @@ public class NewTab extends JPanel implements MouseListener {
 
 			}
 		} catch (Exception e2) {
-
+			System.out.println(e2.getMessage());
 			BotonPersonalizado botonCerrar = (BotonPersonalizado) e.getSource();
 
 			if (botonCerrar != null) {

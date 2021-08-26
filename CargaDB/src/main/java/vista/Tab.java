@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.GroupLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.GroupLayout.Alignment;
 
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
@@ -70,7 +72,24 @@ public class Tab extends JPanel implements ActionListener {
 		if (this.getListaTablas() != null) {
 			PropiedadesVentana.PropiedadesTablas(this);
 		}
+		
+		JScrollPane scrollPane = new JScrollPane(this.getListaTablas().get(0));
 
+		// Force the scrollbars to always be displayed
+		// scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		GroupLayout layout = new GroupLayout(this);
+
+		//horizontal
+		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
+		hGroup.addGroup(layout.createParallelGroup().addComponent(scrollPane));
+		layout.setHorizontalGroup(hGroup);
+		//vertical
+		GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
+		vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(scrollPane));
+		layout.setVerticalGroup(vGroup);
+
+		this.getListaTablas().get(0).setLayout(layout);
 	}
 
 	@Override

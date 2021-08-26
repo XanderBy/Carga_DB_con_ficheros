@@ -1,6 +1,7 @@
 package configuracion;
 
 import java.awt.Dimension;
+import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
@@ -43,7 +44,7 @@ public class Configuracion {
 		}
 
 		ventana = new Ventana("Prueba", new Dimension(500, 500),
-				Integer.parseInt((String) properties.get("NUMEROMAXTABS")), new Point(0,0));
+				Integer.parseInt((String) properties.get("NUMEROMAXTABS")), new Point(0, 0));
 	}
 
 	public static void CargarConfiguracion(ArrayList<BotonPersonalizado> listaBotones,
@@ -80,7 +81,7 @@ public class Configuracion {
 		for (int i = 0; i < numeroBotones; i++) {
 			nombre = (String) properties.get(("NOMBRE" + objeto + Integer.toString(i)));
 			id = (String) properties.get(("ID" + objeto + Integer.toString(i)));
-			depende=(String) properties.get(("DEPENDEHABILITADO" + objeto + Integer.toString(i)));
+			depende = (String) properties.get(("DEPENDEHABILITADO" + objeto + Integer.toString(i)));
 			switch (objeto) {
 			case "BOTON": {
 				boton = new BotonPersonalizado();
@@ -187,17 +188,17 @@ public class Configuracion {
 		}
 		}
 	}
-	
+
 	public static String[] CargarLista(String nombre, boolean comboBox) {
-		String[] listado=null;
-		
-		if(comboBox) {
+		String[] listado = null;
+
+		if (comboBox) {
 			String nombreLista = (String) properties.get(nombre);
-			listado=((String) properties.get(nombreLista)).split(",");
-		}else {
-			listado=((String) properties.get(nombre)).split(",");
+			listado = ((String) properties.get(nombreLista)).split(",");
+		} else {
+			listado = ((String) properties.get(nombre)).split(",");
 		}
-		
+
 		return listado;
 	}
 
@@ -205,10 +206,10 @@ public class Configuracion {
 		String[] listado = CargarLista(("DATOCARGADO" + objeto + numero), true);
 
 		for (String eleccion : listado) {
-			if(comboBox.getItemCount()==0) {
+			if (comboBox.getItemCount() == 0) {
 				comboBox.addItem("");
 			}
-			
+
 			comboBox.addItem(eleccion);
 		}
 	}
@@ -219,16 +220,16 @@ public class Configuracion {
 
 		int anchoVentana = ventana.getWidth();
 		int altoVentana = ventana.getHeight();
-		
-		double anchoComponente = 0, altoComponente=0;
-		double valorX=0, valorY = 0;
+
+		double anchoComponente = 0, altoComponente = 0;
+		double valorX = 0, valorY = 0;
 		for (Tab tab : ventana.getPanelTabs().getListaTabs()) {
-			
+
 			for (BotonPersonalizado boton : tab.getListaBotones()) {
 				valorX = anchoVentana * (boton.getPosicionX() / 100);
 				valorY = altoVentana * (boton.getPosicionY() / 100);
-				anchoComponente=anchoVentana * (boton.getAncho() / 100);
-				altoComponente=altoVentana * (boton.getAlto() / 100);
+				anchoComponente = anchoVentana * (boton.getAncho() / 100);
+				altoComponente = altoVentana * (boton.getAlto() / 100);
 				boton.setBounds((int) valorX, (int) valorY, boton.getWidth(), boton.getHeight());
 			}
 
@@ -246,47 +247,79 @@ public class Configuracion {
 				textField.setBounds((int) valorX, (int) valorY, textField.getWidth(), textField.getHeight());
 			}
 
-			//for (TablaPersonalizado tabla : tab.getListaTablas()) {
+			// for (TablaPersonalizado tabla : tab.getListaTablas()) {
 
-				valorX = anchoVentana * (tab.getListaTablas().get(0).getPosicionX() / 100);
-				valorY = altoVentana * (tab.getListaTablas().get(0).getPosicionY() / 100);
-				anchoComponente=anchoVentana * (tab.getListaTablas().get(0).getAncho() / 100);
-				altoComponente=altoVentana * (tab.getListaTablas().get(0).getAlto() / 100);
-				tab.getListaTablas().get(0).setBounds((int) valorX, (int) valorY, (int) anchoComponente, (int) altoComponente);
+			valorX = anchoVentana * (tab.getListaTablas().get(0).getPosicionX() / 100);
+			valorY = altoVentana * (tab.getListaTablas().get(0).getPosicionY() / 100);
+			anchoComponente = anchoVentana * (tab.getListaTablas().get(0).getAncho() / 100);
+			altoComponente = altoVentana * (tab.getListaTablas().get(0).getAlto() / 100);
+			tab.getListaTablas().get(0).setBounds((int) valorX, (int) valorY, (int) anchoComponente,
+					(int) altoComponente);
 
-		
-					 
-				 
-				
-			//}
+			JScrollPane scrollPane = new JScrollPane(tab.getListaTablas().get(0));
+			scrollPane.setBounds((int) valorX, (int) valorY, (int) anchoComponente,
+					(int) altoComponente);
+			// Force the scrollbars to always be displayed
+			// scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+			scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			GroupLayout layout = new GroupLayout(tab);
+
+			//horizontal
+			GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
+			hGroup.addGroup(layout.createParallelGroup().addComponent(scrollPane));
+			layout.setHorizontalGroup(hGroup);
+			//vertical
+			GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
+			vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(scrollPane));
+			layout.setVerticalGroup(vGroup);
 			
+			/*groupLayout
+					.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
+							groupLayout.createSequentialGroup().addContainerGap().addGroup(
+									groupLayout.createParallelGroup(Alignment.LEADING).addComponent(scrollPane,
+											GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))));
+
+			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
+					groupLayout.createSequentialGroup().addContainerGap()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(scrollPane,
+									GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))));
+*/
+			//tab.setLayout(groupLayout);
+			tab.getListaTablas().get(0).setLayout(layout);
+			tab.add(new JScrollPane(tab.getListaTablas().get(0)));
+
+			// }
+
 			for (LabelPersonalizado label : tab.getListaTitulos()) {
 
 				valorX = anchoVentana * (label.getPosicionX() / 100);
 				valorY = altoVentana * (label.getPosicionY() / 100);
 				label.setBounds((int) valorX, (int) valorY, label.getWidth(), label.getHeight());
 			}
-			
+
 			tab.repaint();
 		}
 
 	}
-	public static void ActivarComponentes(String IdComponente,boolean activar, boolean noDepende, ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
+
+	public static void ActivarComponentes(String IdComponente, boolean activar, boolean noDepende,
+			ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
 			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
 			ArrayList<TablaPersonalizado> listaTablas) {
-		
+
 		for (BotonPersonalizado boton : listaBotones) {
-			if(noDepende) {
-				if(boton.getId().equalsIgnoreCase(IdComponente)) {
+			if (noDepende) {
+				if (boton.getId().equalsIgnoreCase(IdComponente)) {
 					boton.setEnabled(activar);
 				}
-			}else {
-				if(boton.getDependeComponente() != null && boton.getDependeComponente().equalsIgnoreCase(IdComponente)) {
+			} else {
+				if (boton.getDependeComponente() != null
+						&& boton.getDependeComponente().equalsIgnoreCase(IdComponente)) {
 					boton.setEnabled(activar);
 				}
 			}
-			
+
 		}
-		
+
 	}
 }
