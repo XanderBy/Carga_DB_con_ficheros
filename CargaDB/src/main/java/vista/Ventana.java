@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import java.awt.Point;
@@ -30,7 +32,7 @@ public class Ventana extends JFrame implements ActionListener {
 		this.setTamano(tamano);
 		this.setNumeroMaxTabs(numeroMaxTabs);
 
-		this.setLayout(null);
+		//this.setLayout(null);
 		
 		
 		this.panelTabs = new TabbedPanePersonalizado();
@@ -48,7 +50,22 @@ public class Ventana extends JFrame implements ActionListener {
 		setTitle(this.getNombre());
 		//setSize(tamano);
 		setVisible(true);
-		setLayout(new GridLayout(1, 1));
+		//setLayout(new GridLayout(1, 1));
+		GroupLayout layout = new GroupLayout(this);
+		nuevo.setLayout(layout);
+		
+		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
+
+        hGroup.addGroup(layout.createParallelGroup().addComponent(nuevo,GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+                GroupLayout.PREFERRED_SIZE));
+        layout.setHorizontalGroup(hGroup);
+        
+        
+        GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
+
+        vGroup.addGroup(layout.createParallelGroup().addComponent(nuevo));
+        layout.setVerticalGroup(vGroup);
+        layout.setAutoCreateContainerGaps(true);
 
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) { 

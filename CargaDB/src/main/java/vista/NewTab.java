@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,9 +31,24 @@ public class NewTab extends JPanel implements MouseListener {
 
 		this.panel = panel;
 		this.numeroMaxTabs = numeroMaxTabs;
+		
+		this.panel.insertTab("Nuevo", null, null, "Nueva Pestaña", 0);
+/*
+		GroupLayout layout=new GroupLayout(this);
+		this.setLayout(layout);
+		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
-		this.panel.insertTab("Nuevo", null, null, "Nueva Pesta�a", 0);
+        hGroup.addGroup(layout.createParallelGroup().addComponent(this,GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+                GroupLayout.PREFERRED_SIZE));
+        layout.setHorizontalGroup(hGroup);
+        
+        
+        GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
 
+        vGroup.addGroup(layout.createParallelGroup().addComponent(this));
+        layout.setVerticalGroup(vGroup);
+        layout.setAutoCreateContainerGaps(true);
+		*/
 		this.panel.getModel().clearSelection();
 		this.panel.addMouseListener(this);
 
