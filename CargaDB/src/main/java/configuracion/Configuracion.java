@@ -256,7 +256,7 @@ public class Configuracion {
 			tab.getListaTablas().get(0).setBounds((int) valorX, (int) valorY, (int) anchoComponente,
 					(int) altoComponente);
 
-			JScrollPane scrollPane = new JScrollPane(tab.getListaTablas().get(0));
+			/*JScrollPane scrollPane = new JScrollPane(tab.getListaTablas().get(0));
 			scrollPane.setBounds((int) valorX, (int) valorY, (int) anchoComponente,
 					(int) altoComponente);
 			// Force the scrollbars to always be displayed
@@ -271,7 +271,7 @@ public class Configuracion {
 			//vertical
 			GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
 			vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(scrollPane));
-			layout.setVerticalGroup(vGroup);
+			layout.setVerticalGroup(vGroup);*/
 			
 			/*groupLayout
 					.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
@@ -285,7 +285,7 @@ public class Configuracion {
 									GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))));
 */
 			//tab.setLayout(groupLayout);
-			tab.getListaTablas().get(0).setLayout(layout);
+			//tab.getListaTablas().get(0).setLayout(layout);
 			tab.add(new JScrollPane(tab.getListaTablas().get(0)));
 
 			// }

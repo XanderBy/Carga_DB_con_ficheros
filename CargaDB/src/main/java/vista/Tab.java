@@ -77,7 +77,7 @@ public class Tab extends JPanel implements ActionListener {
 
 		// Force the scrollbars to always be displayed
 		// scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		/*scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		GroupLayout layout = new GroupLayout(this);
 
 		//horizontal
@@ -89,7 +89,7 @@ public class Tab extends JPanel implements ActionListener {
 		vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(scrollPane));
 		layout.setVerticalGroup(vGroup);
 
-		this.getListaTablas().get(0).setLayout(layout);
+		this.getListaTablas().get(0).setLayout(layout);*/
 	}
 
 	@Override

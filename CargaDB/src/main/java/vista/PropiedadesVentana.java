@@ -77,7 +77,7 @@ public class PropiedadesVentana {
 	public static void PropiedadesTablas(Tab tab) {
 		//for (TablaPersonalizado tabla : tab.getListaTablas()) {
 
-			JScrollPane scrollPane = new JScrollPane(tab.getListaTablas().get(0));
+			/*JScrollPane scrollPane = new JScrollPane(tab.getListaTablas().get(0));
 			// Force the scrollbars to always be displayed
 			//scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 			scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -98,7 +98,7 @@ public class PropiedadesVentana {
 
 			//tab.setLayout(groupLayout);
 			tab.getListaTablas().get(0).setLayout(groupLayout);
-			tab.add(new JScrollPane(tab.getListaTablas().get(0)));
+			tab.add(new JScrollPane(tab.getListaTablas().get(0)));*/
 			tab.add(tab.getListaTablas().get(0));
 			// tab.add(scrollPane);
 			// tab.getListaScroll().add(scrollPane);
