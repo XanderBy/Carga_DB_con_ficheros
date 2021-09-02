@@ -16,6 +16,7 @@ import java.awt.Point;
 
 import componentes.TabbedPanePersonalizado;
 import configuracion.Configuracion;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame implements ActionListener {
@@ -32,7 +33,7 @@ public class Ventana extends JFrame implements ActionListener {
 		this.setTamano(tamano);
 		this.setNumeroMaxTabs(numeroMaxTabs);
 
-		//this.setLayout(null);
+		this.setLayout(new MigLayout("fill"));
 		
 		
 		this.panelTabs = new TabbedPanePersonalizado();
@@ -51,22 +52,7 @@ public class Ventana extends JFrame implements ActionListener {
 		//setSize(tamano);
 		setVisible(true);
 		//setLayout(new GridLayout(1, 1));
-		GroupLayout layout = new GroupLayout(this);
-		nuevo.setLayout(layout);
 		
-		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
-
-        hGroup.addGroup(layout.createParallelGroup().addComponent(nuevo,GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-                GroupLayout.PREFERRED_SIZE));
-        layout.setHorizontalGroup(hGroup);
-        
-        
-        GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-
-        vGroup.addGroup(layout.createParallelGroup().addComponent(nuevo));
-        layout.setVerticalGroup(vGroup);
-        layout.setAutoCreateContainerGaps(true);
-
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) { 
 				Posicion();

@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ import componentes.BotonPersonalizado;
 import componentes.TabbedPanePersonalizado;
 import componentes.TextFieldPersonalizado;
 import configuracion.Configuracion;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class NewTab extends JPanel implements MouseListener {
@@ -28,10 +30,11 @@ public class NewTab extends JPanel implements MouseListener {
 	private int numeroMaxTabs;
 
 	public NewTab(TabbedPanePersonalizado panel, int numeroMaxTabs) {
-
+		
 		this.panel = panel;
 		this.numeroMaxTabs = numeroMaxTabs;
-		
+		this.setLayout(new MigLayout());
+		this.setBounds(0, 0, 500, 500);
 		this.panel.insertTab("Nuevo", null, null, "Nueva Pestaña", 0);
 		
 		this.panel.getModel().clearSelection();
@@ -39,6 +42,8 @@ public class NewTab extends JPanel implements MouseListener {
 
 	}
 
+	
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		try {
@@ -79,6 +84,7 @@ public class NewTab extends JPanel implements MouseListener {
 
 			}
 		} catch (Exception e2) {
+			System.out.println("Error");
 			System.out.println(e2.getMessage());
 			BotonPersonalizado botonCerrar = (BotonPersonalizado) e.getSource();
 

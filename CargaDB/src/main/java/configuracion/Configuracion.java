@@ -217,10 +217,10 @@ public class Configuracion {
 	// Sobre 100 que llega por parametro lo trataremos para ponerlo en la ventana de
 	// una manera que dependa del ancho y alto de la ventana
 	public static void OtorgarPosicion() {
-
+		System.out.println("Antes");
 		int anchoVentana = ventana.getWidth();
 		int altoVentana = ventana.getHeight();
-
+		System.out.println("Despues");
 		double anchoComponente = 0, altoComponente = 0;
 		double valorX = 0, valorY = 0;
 		for (Tab tab : ventana.getPanelTabs().getListaTabs()) {
