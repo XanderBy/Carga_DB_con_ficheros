@@ -44,7 +44,7 @@ public class Ventana extends JFrame implements ActionListener {
 		
 		NewTab nuevo = new NewTab(this.getPanelTabs(), this.getNumeroMaxTabs());
  
-		add(this.panelTabs);
+		add(this.panelTabs,"grow");
 		
 		GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1].setFullScreenWindow(this);
 		//setLocation(posicion);
