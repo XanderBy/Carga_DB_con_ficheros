@@ -13,7 +13,6 @@ public class PopUp extends JOptionPane {
 	public String[] showInputDialog(Component parentComponent, String messages[], String textoDefault[]) {
 		JTextField textFields[] = new JTextField[messages.length];
 		boolean vacio = true;
-		String valorAux = new String();
 		JPanel panel = new JPanel();
 		String input[] = new String[messages.length];
 		int cancelar = 0;
@@ -25,7 +24,7 @@ public class PopUp extends JOptionPane {
 			panel.add(textFields[i]);
 		}
 
-		cancelar = JOptionPane.showConfirmDialog(parentComponent, panel, "Datos Conexión",
+		cancelar = JOptionPane.showConfirmDialog(parentComponent, panel, "Datos Conexiï¿½n",
 				JOptionPane.OK_CANCEL_OPTION);
 		if (cancelar != 2) {
 

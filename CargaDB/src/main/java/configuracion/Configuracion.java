@@ -1,25 +1,14 @@
 package configuracion;
 
 import java.awt.Dimension;
-import java.awt.LayoutManager;
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import javax.swing.GroupLayout;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.GroupLayout.Alignment;
-
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
 import componentes.LabelPersonalizado;
@@ -217,10 +206,10 @@ public class Configuracion {
 	// Sobre 100 que llega por parametro lo trataremos para ponerlo en la ventana de
 	// una manera que dependa del ancho y alto de la ventana
 	public static void OtorgarPosicion() {
-		System.out.println("Antes");
+
 		int anchoVentana = ventana.getWidth();
 		int altoVentana = ventana.getHeight();
-		System.out.println("Despues");
+		
 		double anchoComponente = 0, altoComponente = 0;
 		double valorX = 0, valorY = 0;
 		for (Tab tab : ventana.getPanelTabs().getListaTabs()) {
@@ -253,40 +242,12 @@ public class Configuracion {
 			valorY = altoVentana * (tab.getListaTablas().get(0).getPosicionY() / 100);
 			anchoComponente = anchoVentana * (tab.getListaTablas().get(0).getAncho() / 100);
 			altoComponente = altoVentana * (tab.getListaTablas().get(0).getAlto() / 100);
+
 			tab.getListaTablas().get(0).setBounds((int) valorX, (int) valorY, (int) anchoComponente,
 					(int) altoComponente);
-
-			/*JScrollPane scrollPane = new JScrollPane(tab.getListaTablas().get(0));
-			scrollPane.setBounds((int) valorX, (int) valorY, (int) anchoComponente,
-					(int) altoComponente);
-			// Force the scrollbars to always be displayed
-			// scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			GroupLayout layout = new GroupLayout(tab);
-
-			//horizontal
-			GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
-			hGroup.addGroup(layout.createParallelGroup().addComponent(scrollPane));
-			layout.setHorizontalGroup(hGroup);
-			//vertical
-			GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-			vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(scrollPane));
-			layout.setVerticalGroup(vGroup);*/
-			
-			/*groupLayout
-					.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
-							groupLayout.createSequentialGroup().addContainerGap().addGroup(
-									groupLayout.createParallelGroup(Alignment.LEADING).addComponent(scrollPane,
-											GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))));
-
-			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
-					groupLayout.createSequentialGroup().addContainerGap()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(scrollPane,
-									GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))));
-*/
-			//tab.setLayout(groupLayout);
-			//tab.getListaTablas().get(0).setLayout(layout);
-			tab.add(new JScrollPane(tab.getListaTablas().get(0)));
+			tab.remove(tab.getListaTablas().get(0).getScroll());
+			tab.getListaTablas().get(0).getScroll().setViewportView(tab.getListaTablas().get(0));
+			tab.add(tab.getListaTablas().get(0).getScroll());
 
 			// }
 

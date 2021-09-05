@@ -21,6 +21,7 @@ import conexion.Conexion;
 import configuracion.Configuracion;
 import estructura.datos.EstructuraDatosImportacionTabla;
 import importacion.Importacion;
+import net.miginfocom.swing.MigLayout;
 
 public class Tab extends JPanel implements ActionListener {
 
@@ -37,7 +38,7 @@ public class Tab extends JPanel implements ActionListener {
 	private Importacion importacion;
 
 	public Tab(TabbedPanePersonalizado panel) {
-		this.setLayout(null);
+		this.setLayout(new MigLayout());
 
 		this.conexion = new Conexion();
 		this.listaBotones = new ArrayList<>();
@@ -73,7 +74,7 @@ public class Tab extends JPanel implements ActionListener {
 			PropiedadesVentana.PropiedadesTablas(this);
 		}
 		
-		JScrollPane scrollPane = new JScrollPane(this.getListaTablas().get(0));
+		//JScrollPane scrollPane = new JScrollPane(this.getListaTablas().get(0));
 
 		// Force the scrollbars to always be displayed
 		// scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
