@@ -73,10 +73,7 @@ public class Configuracion {
 			depende = (String) properties.get(("DEPENDEHABILITADO" + objeto + Integer.toString(i)));
 			switch (objeto) {
 			case "BOTON": {
-				boton = new BotonPersonalizado();
-				boton.setText(nombre);
-				boton.setId(id);
-				boton.setDependeComponente(depende);
+				
 				break;
 			}
 			case "LABELS": {
@@ -89,9 +86,7 @@ public class Configuracion {
 				break;
 			}
 			case "COMBOBOX": {
-				comboBox = new ComboBoxPersonalizado();
-				comboBox.setId(id);
-				CargarComboBox(comboBox, objeto, i);
+				
 				break;
 			}
 			case "TABLA": {
