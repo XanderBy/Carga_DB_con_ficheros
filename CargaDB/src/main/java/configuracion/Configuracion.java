@@ -14,6 +14,7 @@ import componentes.ComboBoxPersonalizado;
 import componentes.LabelPersonalizado;
 import componentes.TablaPersonalizado;
 import componentes.TextFieldPersonalizado;
+import vista.PropiedadesVentana;
 import vista.Tab;
 import vista.Ventana;
 
@@ -36,20 +37,14 @@ public class Configuracion {
 				Integer.parseInt((String) properties.get("NUMEROMAXTABS")), new Point(0, 0));
 	}
 
-	public static void CargarConfiguracion(ArrayList<BotonPersonalizado> listaBotones,
-			ArrayList<LabelPersonalizado> listaLabels, ArrayList<TextFieldPersonalizado> listaCajaTexto,
-			ArrayList<ComboBoxPersonalizado> listaTComboBox, ArrayList<TablaPersonalizado> listaTablas) {
+	public static void CargarConfiguracion(Tab tab) {
 
-		CargarObjetosConfigurados(properties, "NUMEROBOTONESVENTANAPRINCIPAL", "BOTON", false, listaBotones,
-				listaLabels, listaCajaTexto, listaTComboBox, listaTablas);
-		CargarObjetosConfigurados(properties, "NUMEROLABELSVENTANAPRINCIPAL", "LABELS", false, listaBotones,
-				listaLabels, listaCajaTexto, listaTComboBox, listaTablas);
-		CargarObjetosConfigurados(properties, "NUMEROTEXTFIELDSVENTANAPRINCIPAL", "TEXTFIELD", false, listaBotones,
-				listaLabels, listaCajaTexto, listaTComboBox, listaTablas);
-		CargarObjetosConfigurados(properties, "NUMEROCOMBOBOXVENTANAPRINCIPAL", "COMBOBOX", false, listaBotones,
-				listaLabels, listaCajaTexto, listaTComboBox, listaTablas);
-		CargarObjetosConfigurados(properties, "NUMEROTABLASVENTANAPRINCIPAL", "TABLA", false, listaBotones, listaLabels,
-				listaCajaTexto, listaTComboBox, listaTablas);
+		PropiedadesVentana.PropiedadesBotones(tab);
+		PropiedadesVentana.PropiedadesTitulos(tab);
+		PropiedadesVentana.PropiedadesCajaText(tab);
+		PropiedadesVentana.PropiedadesComboBox(tab);
+		PropiedadesVentana.PropiedadesTablas(tab);
+
 	}
 
 	public static void CargarObjetosConfigurados(Properties properties, String numero, String objeto,
@@ -73,7 +68,7 @@ public class Configuracion {
 			depende = (String) properties.get(("DEPENDEHABILITADO" + objeto + Integer.toString(i)));
 			switch (objeto) {
 			case "BOTON": {
-				
+
 				break;
 			}
 			case "LABELS": {
@@ -86,12 +81,11 @@ public class Configuracion {
 				break;
 			}
 			case "COMBOBOX": {
-				
+
 				break;
 			}
 			case "TABLA": {
-				tabla = new TablaPersonalizado();
-				tabla.setId(id);
+
 				break;
 			}
 			}
@@ -186,8 +180,8 @@ public class Configuracion {
 		return listado;
 	}
 
-	public static void CargarComboBox(ComboBoxPersonalizado comboBox, String objeto, int numero) {
-		String[] listado = CargarLista(("DATOCARGADO" + objeto + numero), true);
+	public static void CargarComboBox(ComboBoxPersonalizado comboBox, String objeto) {
+		String[] listado = CargarLista(objeto, true);
 
 		for (String eleccion : listado) {
 			if (comboBox.getItemCount() == 0) {
@@ -201,10 +195,10 @@ public class Configuracion {
 	// Sobre 100 que llega por parametro lo trataremos para ponerlo en la ventana de
 	// una manera que dependa del ancho y alto de la ventana
 	public static void OtorgarPosicion() {
-
+/*
 		int anchoVentana = ventana.getWidth();
 		int altoVentana = ventana.getHeight();
-		
+
 		double anchoComponente = 0, altoComponente = 0;
 		double valorX = 0, valorY = 0;
 		for (Tab tab : ventana.getPanelTabs().getListaTabs()) {
@@ -255,7 +249,7 @@ public class Configuracion {
 
 			tab.repaint();
 		}
-
+*/
 	}
 
 	public static void ActivarComponentes(String IdComponente, boolean activar, boolean noDepende,

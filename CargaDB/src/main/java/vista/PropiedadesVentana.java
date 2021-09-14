@@ -5,6 +5,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
+import componentes.TablaPersonalizado;
+import configuracion.Configuracion;
 
 public class PropiedadesVentana {
 
@@ -64,11 +66,11 @@ public class PropiedadesVentana {
 	}
 
 	public static void PropiedadesComboBox(Tab tab) {
-		ComboBoxPersonalizado comboBox = new ComboBoxPersonalizado();
-		comboBox.setId("BASESDEDATOS");
-		CargarComboBox(comboBox, objeto, i);
-		tab.add(comboBox);
-		comboBox.addActionListener(tab);
+		ComboBoxPersonalizado comboBox1 = new ComboBoxPersonalizado();
+		comboBox1.setId("BASESDEDATOS");
+		Configuracion.CargarComboBox(comboBox1,"BASESDEDATOSPERMITIDAS");
+		tab.add(comboBox1);
+		comboBox1.addActionListener(tab);
 		
 		
 	}
@@ -79,9 +81,12 @@ public class PropiedadesVentana {
 
 	public static void PropiedadesTablas(Tab tab) {
 		// for (TablaPersonalizado tabla : tab.getListaTablas()) {
-		JScrollPane scroll = new JScrollPane(tab.getListaTablas().get(0));
-		tab.getListaTablas().get(0).setScroll(scroll);
-		tab.add(tab.getListaTablas().get(0), "cell 0 1 4 1");
+		tab.setTablaDatos(new TablaPersonalizado());
+		tab.getTablaDatos().setId("DATOSACARGAR");
+		
+		JScrollPane scroll = new JScrollPane(tab.getTablaDatos());
+		tab.getTablaDatos().setScroll(scroll);
+		tab.add(tab.getTablaDatos(), "cell 0 1 4 1");
 		tab.add(scroll, "cell 0 1 4 1");
 		// }
 	}

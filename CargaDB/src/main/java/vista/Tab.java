@@ -3,6 +3,7 @@ package vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.GroupLayout;
 import javax.swing.JOptionPane;
@@ -25,54 +26,31 @@ import net.miginfocom.swing.MigLayout;
 
 public class Tab extends JPanel implements ActionListener {
 
-	private ArrayList<BotonPersonalizado> listaBotones;
-	private ArrayList<TablaPersonalizado> listaTablas;
-	private ArrayList<TextFieldPersonalizado> listaCajaTexto;
-	private ArrayList<LabelPersonalizado> listaTitulos;
-	private ArrayList<ComboBoxPersonalizado> listaTComboBox;
-	private ArrayList<JScrollPane> listaScroll;
+	
 	private String baseDeDatosElegida;
 	private TabbedPanePersonalizado panel;
 	private Conexion conexion;
 	private ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla;
 	private Importacion importacion;
+	
+	private BotonPersonalizado botonConectarDB;
+	private BotonPersonalizado botonImportarFichero;
+	private BotonPersonalizado botonCargarDatos;
+	
+	private ComboBoxPersonalizado ComboBaseDeDatos;
+	
+	private TablaPersonalizado tablaDatos;
 
 	public Tab(TabbedPanePersonalizado panel) {
 		this.setLayout(new MigLayout());
 
 		this.conexion = new Conexion();
-		this.listaBotones = new ArrayList<>();
-		this.listaTablas = new ArrayList<>();
-		this.listaCajaTexto = new ArrayList<>();
-		this.listaTitulos = new ArrayList<>();
-		this.listaTComboBox = new ArrayList<>();
+		
 		this.listaTipoDatosTabla = new ArrayList<>();
 		this.importacion = new Importacion();
-		this.setListaScroll(new ArrayList<>());
 
-		Configuracion.CargarConfiguracion(this.getListaBotones(), this.getListaTitulos(), this.getListaCajaTexto(),
-				this.getListaTComboBox(), this.getListaTablas());
+		Configuracion.CargarConfiguracion(this);
 
-		if (this.getListaBotones() != null) {
-			PropiedadesVentana.PropiedadesBotones(this);
-
-		}
-
-		if (this.getListaTitulos() != null) {
-			PropiedadesVentana.PropiedadesTitulos(this);
-		}
-
-		if (this.getListaCajaTexto() != null) {
-			PropiedadesVentana.PropiedadesCajaText(this);
-		}
-
-		if (this.getListaTComboBox() != null) {
-			PropiedadesVentana.PropiedadesComboBox(this);
-		}
-
-		if (this.getListaTablas() != null) {
-			PropiedadesVentana.PropiedadesTablas(this);
-		}
 		
 		//JScrollPane scrollPane = new JScrollPane(this.getListaTablas().get(0));
 
@@ -93,11 +71,51 @@ public class Tab extends JPanel implements ActionListener {
 		this.getListaTablas().get(0).setLayout(layout);*/
 	}
 
+	public BotonPersonalizado getBotonConectarDB() {
+		return botonConectarDB;
+	}
+
+	public void setBotonConectarDB(BotonPersonalizado botonConectarDB) {
+		this.botonConectarDB = botonConectarDB;
+	}
+
+	public BotonPersonalizado getBotonImportarFichero() {
+		return botonImportarFichero;
+	}
+
+	public void setBotonImportarFichero(BotonPersonalizado botonImportarFichero) {
+		this.botonImportarFichero = botonImportarFichero;
+	}
+
+	public BotonPersonalizado getBotonCargarDatos() {
+		return botonCargarDatos;
+	}
+
+	public void setBotonCargarDatos(BotonPersonalizado botonCargarDatos) {
+		this.botonCargarDatos = botonCargarDatos;
+	}
+
+	public ComboBoxPersonalizado getComboBaseDeDatos() {
+		return ComboBaseDeDatos;
+	}
+
+	public void setComboBaseDeDatos(ComboBoxPersonalizado comboBaseDeDatos) {
+		ComboBaseDeDatos = comboBaseDeDatos;
+	}
+
+	public TablaPersonalizado getTablaDatos() {
+		return tablaDatos;
+	}
+
+	public void setTablaDatos(TablaPersonalizado tablaDatos) {
+		this.tablaDatos = tablaDatos;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		this.listaBotones.forEach((b) -> {
-			if (e.getSource() == b & b.getName().contains("CONECTAR")) {
+
+			if (e.getSource() == botonConectarDB & botonConectarDB.getName().contains("CONECTAR")) {
 				String messages[] = { "Endpoint", "Base de Datos", "Puerto", "Usuario", "Contrase�a" };
 				String textoDefault[] = { "localhost/", "prueba", "3306", "root", "admin" };
 				String[] datosConexion = new PopUp().showInputDialog(null, messages, textoDefault);
@@ -111,8 +129,8 @@ public class Tab extends JPanel implements ActionListener {
 						if (datosConexion.length > 0) {
 							if (this.conexion.ConectarConDb(this.getBaseDeDatosElegida(), datosConexion[3],
 									datosConexion[4], datosConexion[1], datosConexion[0], datosConexion[2])) {
-								System.out.println(b.getId());
-								Configuracion.ActivarComponentes(b.getId(), true,false, this.getListaBotones(), null, null,
+								System.out.println(botonConectarDB.getId());
+								Configuracion.ActivarComponentes(botonConectarDB.getId(), true,false,new ArrayList<>(Arrays.asList(botonCargarDatos,botonConectarDB,botonImportarFichero)), null, null,
 										null, null);
 							} else {
 								JOptionPane.showMessageDialog(null, "No se ha podido establecer conexion", "Error",
@@ -124,90 +142,48 @@ public class Tab extends JPanel implements ActionListener {
 				}
 
 			}
-			if (e.getSource() == b & b.getName().contains("IMPORTARFICHERO")) {
+			if (e.getSource() == botonImportarFichero & botonImportarFichero.getName().contains("IMPORTARFICHERO")) {
 				this.getListaTipoDatosTabla().clear();
 				this.setListaTipoDatosTabla(
 						this.importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS", false),
 								this.getConexion(), this.getListaTipoDatosTabla()));
-				Configuracion.ActivarComponentes(b.getId(), true,false, this.getListaBotones(), null, null, null, null);
-				this.listaTablas.forEach((t) -> {
-					System.out.println(t.getId());
+				Configuracion.ActivarComponentes(botonImportarFichero.getId(), true,false, new ArrayList<>(Arrays.asList(botonCargarDatos,botonConectarDB,botonImportarFichero)), null, null, null, null);
+				
 
-					if (t.getId().contains("DATOSACARGAR")) {
+					if (tablaDatos.getId().contains("DATOSACARGAR")) {
 						System.out.println("Entró");
-						t.setModel(this.importacion.CargarDatosJTable(listaTipoDatosTabla));
+						tablaDatos.setModel(this.importacion.CargarDatosJTable(listaTipoDatosTabla));
 
 					}
-				});
+
 
 				System.out.println(this.getListaTipoDatosTabla().get(0).getListadoDatos().get(0));
 			}
-			if (e.getSource() == b & b.getName().contains("CARGADATOS")) {
+			if (e.getSource() == botonCargarDatos & botonCargarDatos.getName().contains("CARGADATOS")) {
 				if(this.getConexion().RealizarCarga(baseDeDatosElegida, this.importacion.getNombreTabla(),
 						this.getListaTipoDatosTabla())) {
 					
 				}else {
 					
 				}
-				Configuracion.ActivarComponentes(b.getId(), false,true, this.getListaBotones(), null, null, null, null);
+				Configuracion.ActivarComponentes(botonCargarDatos.getId(), false,true, new ArrayList<>(Arrays.asList(botonCargarDatos,botonConectarDB,botonImportarFichero)), null, null, null, null);
 
 			}
 
-		});
-		this.listaTComboBox.forEach((b) -> {
-			System.out.println(b.getId());
-			if (e.getSource() == b & b.getId().contains("BASESDEDATOS")) {
+
+		
+			if (e.getSource() == ComboBaseDeDatos & ComboBaseDeDatos.getId().contains("BASESDEDATOS")) {
 				String valor = (String) ((ComboBoxPersonalizado) e.getSource()).getSelectedItem();
 				if (valor != null && valor.length() > 0) {
-					Configuracion.ActivarComponentes(b.getId(), true,false, this.getListaBotones(), null, null, null, null);
+					Configuracion.ActivarComponentes(ComboBaseDeDatos.getId(), true,false, new ArrayList<>(Arrays.asList(botonCargarDatos,botonConectarDB,botonImportarFichero)), null, null, null, null);
 					this.setBaseDeDatosElegida(valor);
 				} else {
-					Configuracion.ActivarComponentes(b.getId(), false,false, this.getListaBotones(), null, null, null, null);
+					Configuracion.ActivarComponentes(ComboBaseDeDatos.getId(), false,false, new ArrayList<>(Arrays.asList(botonCargarDatos,botonConectarDB,botonImportarFichero)), null, null, null, null);
 				}
 
 			}
-		});
+
 		repaint();
-	}
-
-	public ArrayList<BotonPersonalizado> getListaBotones() {
-		return listaBotones;
-	}
-
-	public void setListaBotones(ArrayList<BotonPersonalizado> listaBotones) {
-		this.listaBotones = listaBotones;
-	}
-
-	public ArrayList<TablaPersonalizado> getListaTablas() {
-		return listaTablas;
-	}
-
-	public void setListaTablas(ArrayList<TablaPersonalizado> listaTablas) {
-		this.listaTablas = listaTablas;
-	}
-
-	public ArrayList<TextFieldPersonalizado> getListaCajaTexto() {
-		return listaCajaTexto;
-	}
-
-	public void setListaCajaTexto(ArrayList<TextFieldPersonalizado> listaCajaTexto) {
-		this.listaCajaTexto = listaCajaTexto;
-	}
-
-	public ArrayList<LabelPersonalizado> getListaTitulos() {
-		return listaTitulos;
-	}
-
-	public void setListaTitulos(ArrayList<LabelPersonalizado> listaTitulos) {
-		this.listaTitulos = listaTitulos;
-	}
-
-	public ArrayList<ComboBoxPersonalizado> getListaTComboBox() {
-		return listaTComboBox;
-	}
-
-	public void setListaTComboBox(ArrayList<ComboBoxPersonalizado> listaTComboBox) {
-		this.listaTComboBox = listaTComboBox;
 	}
 
 	public Conexion getConexion() {
@@ -234,11 +210,4 @@ public class Tab extends JPanel implements ActionListener {
 		this.listaTipoDatosTabla = listaTipoDatosTabla;
 	}
 
-	public ArrayList<JScrollPane> getListaScroll() {
-		return listaScroll;
-	}
-
-	public void setListaScroll(ArrayList<JScrollPane> listaScroll) {
-		this.listaScroll = listaScroll;
-	}
 }
