@@ -16,30 +16,33 @@ public class PropiedadesVentana {
 
 	public static void PropiedadesBotones(Tab tab) {
 
-		BotonPersonalizado boton1 = new BotonPersonalizado();
-		boton1.setText("Conexión");
-		boton1.setId("CONECTAR");
-		boton1.setDependeComponente("BASESDEDATOS");
-		boton1.setEnabled(false);
-		tab.add(boton1, "cell 2 0");
-		boton1.addActionListener(tab);
+		tab.setBotonConectarDB(new BotonPersonalizado());
+		tab.getBotonConectarDB().setText("Conexión");
+		tab.getBotonConectarDB().setId("CONECTAR");
+		tab.getBotonConectarDB().setName("CONECTAR");
+		tab.getBotonConectarDB().setDependeComponente("BASESDEDATOS");
+		tab.getBotonConectarDB().setEnabled(false);
+		tab.add(tab.getBotonConectarDB(), "cell 2 0");
+		tab.getBotonConectarDB().addActionListener(tab);
 		
-		BotonPersonalizado boton2 = new BotonPersonalizado();
-		boton2.setText("Importar Fichero");
-		boton2.setId("IMPORTARFICHERO");
-		boton2.setDependeComponente("CONECTAR");
-		boton2.setEnabled(false);
-		tab.add(boton2, "cell 2 0");
-		boton2.addActionListener(tab);
+		tab.setBotonImportarFichero(new BotonPersonalizado());
+		tab.getBotonImportarFichero().setText("Importar Fichero");
+		tab.getBotonImportarFichero().setName("IMPORTARFICHERO");
+		tab.getBotonImportarFichero().setId("IMPORTARFICHERO");
+		tab.getBotonImportarFichero().setDependeComponente("CONECTAR");
+		tab.getBotonImportarFichero().setEnabled(false);
+		tab.add(tab.getBotonImportarFichero(), "cell 2 0");
+		tab.getBotonImportarFichero().addActionListener(tab);
 		
 		
-		BotonPersonalizado boton3 = new BotonPersonalizado();
-		boton3.setText("Cargar Datos");
-		boton3.setId("CARGADATOS");
-		boton3.setDependeComponente("IMPORTARFICHERO");
-		boton3.setEnabled(false);
-		tab.add(boton3, "cell 2 0");
-		boton3.addActionListener(tab);
+		tab.setBotonCargarDatos(new BotonPersonalizado());
+		tab.getBotonCargarDatos().setText("Cargar Datos");
+		tab.getBotonCargarDatos().setName("CARGADATOS");
+		tab.getBotonCargarDatos().setId("CARGADATOS");
+		tab.getBotonCargarDatos().setDependeComponente("IMPORTARFICHERO");
+		tab.getBotonCargarDatos().setEnabled(false);
+		tab.add(tab.getBotonCargarDatos(), "cell 2 0");
+		tab.getBotonCargarDatos().addActionListener(tab);
 		
 
 	}
@@ -66,11 +69,11 @@ public class PropiedadesVentana {
 	}
 
 	public static void PropiedadesComboBox(Tab tab) {
-		ComboBoxPersonalizado comboBox1 = new ComboBoxPersonalizado();
-		comboBox1.setId("BASESDEDATOS");
-		Configuracion.CargarComboBox(comboBox1,"BASESDEDATOSPERMITIDAS");
-		tab.add(comboBox1);
-		comboBox1.addActionListener(tab);
+		tab.setComboBaseDeDatos(new ComboBoxPersonalizado());
+		tab.getComboBaseDeDatos().setId("BASESDEDATOS");
+		Configuracion.CargarComboBox(tab.getComboBaseDeDatos(),"BASESDEDATOSPERMITIDAS");
+		tab.add(tab.getComboBaseDeDatos());
+		tab.getComboBaseDeDatos().addActionListener(tab);
 		
 		
 	}
@@ -86,8 +89,9 @@ public class PropiedadesVentana {
 		
 		JScrollPane scroll = new JScrollPane(tab.getTablaDatos());
 		tab.getTablaDatos().setScroll(scroll);
+		tab.getTablaDatos().getScroll().setViewportView(tab.getTablaDatos());
 		tab.add(tab.getTablaDatos(), "cell 0 1 4 1");
-		tab.add(scroll, "cell 0 1 4 1");
+		tab.add(tab.getTablaDatos().getScroll(), "cell 0 1 4 1");
 		// }
 	}
 

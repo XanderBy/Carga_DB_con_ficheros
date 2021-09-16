@@ -172,7 +172,7 @@ public class Configuracion {
 
 		if (comboBox) {
 			String nombreLista = (String) properties.get(nombre);
-			listado = ((String) properties.get(nombreLista)).split(",");
+			listado = nombreLista.split(",");
 		} else {
 			listado = ((String) properties.get(nombre)).split(",");
 		}
@@ -195,6 +195,26 @@ public class Configuracion {
 	// Sobre 100 que llega por parametro lo trataremos para ponerlo en la ventana de
 	// una manera que dependa del ancho y alto de la ventana
 	public static void OtorgarPosicion() {
+		
+		int anchoVentana = ventana.getWidth();
+		int altoVentana = ventana.getHeight();
+
+		double anchoComponente = 0, altoComponente = 0;
+		double valorX = 0, valorY = 0;
+		
+		for (Tab tab : ventana.getPanelTabs().getListaTabs()) {
+			valorX = anchoVentana * (tab.getTablaDatos().getPosicionX() / 100);
+			valorY = altoVentana * (tab.getTablaDatos().getPosicionY() / 100);
+			anchoComponente = anchoVentana * (tab.getTablaDatos().getAncho() / 100);
+			altoComponente = altoVentana * (tab.getTablaDatos().getAlto() / 100);
+
+			tab.getTablaDatos().setBounds((int) valorX, (int) valorY, (int) anchoComponente,
+					(int) altoComponente);
+			tab.remove(tab.getTablaDatos().getScroll());
+			tab.getTablaDatos().getScroll().setViewportView(tab.getTablaDatos());
+			tab.add(tab.getTablaDatos().getScroll());
+		}
+		
 /*
 		int anchoVentana = ventana.getWidth();
 		int altoVentana = ventana.getHeight();
