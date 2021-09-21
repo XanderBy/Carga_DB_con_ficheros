@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
-import javax.swing.JScrollPane;
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
 import componentes.LabelPersonalizado;
@@ -47,126 +46,6 @@ public class Configuracion {
 
 	}
 
-	public static void CargarObjetosConfigurados(Properties properties, String numero, String objeto,
-			boolean tieneDatos, ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
-			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
-			ArrayList<TablaPersonalizado> listaTablas) {
-		BotonPersonalizado boton = null;
-		TablaPersonalizado tabla = null;
-		ComboBoxPersonalizado comboBox = null;
-		LabelPersonalizado label = null;
-		TextFieldPersonalizado textField = null;
-
-		String nombre, id, depende = new String();
-		int numeroBotones, posicionX, posicionY, ancho, alto;
-
-		numeroBotones = Integer.parseInt((String) properties.get(numero));
-
-		for (int i = 0; i < numeroBotones; i++) {
-			nombre = (String) properties.get(("NOMBRE" + objeto + Integer.toString(i)));
-			id = (String) properties.get(("ID" + objeto + Integer.toString(i)));
-			depende = (String) properties.get(("DEPENDEHABILITADO" + objeto + Integer.toString(i)));
-			switch (objeto) {
-			case "BOTON": {
-
-				break;
-			}
-			case "LABELS": {
-				label = new LabelPersonalizado();
-				label.setText(nombre);
-				break;
-			}
-			case "TEXTFIELD": {
-				textField = new TextFieldPersonalizado();
-				break;
-			}
-			case "COMBOBOX": {
-
-				break;
-			}
-			case "TABLA": {
-
-				break;
-			}
-			}
-
-			posicionX = Integer.parseInt((String) properties.get("POSICIONX" + objeto + Integer.toString(i)));
-			posicionY = Integer.parseInt((String) properties.get("POSICIONY" + objeto + Integer.toString(i)));
-			ancho = Integer.parseInt((String) properties.get("TAMANOANCHO" + objeto + Integer.toString(i)));
-			alto = Integer.parseInt((String) properties.get("TAMANOALTO" + objeto + Integer.toString(i)));
-
-			switch (objeto) {
-			case "BOTON": {
-				boton.setBounds(posicionX, posicionY, ancho, alto);
-				boton.setPosicionX(posicionX);
-				boton.setPosicionY(posicionY);
-				boton.setName(id);
-				break;
-			}
-			case "LABELS": {
-				label.setBounds(posicionX, posicionY, ancho, alto);
-				label.setPosicionX(posicionX);
-				label.setPosicionY(posicionY);
-				break;
-			}
-			case "TEXTFIELD": {
-				textField.setBounds(posicionX, posicionY, ancho, alto);
-				textField.setPosicionX(posicionX);
-				textField.setPosicionY(posicionY);
-				break;
-			}
-			case "COMBOBOX": {
-				comboBox.setBounds(posicionX, posicionY, ancho, alto);
-				comboBox.setPosicionX(posicionX);
-				comboBox.setPosicionY(posicionY);
-				break;
-			}
-			case "TABLA": {
-				tabla.setBounds(posicionX, posicionY, ancho, alto);
-				tabla.setPosicionX(posicionX);
-				tabla.setPosicionY(posicionY);
-				tabla.setAncho(ancho);
-				tabla.setAlto(alto);
-				break;
-			}
-			}
-
-			SwitchAddListas(objeto, boton, tabla, comboBox, label, textField, listaBotones, listaLabels, listaCajaTexto,
-					listaTComboBox, listaTablas);
-
-		}
-	}
-
-	public static void SwitchAddListas(String objeto, BotonPersonalizado boton, TablaPersonalizado tabla,
-			ComboBoxPersonalizado comboBox, LabelPersonalizado label, TextFieldPersonalizado textField,
-			ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
-			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
-			ArrayList<TablaPersonalizado> listaTablas) {
-		switch (objeto) {
-		case "BOTON": {
-			listaBotones.add(boton);
-			break;
-		}
-		case "LABELS": {
-			listaLabels.add(label);
-			break;
-		}
-		case "TEXTFIELD": {
-			listaCajaTexto.add(textField);
-			break;
-		}
-		case "COMBOBOX": {
-
-			listaTComboBox.add(comboBox);
-			break;
-		}
-		case "TABLA": {
-			listaTablas.add(tabla);
-			break;
-		}
-		}
-	}
-
 	public static String[] CargarLista(String nombre, boolean comboBox) {
 		String[] listado = null;
 
@@ -195,7 +74,7 @@ public class Configuracion {
 	// Sobre 100 que llega por parametro lo trataremos para ponerlo en la ventana de
 	// una manera que dependa del ancho y alto de la ventana
 	public static void OtorgarPosicion() {
-		
+		/*
 		int anchoVentana = ventana.getWidth();
 		int altoVentana = ventana.getHeight();
 
@@ -214,7 +93,7 @@ public class Configuracion {
 			tab.getTablaDatos().getScroll().setViewportView(tab.getTablaDatos());
 			tab.add(tab.getTablaDatos().getScroll());
 		}
-		
+		*/
 /*
 		int anchoVentana = ventana.getWidth();
 		int altoVentana = ventana.getHeight();

@@ -1,12 +1,11 @@
 package vista;
 
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
 import componentes.TablaPersonalizado;
 import configuracion.Configuracion;
+import net.miginfocom.swing.MigLayout;
 
 public class PropiedadesVentana {
 
@@ -22,7 +21,7 @@ public class PropiedadesVentana {
 		tab.getBotonConectarDB().setName("CONECTAR");
 		tab.getBotonConectarDB().setDependeComponente("BASESDEDATOS");
 		tab.getBotonConectarDB().setEnabled(false);
-		tab.add(tab.getBotonConectarDB(), "cell 2 0");
+		tab.add(tab.getBotonConectarDB(), "cell 2 1");
 		tab.getBotonConectarDB().addActionListener(tab);
 		
 		tab.setBotonImportarFichero(new BotonPersonalizado());
@@ -31,7 +30,7 @@ public class PropiedadesVentana {
 		tab.getBotonImportarFichero().setId("IMPORTARFICHERO");
 		tab.getBotonImportarFichero().setDependeComponente("CONECTAR");
 		tab.getBotonImportarFichero().setEnabled(false);
-		tab.add(tab.getBotonImportarFichero(), "cell 2 0");
+		tab.add(tab.getBotonImportarFichero(), "cell 4 1");
 		tab.getBotonImportarFichero().addActionListener(tab);
 		
 		
@@ -41,7 +40,7 @@ public class PropiedadesVentana {
 		tab.getBotonCargarDatos().setId("CARGADATOS");
 		tab.getBotonCargarDatos().setDependeComponente("IMPORTARFICHERO");
 		tab.getBotonCargarDatos().setEnabled(false);
-		tab.add(tab.getBotonCargarDatos(), "cell 2 0");
+		tab.add(tab.getBotonCargarDatos(), "cell 4 2");
 		tab.getBotonCargarDatos().addActionListener(tab);
 		
 
@@ -72,7 +71,7 @@ public class PropiedadesVentana {
 		tab.setComboBaseDeDatos(new ComboBoxPersonalizado());
 		tab.getComboBaseDeDatos().setId("BASESDEDATOS");
 		Configuracion.CargarComboBox(tab.getComboBaseDeDatos(),"BASESDEDATOSPERMITIDAS");
-		tab.add(tab.getComboBaseDeDatos());
+		tab.add(tab.getComboBaseDeDatos(),"cell 2 2");
 		tab.getComboBaseDeDatos().addActionListener(tab);
 		
 		
@@ -86,12 +85,10 @@ public class PropiedadesVentana {
 		// for (TablaPersonalizado tabla : tab.getListaTablas()) {
 		tab.setTablaDatos(new TablaPersonalizado());
 		tab.getTablaDatos().setId("DATOSACARGAR");
-		
+		tab.getTablaDatos().setFillsViewportHeight(true);
 		JScrollPane scroll = new JScrollPane(tab.getTablaDatos());
 		tab.getTablaDatos().setScroll(scroll);
-		tab.getTablaDatos().getScroll().setViewportView(tab.getTablaDatos());
-		tab.add(tab.getTablaDatos(), "cell 0 1 4 1");
-		tab.add(tab.getTablaDatos().getScroll(), "cell 0 1 4 1");
+		tab.add(tab.getTablaDatos().getScroll(), "cell 0 4 6 2,grow");
 		// }
 	}
 

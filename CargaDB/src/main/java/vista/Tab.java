@@ -4,20 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import javax.swing.GroupLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.GroupLayout.Alignment;
-
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
-import componentes.LabelPersonalizado;
 import componentes.TabbedPanePersonalizado;
 import componentes.TablaPersonalizado;
-import componentes.TextFieldPersonalizado;
 import conexion.Conexion;
 import configuracion.Configuracion;
 import estructura.datos.EstructuraDatosImportacionTabla;
@@ -42,7 +34,9 @@ public class Tab extends JPanel implements ActionListener {
 	private TablaPersonalizado tablaDatos;
 
 	public Tab(TabbedPanePersonalizado panel) {
-		this.setLayout(new MigLayout());
+		this.setLayout(new MigLayout("debug, fill", // Layout Constraints
+				 "[][][][][][]", // columnas
+				 "[][][][][]")); //filas
 
 		this.conexion = new Conexion();
 		
