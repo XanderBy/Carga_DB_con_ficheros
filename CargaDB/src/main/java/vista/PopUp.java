@@ -6,9 +6,15 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class PopUp extends JOptionPane {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public String[] showInputDialog(Component parentComponent, String messages[], String textoDefault[]) {
 		JTextField textFields[] = new JTextField[messages.length];
@@ -17,22 +23,34 @@ public class PopUp extends JOptionPane {
 		String input[] = new String[messages.length];
 		int cancelar = 0;
 		panel.setLayout(new GridLayout(messages.length, 2, 0, 0));
-
+		
 		for (int i = 0; i < messages.length; i++) {
 			panel.add(new JLabel(messages[i]));
-			textFields[i] = new JTextField();
-			panel.add(textFields[i]);
+			
+			if(i==(messages.length-1)) {
+				JPasswordField pass = new JPasswordField(15);
+				panel.add(pass);
+			}else {
+				textFields[i] = new JTextField();
+				panel.add(textFields[i]);
+			}
+			 
 		}
-
-		cancelar = JOptionPane.showConfirmDialog(parentComponent, panel, "Datos Conexi�n",
-				JOptionPane.OK_CANCEL_OPTION);
-		if (cancelar != 2) {
-
+		String[] options = new String[]{"OK", "Cancel"};
+		cancelar = JOptionPane.showOptionDialog(parentComponent, panel, "Datos Conexión",
+				JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE,null,options,null);
+		if (cancelar != 1) {
+			
 			for (int i = 0; i < messages.length; i++) {
-				input[i] = textFields[i].getText();
-				if (input[i].length() > 0) {
-					vacio = false;
+				if(textFields[i]==null) {
+					vacio = true;
+				}else {
+					input[i] = textFields[i].getText();
+					if (input[i].length() > 0) {
+						vacio = false;
+					}
 				}
+				
 			}
 
 		}else {

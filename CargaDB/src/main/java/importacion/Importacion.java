@@ -2,15 +2,10 @@ package importacion;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
-import componentes.TablaPersonalizado;
 import conexion.Conexion;
 import estructura.datos.EstructuraDatosImportacionTabla;
 import tipo.ficheros.Excel;
@@ -49,6 +44,11 @@ public class Importacion {
 			contadorCabecera++;
 		}
 		DefaultTableModel modelo = new DefaultTableModel(datos, Cabecera) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -126,10 +126,11 @@ public class Importacion {
 	}
 
 	public boolean ComprobarTipoDato(String tipoDato, String dato) {
+		/*
 		ArrayList<String> tipoValorInt = new ArrayList<>(Arrays.asList("INT", "NUMBER"));
 		ArrayList<String> tipoValorDecimal = new ArrayList<>(Arrays.asList("DECIMAL"));
 		ArrayList<String> tipoValorBool = new ArrayList<>(Arrays.asList("BINARY"));
-
+*/
 		boolean res = true;
 		try {
 

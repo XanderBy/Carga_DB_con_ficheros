@@ -5,10 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -28,7 +24,6 @@ public class Excel {
 
 			Sheet hoja = excel.getSheetAt(0);
 			Row fila;
-			Cell celda;
 
 			int numeroFilas = hoja.getLastRowNum();
 			int numeroColumnas = (numeroFilas > 0) ? hoja.getRow(0).getPhysicalNumberOfCells() : 0;
@@ -57,6 +52,8 @@ public class Excel {
 			            break;
 			        case ERROR:
 			            break;
+					default:
+						break;
 
 			    }
 					

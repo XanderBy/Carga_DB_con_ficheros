@@ -4,6 +4,10 @@ import javax.swing.JComboBox;
 
 public class ComboBoxPersonalizado extends JComboBox<String> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private double posicionX;
 	private double posicionY;

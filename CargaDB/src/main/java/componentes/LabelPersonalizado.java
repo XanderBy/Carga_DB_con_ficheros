@@ -4,6 +4,10 @@ import javax.swing.JLabel;
 
 public class LabelPersonalizado extends JLabel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double posicionX;
 	private double posicionY;
 

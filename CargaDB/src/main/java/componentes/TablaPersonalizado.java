@@ -2,12 +2,13 @@ package componentes;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class TablaPersonalizado extends JTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double posicionX;
 	private double posicionY;
 	private double ancho;

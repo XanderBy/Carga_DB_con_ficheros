@@ -8,6 +8,10 @@ import vista.Tab;
 
 public class TabbedPanePersonalizado extends JTabbedPane {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Tab> listaTabs;
 
 	public TabbedPanePersonalizado() {

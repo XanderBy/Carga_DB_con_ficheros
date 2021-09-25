@@ -5,8 +5,6 @@ import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
 import componentes.TablaPersonalizado;
 import configuracion.Configuracion;
-import net.miginfocom.swing.MigLayout;
-
 public class PropiedadesVentana {
 
 	public PropiedadesVentana(Ventana vista) {

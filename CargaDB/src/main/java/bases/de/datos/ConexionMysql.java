@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import estructura.datos.EstructuraDatosImportacionTabla;
 
@@ -110,7 +109,6 @@ public class ConexionMysql {
 		String campos = new String();
 		String valores = new String();
 		ArrayList<EstructuraDatosImportacionTabla> temporal = listaTipoDatosTabla;
-		int contador = 0;
 		boolean res = true;
 		PreparedStatement st;
 		int maxDatos = 0;

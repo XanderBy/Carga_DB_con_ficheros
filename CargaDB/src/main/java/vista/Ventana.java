@@ -2,20 +2,14 @@ package vista;
 
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
-import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
-import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+import javax.swing.WindowConstants;
 import java.awt.Point;
-
 import componentes.TabbedPanePersonalizado;
-import configuracion.Configuracion;
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
@@ -39,32 +33,24 @@ public class Ventana extends JFrame implements ActionListener {
 		this.panelTabs = new TabbedPanePersonalizado();
 		this.panelTabs.setTabPlacement(JTabbedPane.TOP);
 		
-		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		
-		NewTab nuevo = new NewTab(this.getPanelTabs(), this.getNumeroMaxTabs());
+		new NewTab(this.getPanelTabs(), this.getNumeroMaxTabs());
  
 		add(this.panelTabs,"grow");
 		
-		GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1].setFullScreenWindow(this);
+		GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].setFullScreenWindow(this);
 		//setLocation(posicion);
 		setTitle(this.getNombre());
 		//setSize(tamano);
 		setVisible(true);
 		//setLayout(new GridLayout(1, 1));
 		
-		this.addComponentListener(new ComponentAdapter() {
-			public void componentResized(ComponentEvent e) { 
-				Posicion();
-				System.out.println("componentResized");
-			}
-		});
+		
 
 	}
 	
-	public void Posicion() {
-		Configuracion.OtorgarPosicion();
-	}
 	
 	public void anadirBoton(JTabbedPane paneltab) {
 

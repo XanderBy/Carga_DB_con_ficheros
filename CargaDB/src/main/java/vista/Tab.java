@@ -19,8 +19,11 @@ import net.miginfocom.swing.MigLayout;
 public class Tab extends JPanel implements ActionListener {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String baseDeDatosElegida;
-	private TabbedPanePersonalizado panel;
 	private Conexion conexion;
 	private ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla;
 	private Importacion importacion;
@@ -34,7 +37,7 @@ public class Tab extends JPanel implements ActionListener {
 	private TablaPersonalizado tablaDatos;
 
 	public Tab(TabbedPanePersonalizado panel) {
-		this.setLayout(new MigLayout("debug, fill", // Layout Constraints
+		this.setLayout(new MigLayout("fill", // Layout Constraints
 				 "[][][][][][]", // columnas
 				 "[][][][][]")); //filas
 
@@ -44,25 +47,6 @@ public class Tab extends JPanel implements ActionListener {
 		this.importacion = new Importacion();
 
 		Configuracion.CargarConfiguracion(this);
-
-		
-		//JScrollPane scrollPane = new JScrollPane(this.getListaTablas().get(0));
-
-		// Force the scrollbars to always be displayed
-		// scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		/*scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		GroupLayout layout = new GroupLayout(this);
-
-		//horizontal
-		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
-		hGroup.addGroup(layout.createParallelGroup().addComponent(scrollPane));
-		layout.setHorizontalGroup(hGroup);
-		//vertical
-		GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-		vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(scrollPane));
-		layout.setVerticalGroup(vGroup);
-
-		this.getListaTablas().get(0).setLayout(layout);*/
 	}
 
 	public BotonPersonalizado getBotonConectarDB() {
@@ -110,11 +94,9 @@ public class Tab extends JPanel implements ActionListener {
 
 
 			if (e.getSource() == botonConectarDB & botonConectarDB.getName().contains("CONECTAR")) {
-				String messages[] = { "Endpoint", "Base de Datos", "Puerto", "Usuario", "Contrase�a" };
+				String messages[] = { "Endpoint", "Base de Datos", "Puerto", "Usuario", "Contraseña" };
 				String textoDefault[] = { "localhost/", "prueba", "3306", "root", "admin" };
-				String[] datosConexion = new PopUp().showInputDialog(null, messages, textoDefault);
-				System.out.println(datosConexion.length);
-				System.out.println(datosConexion[0]);
+				String[] datosConexion = new PopUp().showInputDialog(this, messages, textoDefault);
 				if (datosConexion.length == 0) {
 					JOptionPane.showMessageDialog(null, "No has introducido los campos necesarios", "Error",
 							JOptionPane.ERROR_MESSAGE);

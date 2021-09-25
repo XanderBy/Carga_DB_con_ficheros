@@ -1,25 +1,15 @@
 package vista;
 
-import java.awt.Color;
-import java.awt.Component;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import componentes.BotonPersonalizado;
 import componentes.TabbedPanePersonalizado;
 import componentes.TextFieldPersonalizado;
-import configuracion.Configuracion;
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
@@ -55,7 +45,6 @@ public class NewTab extends JPanel implements MouseListener {
 				this.getPanel().addTab("Tab", tab);
 				BotonPersonalizado boton = null;
 				TextFieldPersonalizado nombreCabecera=null;
-				Configuracion.OtorgarPosicion();
 				boton = new BotonPersonalizado();
 				nombreCabecera=new TextFieldPersonalizado(){ 
 				    @Override public void setBorder(Border border) { 

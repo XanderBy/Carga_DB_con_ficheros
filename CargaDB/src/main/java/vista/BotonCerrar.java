@@ -1,12 +1,14 @@
 package vista;
 
 import java.awt.Component;
-
 import javax.swing.JButton;
-import javax.swing.JTabbedPane;
 
 public class BotonCerrar extends JButton {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Component panel;
 	
 	public BotonCerrar(Component panel) {

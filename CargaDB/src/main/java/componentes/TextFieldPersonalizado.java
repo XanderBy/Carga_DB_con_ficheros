@@ -4,6 +4,10 @@ import javax.swing.JTextField;
 
 public class TextFieldPersonalizado extends JTextField {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double posicionX;
 	private double posicionY;
 	
