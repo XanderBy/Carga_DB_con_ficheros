@@ -29,6 +29,7 @@ public class PopUp extends JOptionPane {
 			
 			if(i==(messages.length-1)) {
 				JPasswordField pass = new JPasswordField(15);
+				textFields[i]=pass;
 				panel.add(pass);
 			}else {
 				textFields[i] = new JTextField();
@@ -39,25 +40,23 @@ public class PopUp extends JOptionPane {
 		String[] options = new String[]{"OK", "Cancel"};
 		cancelar = JOptionPane.showOptionDialog(parentComponent, panel, "Datos Conexión",
 				JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE,null,options,null);
+		int contadorTextoIntroducido=0;
 		if (cancelar != 1) {
 			
 			for (int i = 0; i < messages.length; i++) {
 				if(textFields[i]==null) {
-					vacio = true;
+					contadorTextoIntroducido ++;
 				}else {
 					input[i] = textFields[i].getText();
-					if (input[i].length() > 0) {
-						vacio = false;
-					}
 				}
 				
 			}
 
 		}else {
 			input[0]="Ha pulsado cancelar";
-			vacio=false;
+			contadorTextoIntroducido=messages.length;
 		}
-		if (vacio)
+		if (contadorTextoIntroducido==messages.length)
 			input = new String[0];
 
 		return input;

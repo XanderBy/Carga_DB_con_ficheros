@@ -33,9 +33,9 @@ public class Conexion {
 		return res;
 	}
 
-	public boolean RealizarCarga(String db, String tabla,ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
+	public String RealizarCarga(String db, String tabla,ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
 
-		boolean res = false;
+		String res = new String();
 
 		switch (db) {
 		case "MYSQL": {

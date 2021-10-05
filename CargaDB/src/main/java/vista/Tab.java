@@ -136,11 +136,14 @@ public class Tab extends JPanel implements ActionListener {
 				System.out.println(this.getListaTipoDatosTabla().get(0).getListadoDatos().get(0));
 			}
 			if (e.getSource() == botonCargarDatos & botonCargarDatos.getName().contains("CARGADATOS")) {
-				if(this.getConexion().RealizarCarga(baseDeDatosElegida, this.importacion.getNombreTabla(),
-						this.getListaTipoDatosTabla())) {
-					
+				String mnesajeError=this.getConexion().RealizarCarga(baseDeDatosElegida, this.importacion.getNombreTabla(),
+						this.getListaTipoDatosTabla());
+				if(mnesajeError.length()==0) {
+					JOptionPane.showMessageDialog(null, "Se ha realizado con exito la carga", "Proceso Completado",
+							JOptionPane.INFORMATION_MESSAGE);
 				}else {
-					
+					JOptionPane.showMessageDialog(null, mnesajeError, "Error al realizar la carga",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				Configuracion.ActivarComponentes(botonCargarDatos.getId(), false,true, new ArrayList<>(Arrays.asList(botonCargarDatos,botonConectarDB,botonImportarFichero)), null, null, null, null);
 

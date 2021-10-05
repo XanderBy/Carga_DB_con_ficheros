@@ -104,12 +104,12 @@ public class ConexionMysql {
 		return listaTipoDatosTabla;
 	}
 
-	public boolean Insert(String tabla, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
+	public String Insert(String tabla, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla) {
 		String insert = new String();
 		String campos = new String();
 		String valores = new String();
 		ArrayList<EstructuraDatosImportacionTabla> temporal = listaTipoDatosTabla;
-		boolean res = true;
+		String res = new String();
 		PreparedStatement st;
 		int maxDatos = 0;
 
@@ -151,8 +151,9 @@ public class ConexionMysql {
 			}
 
 		} catch (SQLException e) {
-			res = false;
-			e.printStackTrace();
+			res = e.getMessage();
+			//e.printStackTrace();
+			System.out.println(e.getMessage());
 		} finally {
 			Desconectar();
 		}
