@@ -1,11 +1,18 @@
 package vista;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
 import componentes.TabbedPanePersonalizado;
@@ -96,7 +103,32 @@ public class Tab extends JPanel implements ActionListener {
 			if (e.getSource() == botonConectarDB & botonConectarDB.getName().contains("CONECTAR")) {
 				String messages[] = { "Endpoint", "Base de Datos", "Puerto", "Usuario", "Contraseña" };
 				String textoDefault[] = { "localhost/", "prueba", "3306", "root", "admin" };
-				String[] datosConexion = new PopUp().showInputDialog(this, messages, textoDefault);
+
+				
+				JTextField textFields[] = new JTextField[messages.length];
+				JPanel panel = new JPanel();
+				String input[] = new String[messages.length];
+				int cancelar = 0;
+				
+				panel.setLayout(new GridLayout(messages.length, 2, 0, 0));
+				
+				for (int i = 0; i < messages.length; i++) {
+					panel.add(new JLabel(messages[i]));
+					
+					if(i==(messages.length-1)) {
+						JPasswordField pass = new JPasswordField(15);
+						textFields[i]=pass;
+						panel.add(pass);
+					}else {
+						textFields[i] = new JTextField();
+						panel.add(textFields[i]);
+					}
+					 
+				}
+				this.add(panel,"cell 0 0");
+				//String[] datosConexion = new PopUp().showInputDialog(this, messages, textoDefault);
+				/*
+				String[] datosConexion=new String[0];
 				if (datosConexion.length == 0) {
 					JOptionPane.showMessageDialog(null, "No has introducido los campos necesarios", "Error",
 							JOptionPane.ERROR_MESSAGE);
@@ -116,7 +148,7 @@ public class Tab extends JPanel implements ActionListener {
 					}
 
 				}
-
+*/
 			}
 			if (e.getSource() == botonImportarFichero & botonImportarFichero.getName().contains("IMPORTARFICHERO")) {
 				this.getListaTipoDatosTabla().clear();
@@ -162,7 +194,10 @@ public class Tab extends JPanel implements ActionListener {
 
 			}
 
-		repaint();
+			invalidate();
+			validate();
+			repaint();
+		System.out.println("repintar");
 	}
 
 	public Conexion getConexion() {

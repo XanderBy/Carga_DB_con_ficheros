@@ -18,10 +18,10 @@ public class PopUp extends JOptionPane {
 
 	public String[] showInputDialog(Component parentComponent, String messages[], String textoDefault[]) {
 		JTextField textFields[] = new JTextField[messages.length];
-		boolean vacio = true;
 		JPanel panel = new JPanel();
 		String input[] = new String[messages.length];
 		int cancelar = 0;
+		
 		panel.setLayout(new GridLayout(messages.length, 2, 0, 0));
 		
 		for (int i = 0; i < messages.length; i++) {
@@ -38,9 +38,11 @@ public class PopUp extends JOptionPane {
 			 
 		}
 		String[] options = new String[]{"OK", "Cancel"};
+		
 		cancelar = JOptionPane.showOptionDialog(parentComponent, panel, "Datos Conexión",
 				JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE,null,options,null);
 		int contadorTextoIntroducido=0;
+		System.out.println(cancelar);
 		if (cancelar != 1) {
 			
 			for (int i = 0; i < messages.length; i++) {
@@ -54,7 +56,7 @@ public class PopUp extends JOptionPane {
 
 		}else {
 			input[0]="Ha pulsado cancelar";
-			contadorTextoIntroducido=messages.length;
+			contadorTextoIntroducido++;
 		}
 		if (contadorTextoIntroducido==messages.length)
 			input = new String[0];
