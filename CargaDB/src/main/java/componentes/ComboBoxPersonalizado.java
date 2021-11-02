@@ -11,6 +11,7 @@ public class ComboBoxPersonalizado extends JComboBox<String> {
 	private String id;
 	private double posicionX;
 	private double posicionY;
+	private String dependeComponente;
 
 	public ComboBoxPersonalizado() {
 		super();
@@ -44,6 +45,14 @@ public class ComboBoxPersonalizado extends JComboBox<String> {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getDependeComponente() {
+		return dependeComponente;
+	}
+
+	public void setDependeComponente(String dependeComponente) {
+		this.dependeComponente = dependeComponente;
 	}
 
 }

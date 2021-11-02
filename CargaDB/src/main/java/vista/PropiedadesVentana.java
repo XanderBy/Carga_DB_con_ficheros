@@ -17,7 +17,7 @@ public class PropiedadesVentana {
 		tab.getBotonConectarDB().setText("Conexión");
 		tab.getBotonConectarDB().setId("CONECTAR");
 		tab.getBotonConectarDB().setName("CONECTAR");
-		tab.getBotonConectarDB().setDependeComponente("BASESDEDATOS");
+		tab.getBotonConectarDB().setDependeComponente("VERSIONESDEDATOS");
 		tab.getBotonConectarDB().setEnabled(false);
 		tab.add(tab.getBotonConectarDB(), "cell 2 1");
 		tab.getBotonConectarDB().addActionListener(tab);
@@ -26,7 +26,7 @@ public class PropiedadesVentana {
 		tab.getBotonImportarFichero().setText("Importar Fichero");
 		tab.getBotonImportarFichero().setName("IMPORTARFICHERO");
 		tab.getBotonImportarFichero().setId("IMPORTARFICHERO");
-		tab.getBotonImportarFichero().setDependeComponente("CONECTAR");
+		tab.getBotonImportarFichero().setDependeComponente("ESTABLECERCONEXION");
 		tab.getBotonImportarFichero().setEnabled(false);
 		tab.add(tab.getBotonImportarFichero(), "cell 4 1");
 		tab.getBotonImportarFichero().addActionListener(tab);
@@ -41,7 +41,11 @@ public class PropiedadesVentana {
 		tab.add(tab.getBotonCargarDatos(), "cell 4 2");
 		tab.getBotonCargarDatos().addActionListener(tab);
 		
-
+		tab.setBotonConectarse(new BotonPersonalizado());
+		tab.getBotonConectarse().setText("Establecer conexión");
+		tab.getBotonConectarse().setId("ESTABLECERCONEXION");
+		tab.getBotonConectarse().setName("ESTABLECERCONEXION");
+		tab.getBotonConectarse().setDependeComponente("CONECTAR");
 	}
 
 	public static void DependienteBotones() {
@@ -68,9 +72,19 @@ public class PropiedadesVentana {
 	public static void PropiedadesComboBox(Tab tab) {
 		tab.setComboBaseDeDatos(new ComboBoxPersonalizado());
 		tab.getComboBaseDeDatos().setId("BASESDEDATOS");
+		tab.getComboBaseDeDatos().setDependeComponente("");
 		Configuracion.CargarComboBox(tab.getComboBaseDeDatos(),"BASESDEDATOSPERMITIDAS");
 		tab.add(tab.getComboBaseDeDatos(),"cell 2 2");
 		tab.getComboBaseDeDatos().addActionListener(tab);
+		
+		
+		tab.setComboVersionesBaseDatos(new ComboBoxPersonalizado());
+		tab.getComboVersionesBaseDatos().setId("VERSIONESDEDATOS");
+		tab.getComboVersionesBaseDatos().setDependeComponente("BASESDEDATOS");
+		tab.getComboVersionesBaseDatos().setEnabled(false);
+		//Configuracion.CargarComboBox(tab.getComboBaseDeDatos(),"BASESDEDATOSPERMITIDAS");
+		tab.add(tab.getComboVersionesBaseDatos(),"cell 2 3");
+		tab.getComboVersionesBaseDatos().addActionListener(tab);
 		
 		
 	}

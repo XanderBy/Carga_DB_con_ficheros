@@ -8,6 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import javax.swing.ComboBoxEditor;
+
 import componentes.BotonPersonalizado;
 import componentes.ComboBoxPersonalizado;
 import componentes.LabelPersonalizado;
@@ -61,7 +64,7 @@ public class Configuracion {
 
 	public static void CargarComboBox(ComboBoxPersonalizado comboBox, String objeto) {
 		String[] listado = CargarLista(objeto, true);
-
+		comboBox.removeAllItems();
 		for (String eleccion : listado) {
 			if (comboBox.getItemCount() == 0) {
 				comboBox.addItem("");
@@ -76,20 +79,38 @@ public class Configuracion {
 			ArrayList<BotonPersonalizado> listaBotones, ArrayList<LabelPersonalizado> listaLabels,
 			ArrayList<TextFieldPersonalizado> listaCajaTexto, ArrayList<ComboBoxPersonalizado> listaTComboBox,
 			ArrayList<TablaPersonalizado> listaTablas) {
+		if(listaBotones!=null) {
+			for (BotonPersonalizado boton : listaBotones) {
+				if (noDepende) {
+					if (boton.getId().equalsIgnoreCase(IdComponente)) {
+						boton.setEnabled(activar);
+					}
+				} else {
+					if (boton.getDependeComponente() != null
+							&& boton.getDependeComponente().equalsIgnoreCase(IdComponente)) {
+						boton.setEnabled(activar);
+					}
+				}
 
-		for (BotonPersonalizado boton : listaBotones) {
-			if (noDepende) {
-				if (boton.getId().equalsIgnoreCase(IdComponente)) {
-					boton.setEnabled(activar);
-				}
-			} else {
-				if (boton.getDependeComponente() != null
-						&& boton.getDependeComponente().equalsIgnoreCase(IdComponente)) {
-					boton.setEnabled(activar);
-				}
 			}
-
 		}
+		
+		if(listaTComboBox!=null) {
+			for (ComboBoxPersonalizado combo : listaTComboBox) {
+				if (noDepende) {
+					if (combo.getId().equalsIgnoreCase(IdComponente)) {
+						combo.setEnabled(activar);
+					}
+				} else {
+					if (combo.getDependeComponente() != null
+							&& combo.getDependeComponente().equalsIgnoreCase(IdComponente)) {
+						combo.setEnabled(activar);
+					}
+				}
+
+			}
+		}
+		
 
 	}
 }
