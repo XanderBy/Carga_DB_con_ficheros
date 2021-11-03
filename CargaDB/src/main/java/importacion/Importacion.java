@@ -34,13 +34,12 @@ public class Importacion {
 			System.out.println(estructuraDatosImportacionTabla.getNombreCampo());
 
 			Cabecera[contadorCabecera] = estructuraDatosImportacionTabla.getNombreCampo();
-			
-			
+
 			for (String dato : estructuraDatosImportacionTabla.getListadoDatos()) {
-				datos[contadorDatos][contadorCabecera]=dato;
+				datos[contadorDatos][contadorCabecera] = dato;
 				contadorDatos++;
 			}
-			contadorDatos=0;
+			contadorDatos = 0;
 			contadorCabecera++;
 		}
 		DefaultTableModel modelo = new DefaultTableModel(datos, Cabecera) {
@@ -94,12 +93,15 @@ public class Importacion {
 		System.out.println("El nombre de la tabla es: " + nombreTabla);
 		String[][] datosExcel = null;
 		switch (tipo) {
-		case "xlsx": {
-			listaTipoDatosTabla = conexionDB.mysql.ObtenerDatosBasicosTabla(nombreTabla, listaTipoDatosTabla);
-			datosExcel = Excel.ObtenerDatosExcel(new File(ruta));
-			listaTipoDatosTabla = ValidarDatos(datosExcel, listaTipoDatosTabla);
-			break;
-		}
+			case "xlsx": {
+				listaTipoDatosTabla = conexionDB.mysql.ObtenerDatosBasicosTabla(nombreTabla, listaTipoDatosTabla);
+				datosExcel = Excel.ObtenerDatosExcel(new File(ruta));
+				listaTipoDatosTabla = ValidarDatos(datosExcel, listaTipoDatosTabla);
+				break;
+			}
+			case "txt":
+				
+				break;
 		}
 
 		return listaTipoDatosTabla;
@@ -127,10 +129,11 @@ public class Importacion {
 
 	public boolean ComprobarTipoDato(String tipoDato, String dato) {
 		/*
-		ArrayList<String> tipoValorInt = new ArrayList<>(Arrays.asList("INT", "NUMBER"));
-		ArrayList<String> tipoValorDecimal = new ArrayList<>(Arrays.asList("DECIMAL"));
-		ArrayList<String> tipoValorBool = new ArrayList<>(Arrays.asList("BINARY"));
-*/
+		 * ArrayList<String> tipoValorInt = new ArrayList<>(Arrays.asList("INT",
+		 * "NUMBER")); ArrayList<String> tipoValorDecimal = new
+		 * ArrayList<>(Arrays.asList("DECIMAL")); ArrayList<String> tipoValorBool = new
+		 * ArrayList<>(Arrays.asList("BINARY"));
+		 */
 		boolean res = true;
 		try {
 

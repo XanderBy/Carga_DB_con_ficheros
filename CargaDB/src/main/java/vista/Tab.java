@@ -48,6 +48,9 @@ public class Tab extends JPanel implements ActionListener {
 	private JPanel panelConexion;
 	private BotonPersonalizado BotonConectarse;
 	private JTextField textFields[];
+	
+	private ArrayList<BotonPersonalizado> ListadoBotones;
+	private ArrayList<ComboBoxPersonalizado> ListadoComboBox;
 
 	public Tab(TabbedPanePersonalizado panel) {
 		this.setLayout(new MigLayout("fill", // Layout Constraints
@@ -60,6 +63,11 @@ public class Tab extends JPanel implements ActionListener {
 		this.importacion = new Importacion();
 
 		Configuracion.CargarConfiguracion(this);
+		
+		this.ListadoBotones=new ArrayList<>(Arrays.asList(botonCargarDatos, botonConectarDB, botonImportarFichero,BotonConectarse));
+		this.ListadoComboBox=new ArrayList<>(Arrays.asList(ComboBaseDeDatos, ComboVersionesBaseDatos));
+		
+		
 	}
 
 	public BotonPersonalizado getBotonConectarse() {
@@ -113,6 +121,16 @@ public class Tab extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		AccionBotones(e);
+		AccionComboBox(e);
+
+		invalidate();
+		validate();
+		repaint();
+		System.out.println("repintar");
+	}
+	private void AccionBotones(ActionEvent e) {
+
 		try {
 			System.out.println(BotonConectarse);
 			if (e.getSource() == this.BotonConectarse & this.BotonConectarse.getName().contains("ESTABLECERCONEXION")) {
@@ -121,7 +139,7 @@ public class Tab extends JPanel implements ActionListener {
 						textFields[4].getText(), textFields[1].getText(), textFields[0].getText(),
 						textFields[2].getText())) {
 					Configuracion.ActivarComponentes(this.BotonConectarse.getId(), true, false,
-							new ArrayList<>(Arrays.asList(botonCargarDatos, botonConectarDB, botonImportarFichero,BotonConectarse)), null,
+							this.ListadoBotones, null,
 							null, null, null);
 				} else {
 					JOptionPane.showMessageDialog(null, "No se ha podido establecer conexion", "Error",
@@ -140,12 +158,9 @@ public class Tab extends JPanel implements ActionListener {
 				this.panelConexion = null;
 			} else {
 				String messages[] = { "Endpoint", "Base de Datos", "Puerto", "Usuario", "Contraseña" };
-				String textoDefault[] = { "localhost/", "prueba", "3306", "root", "admin" };
 				textFields = new JTextField[messages.length];
 
 				this.panelConexion = new JPanel();
-				String input[] = new String[messages.length];
-				int cancelar = 0;
 
 				this.panelConexion.setLayout(new GridLayout(messages.length + 1, 2, 0, 0));
 
@@ -176,7 +191,7 @@ public class Tab extends JPanel implements ActionListener {
 					this.importacion.ImportarFichero(Configuracion.CargarLista("FORMATOSPERMITIDOS", false),
 							this.getConexion(), this.getListaTipoDatosTabla()));
 			Configuracion.ActivarComponentes(botonImportarFichero.getId(), true, false,
-					new ArrayList<>(Arrays.asList(botonCargarDatos, botonConectarDB, botonImportarFichero)), null, null,
+					this.ListadoBotones, null, null,
 					null, null);
 
 			if (tablaDatos.getId().contains("DATOSACARGAR")) {
@@ -198,23 +213,24 @@ public class Tab extends JPanel implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 			}
 			Configuracion.ActivarComponentes(botonCargarDatos.getId(), false, true,
-					new ArrayList<>(Arrays.asList(botonCargarDatos, botonConectarDB, botonImportarFichero)), null, null,
+					this.ListadoBotones, null, null,
 					null, null);
 
 		}
-
+	}
+	private void AccionComboBox(ActionEvent e) {
 		if (e.getSource() == ComboBaseDeDatos & ComboBaseDeDatos.getId().contains("BASESDEDATOS")) {
 			String valor = (String) ((ComboBoxPersonalizado) e.getSource()).getSelectedItem();
 			if (valor != null && valor.length() > 0) {
 				Configuracion.ActivarComponentes(ComboBaseDeDatos.getId(), true, false,
 						null, null,
-						null, new ArrayList<>(Arrays.asList(ComboBaseDeDatos, ComboVersionesBaseDatos)), null);
+						null, this.ListadoComboBox, null);
 				this.setBaseDeDatosElegida(valor);
 				Configuracion.CargarComboBox(this.ComboVersionesBaseDatos, "VERSIONES" + valor);
 			} else {
 				Configuracion.ActivarComponentes(ComboBaseDeDatos.getId(), false, false,
 						null, null,
-						null, new ArrayList<>(Arrays.asList(ComboBaseDeDatos, ComboVersionesBaseDatos)), null);
+						null, this.ListadoComboBox, null);
 			}
 
 		}
@@ -224,22 +240,16 @@ public class Tab extends JPanel implements ActionListener {
 			String valor = (String) ((ComboBoxPersonalizado) e.getSource()).getSelectedItem();
 			if (valor != null && valor.length() > 0) {
 				Configuracion.ActivarComponentes(ComboVersionesBaseDatos.getId(), true, false,
-						new ArrayList<>(Arrays.asList(botonCargarDatos, botonConectarDB, botonImportarFichero)), null,
-						null, new ArrayList<>(Arrays.asList(ComboBaseDeDatos, ComboVersionesBaseDatos)), null);
+						this.ListadoBotones, null,
+						null, this.ListadoComboBox, null);
 			} else {
 				Configuracion.ActivarComponentes(ComboVersionesBaseDatos.getId(), false, false,
-						new ArrayList<>(Arrays.asList(botonCargarDatos, botonConectarDB, botonImportarFichero)), null,
-						null, new ArrayList<>(Arrays.asList(ComboBaseDeDatos, ComboVersionesBaseDatos)), null);
+						this.ListadoBotones, null,
+						null,this.ListadoComboBox, null);
 			}
 
 		}
-
-		invalidate();
-		validate();
-		repaint();
-		System.out.println("repintar");
 	}
-
 	public Conexion getConexion() {
 		return conexion;
 	}
