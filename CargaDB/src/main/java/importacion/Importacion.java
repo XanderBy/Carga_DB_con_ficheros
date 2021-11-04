@@ -92,9 +92,10 @@ public class Importacion {
 			Conexion conexionDB, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla, String ruta) {
 		System.out.println("El nombre de la tabla es: " + nombreTabla);
 		String[][] datosExcel = null;
+		listaTipoDatosTabla = conexionDB.mysql.ObtenerDatosBasicosTabla(nombreTabla, listaTipoDatosTabla);
 		switch (tipo) {
 			case "xlsx": {
-				listaTipoDatosTabla = conexionDB.mysql.ObtenerDatosBasicosTabla(nombreTabla, listaTipoDatosTabla);
+				
 				datosExcel = Excel.ObtenerDatosExcel(new File(ruta));
 				listaTipoDatosTabla = ValidarDatos(datosExcel, listaTipoDatosTabla);
 				break;

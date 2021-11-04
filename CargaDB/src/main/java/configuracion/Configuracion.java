@@ -22,7 +22,7 @@ import vista.Ventana;
 
 public class Configuracion {
 
-	static Properties properties = new Properties();
+	public static Properties properties = new Properties();
 	public static Ventana ventana;
 
 	public void CreacionVentana() {

@@ -4,14 +4,20 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
+
+import configuracion.Configuracion;
 
 public class Txt {
 
-	public static boolean ObtenerDatosTxt(String Fichero) {
+	public static String[][] ObtenerDatosTxt(String Fichero) {
 		
-		String[] cabecera; 
+		String [][] datosTxt = null;
+		String [] linea;
+		String separador= (String) Configuracion.properties.get("SEPARADORTXT");
         FileReader f = null;
         int contadorLineas=0;
+        int contadorColumnas=0;
 		try {
 			f = new FileReader(Fichero);
 		} catch (FileNotFoundException e1) {
@@ -19,12 +25,21 @@ public class Txt {
 			e1.printStackTrace();
 		} 
         BufferedReader b = new BufferedReader(f); 
+        int x=(int) b.lines().count();
         try {
         	String cadena= new String();
 			while((cadena = b.readLine())!=null) { 
 				System.out.println(cadena); 
 				if(contadorLineas==0) {
+					datosTxt=new String[x][cadena.split(separador).length];
 					
+				}
+				linea=new String[cadena.split(separador).length];
+				linea=cadena.split(separador);
+				contadorColumnas=0;
+				for (String componente : linea) {
+					datosTxt[contadorLineas][contadorColumnas]=componente;
+					contadorColumnas++;
 				}
 				contadorLineas++;
 			}
@@ -34,7 +49,7 @@ public class Txt {
 			e.printStackTrace();
 		} 
         
-		return true;
+		return datosTxt;
 	}
 	
 	
