@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import conexion.Conexion;
 import estructura.datos.EstructuraDatosImportacionTabla;
 import tipo.ficheros.Excel;
+import tipo.ficheros.Txt;
 
 public class Importacion {
 
@@ -91,17 +92,18 @@ public class Importacion {
 	public ArrayList<EstructuraDatosImportacionTabla> ImportarPorTipo(String tipo, String nombreTabla,
 			Conexion conexionDB, ArrayList<EstructuraDatosImportacionTabla> listaTipoDatosTabla, String ruta) {
 		System.out.println("El nombre de la tabla es: " + nombreTabla);
-		String[][] datosExcel = null;
+		String[][] datos = null;
 		listaTipoDatosTabla = conexionDB.mysql.ObtenerDatosBasicosTabla(nombreTabla, listaTipoDatosTabla);
 		switch (tipo) {
 			case "xlsx": {
 				
-				datosExcel = Excel.ObtenerDatosExcel(new File(ruta));
-				listaTipoDatosTabla = ValidarDatos(datosExcel, listaTipoDatosTabla);
+				datos = Excel.ObtenerDatosExcel(new File(ruta));
+				listaTipoDatosTabla = ValidarDatos(datos, listaTipoDatosTabla);
 				break;
 			}
 			case "txt":
-				
+				datos=Txt.ObtenerDatosTxt(ruta);
+				listaTipoDatosTabla = ValidarDatos(datos, listaTipoDatosTabla);
 				break;
 		}
 
@@ -115,10 +117,10 @@ public class Importacion {
 
 		for (EstructuraDatosImportacionTabla estructuraDatosImportacionTabla : listaTipoDatosTabla) {
 
-			if (datosExcel[contadorColumna][0].equalsIgnoreCase(estructuraDatosImportacionTabla.getNombreCampo())) {
-				for (int y = 1; y < datosExcel[contadorColumna].length; y++) {
+			if (datosExcel[0][contadorColumna].equalsIgnoreCase(estructuraDatosImportacionTabla.getNombreCampo())) {
+				for (int y = 1; y < datosExcel.length; y++) {
 					// Comprobar si se puede convertir el dato al tipo de la columna
-					estructuraDatosImportacionTabla.getListadoDatos().add(datosExcel[contadorColumna][y]);
+					estructuraDatosImportacionTabla.getListadoDatos().add(datosExcel[y][contadorColumna]);
 
 				}
 			}
